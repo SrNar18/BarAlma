@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alma · Bar Restaurant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=25" />
+  <link rel="icon" type="image/png" href="logo.png" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <div class="nav__logo">
+      <a href="en.html"><img src="img/LOGO_BANNER.png" alt="Alma Bar Restaurant" class="nav__logo-img" /></a>
+    </div>
+    <nav class="nav__links">
+      <a href="#inicio">Home</a>
+      <a href="#nosotros">About</a>
+      <a href="#menu">Menu</a>
+      <a href="#galeria">Our Space</a>
+      <a href="#reservas">Contact</a>
+    </nav>
+    <div class="nav__right">
+      <button class="nav__cta" onclick="scrollToSection('reservas')">Book a table</button>
+      <div class="nav__lang">
+        <button class="nav__lang-btn" id="langBtn">
+          EN
+          <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg>
+        </button>
+        <div class="nav__lang-dropdown" id="langDropdown">
+          <a href="index.html" class="lang-opt">Català</a>
+          <a href="es.html" class="lang-opt">Castellano</a>
+          <a href="fr.html" class="lang-opt">Français</a>
+          <a href="en.html" class="lang-opt active">English</a>
+          <a href="pt.html" class="lang-opt">Português</a>
+        </div>
+      </div>
+      <button class="nav__hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#inicio" onclick="closeMobileMenu()">Home</a>
+    <a href="#nosotros" onclick="closeMobileMenu()">About</a>
+    <a href="#menu" onclick="closeMobileMenu()">Menu</a>
+    <a href="#galeria" onclick="closeMobileMenu()">Our Space</a>
+    <a href="#reservas" onclick="closeMobileMenu()">Contact</a>
+    <div class="mobile-menu__langs">
+      <a href="index.html">CA</a>
+      <a href="es.html">ES</a>
+      <a href="fr.html">FR</a>
+      <a href="en.html" class="active">EN</a>
+      <a href="pt.html">PT</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero__bg" style="background-image:url('img/dos-1200w.webp')"></div>
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <p class="hero__eyebrow">· Gastronomic Experience ·</p>
+      <h1 class="hero__title">Where every dish<br /><em>tells a story</em></h1>
+      <p class="hero__subtitle">Fine dining, intimate atmosphere and the finest cocktails.<br />An experience for the senses.</p>
+      <div class="hero__actions">
+        <button class="btn btn--gold" onclick="scrollToSection('reservas')">Book a table</button>
+        <button class="btn btn--outline" onclick="scrollToSection('menu')">View menu</button>
+      </div>
+    </div>
+    <div class="hero__scroll">
+      <span>Discover</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- STRIP -->
+  <div class="strip">
+    <div class="strip__track">
+      <span>Fine dining</span><i>◆</i>
+      <span>Signature cocktails</span><i>◆</i>
+      <span>Exclusive atmosphere</span><i>◆</i>
+      <span>Seasonal ingredients</span><i>◆</i>
+      <span>Tasting menu</span><i>◆</i>
+      <span>Wine pairing</span><i>◆</i>
+      <span>Private events</span><i>◆</i>
+      <span>Fine dining</span><i>◆</i>
+      <span>Signature cocktails</span><i>◆</i>
+      <span>Exclusive atmosphere</span><i>◆</i>
+      <span>Seasonal ingredients</span><i>◆</i>
+      <span>Tasting menu</span><i>◆</i>
+      <span>Wine pairing</span><i>◆</i>
+      <span>Private events</span><i>◆</i>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about" id="nosotros">
+    <div class="about__inner">
+      <div class="about__visual">
+        <div class="about__img-wrap">
+          <div class="about__img about__img--main" style="background-image:url('img/dos-1200w.webp')"></div>
+          <div class="about__img about__img--accent about__img--logo">
+            <img src="img/logopng.png" alt="Alma Logo" class="about__logo-img" />
+          </div>
+        </div>
+        <div class="about__badge">
+          <span class="about__badge-year">2018</span>
+          <span class="about__badge-label">Founded</span>
+        </div>
+      </div>
+      <div class="about__text">
+        <p class="section__eyebrow">· Our story ·</p>
+        <h2 class="section__title">The soul of every<br /><em>ingredient</em></h2>
+        <p class="about__body">Alma was born from the desire to create a space where gastronomy transcends the ordinary. Every corner, every dish and every glass is crafted to connect with those who enjoy it.</p>
+        <p class="about__body">We work with local, seasonal producers, respecting the ingredient and elevating it through technique, creativity and genuine passion.</p>
+        <div class="about__stats">
+          <div class="stat">
+            <span class="stat__num">180+</span>
+            <span class="stat__label">Dishes created</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">50+</span>
+            <span class="stat__label">Signature cocktails</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">7</span>
+            <span class="stat__label">Years of history</span>
+          </div>
+        </div>
+        <a href="#reservas" class="btn btn--gold" onclick="event.preventDefault(); scrollToSection('reservas')">Live the experience</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="menu" id="menu">
+    <div class="menu__header">
+      <p class="section__eyebrow">· Our offerings ·</p>
+      <h2 class="section__title">The menu</h2>
+      <p class="menu__subtitle">A carefully curated selection for every moment of the day.</p>
+    </div>
+    <div class="menu__tabs">
+      <button class="tab active" data-tab="entrantes">Starters</button>
+      <button class="tab" data-tab="principales">Mains</button>
+      <button class="tab" data-tab="postres">Desserts</button>
+      <button class="tab" data-tab="cocktails">Cocktails</button>
+    </div>
+    <div class="menu__grid" id="menuGrid">
+      <div class="menu__panel active" data-panel="entrantes">
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/carpaccio.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Bluefin tuna tartare</h3><span class="dish-card__price">18€</span></div>
+            <p>With avocado, soy, toasted sesame and crispy rice.</p>
+            <span class="dish-card__tag">Signature</span>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/pulpo.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Burrata with black truffle</h3><span class="dish-card__price">16€</span></div>
+            <p>On piquillo cream, extra virgin olive oil and microgreens.</p>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/canelones.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Grilled scallops</h3><span class="dish-card__price">22€</span></div>
+            <p>With noisette butter, cauliflower purée and lemon caviar.</p>
+            <span class="dish-card__tag">Chef's choice</span>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/callos.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Foie mi-cuit</h3><span class="dish-card__price">20€</span></div>
+            <p>With toasted brioche, fig jam and flaky salt.</p>
+          </div>
+        </div>
+      </div>
+      <div class="menu__panel" data-panel="principales">
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/bacalla.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Hake loin</h3><span class="dish-card__price">28€</span></div>
+            <p>On clam velouté, white asparagus and parsley oil.</p>
+            <span class="dish-card__tag">Seasonal</span>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/entrecot.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>45-day aged entrecôte</h3><span class="dish-card__price">52€</span></div>
+            <p>With ratte potato, herb chimichurri and red wine reduction.</p>
+            <span class="dish-card__tag">Signature</span>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/callos.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Wild mushroom and parmesan risotto</h3><span class="dish-card__price">24€</span></div>
+            <p>With seasonal mushrooms, parmesan mantecare and grated truffle.</p>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/pulpo.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Roasted pigeon</h3><span class="dish-card__price">34€</span></div>
+            <p>With celeriac parmentier, game jus and pickled cherries.</p>
+            <span class="dish-card__tag">Chef's choice</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu__panel" data-panel="postres">
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/canelones.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Dark chocolate coulant</h3><span class="dish-card__price">10€</span></div>
+            <p>With Madagascar vanilla ice cream and gold dust.</p>
+            <span class="dish-card__tag">Signature</span>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/carpaccio.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Basque cheesecake</h3><span class="dish-card__price">9€</span></div>
+            <p>Creamy, caramelised, with red berry coulis.</p>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/bacalla.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Lavender crème brûlée</h3><span class="dish-card__price">8€</span></div>
+            <p>With crispy caramel, lemon zest and sablé biscuit.</p>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/entrecot.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Artisan ice cream selection</h3><span class="dish-card__price">7€</span></div>
+            <p>Three scoops of house-made ice cream with seasonal toppings.</p>
+          </div>
+        </div>
+      </div>
+      <div class="menu__panel" data-panel="cocktails">
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/pulpo.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Alma Sour</h3><span class="dish-card__price">13€</span></div>
+            <p>Smoked whisky, lemon juice, rosemary syrup and egg white.</p>
+            <span class="dish-card__tag">Signature</span>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/carpaccio.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Golden Garden</h3><span class="dish-card__price">14€</span></div>
+            <p>Gin, cucumber, fresh mint, Elderflower and premium tonic.</p>
+            <span class="dish-card__tag">Bestseller</span>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/callos.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Dark Negroni</h3><span class="dish-card__price">14€</span></div>
+            <p>Black Campari, aged rosso vermouth and barrel-aged gin.</p>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/canelones.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Velvet Espresso</h3><span class="dish-card__price">12€</span></div>
+            <p>Vodka, coffee liqueur, double espresso and vanilla foam.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="menu__footer">
+      <p>Allergens or dietary requirements? Ask our team.</p>
+      <button class="btn btn--outline" onclick="scrollToSection('reservas')">Book to try them</button>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="experience">
+    <div class="experience__inner">
+      <div class="experience__text">
+        <p class="section__eyebrow">· More than a restaurant ·</p>
+        <h2 class="section__title">A complete<br /><em>experience</em></h2>
+        <p>From the aperitif to the last cocktail, every moment at Alma is designed to surprise you. Our team takes care of every detail to make your visit unforgettable.</p>
+      </div>
+      <div class="experience__cards">
+        <div class="exp-card">
+          <div class="exp-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg></div>
+          <h3>Extended hours</h3>
+          <p>Open Tuesday to Sunday until 2:00 AM. The night-time atmosphere is our moment.</p>
+        </div>
+        <div class="exp-card">
+          <div class="exp-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <h3>Private events</h3>
+          <p>Celebrate your special moments. Reserved spaces for groups and exclusive celebrations.</p>
+        </div>
+        <div class="exp-card">
+          <div class="exp-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+          <h3>Tasting menu</h3>
+          <p>A 7-course journey through the best of our menu. Wine pairing included.</p>
+        </div>
+        <div class="exp-card">
+          <div class="exp-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+          <h3>Seasonal menu</h3>
+          <p>The menu evolves with the seasons. Always fresh, local produce at its best.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR SPACE -->
+  <section class="gallery" id="galeria">
+    <div class="gallery__wrap">
+      <div class="gallery__header">
+        <p class="section__eyebrow">· Our space ·</p>
+        <h2 class="gallery__title">A <em>special</em> place</h2>
+        <p class="gallery__subtitle">Every detail is designed so you feel at home, but in a place you will never forget.</p>
+      </div>
+      <div class="gallery__grid">
+        <div class="gallery__aside">
+          <div class="gallery__info">
+            <h3>The Alma atmosphere</h3>
+            <p>An intimate and elegant space where warm light, natural materials and attention to detail in every corner create the perfect atmosphere for every occasion.</p>
+            <div class="gallery__stats">
+              <div class="gallery__stat"><strong>70</strong><span>Guests</span></div>
+              <div class="gallery__stat"><strong>Terrace</strong><span>Outside</span></div>
+              <div class="gallery__stat"><strong>Room</strong><span>Private</span></div>
+            </div>
+            <button class="btn btn--gold" onclick="scrollToSection('reservas')">Book a table</button>
+          </div>
+          <div class="gallery__stack">
+            <div class="gallery__stack-img" style="background-image:url('img/carpaccio.webp')"><span>Starters</span></div>
+            <div class="gallery__stack-img" style="background-image:url('img/entrecot.webp')"><span>Grill</span></div>
+          </div>
+        </div>
+        <div class="gallery__feature" style="background-image:url('img/dos-1200w.webp')">
+          <div class="gallery__feature-overlay">
+            <div class="gallery__feature-badge">
+              <span class="gallery__feature-badge-num">2018</span>
+              <span class="gallery__feature-badge-lbl">Since</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__strip">
+        <div class="gallery__strip-item" style="background-image:url('img/pulpo.webp')"><span>From the sea</span></div>
+        <div class="gallery__strip-item" style="background-image:url('img/callos.webp')"><span>Tradition</span></div>
+        <div class="gallery__strip-item" style="background-image:url('img/canelones.webp')"><span>Passion</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESERVATIONS -->
+  <section class="reservations" id="reservas">
+    <div class="reservations__inner">
+      <div class="reservations__text">
+        <p class="section__eyebrow">· Book your table ·</p>
+        <h2 class="section__title">An unforgettable<br /><em>evening</em></h2>
+        <p>Book your table and let us surprise you. For groups of more than 10 people or private events, please contact us directly.</p>
+        <div class="reservations__info">
+          <div class="res-info">
+            <span class="res-info__label">Tuesday – Friday</span>
+            <span class="res-info__val">1:30 PM – 4:00 PM · 8:30 PM – 2:00 AM</span>
+          </div>
+          <div class="res-info">
+            <span class="res-info__label">Saturdays & Sundays</span>
+            <span class="res-info__val">1:00 PM – 4:30 PM · 8:00 PM – 2:00 AM</span>
+          </div>
+          <div class="res-info">
+            <span class="res-info__label">Monday</span>
+            <span class="res-info__val">Closed</span>
+          </div>
+        </div>
+      </div>
+      <form class="reservation-form" id="reservationForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Full name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="+34 600 000 000" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" id="date" name="date" required />
+          </div>
+          <div class="form-group">
+            <label for="time">Time</label>
+            <select id="time" name="time" required>
+              <option value="">Select time</option>
+              <option>13:30</option><option>14:00</option><option>14:30</option>
+              <option>20:30</option><option>21:00</option><option>21:30</option><option>22:00</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="guests">Guests</label>
+            <select id="guests" name="guests" required>
+              <option value="">Number of guests</option>
+              <option>1 guest</option><option>2 guests</option><option>3 guests</option>
+              <option>4 guests</option><option>5 guests</option><option>6 guests</option>
+              <option>7-10 guests</option><option>+10 guests</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="occasion">Special occasion</label>
+            <select id="occasion" name="occasion">
+              <option value="">No special occasion</option>
+              <option>Birthday</option><option>Anniversary</option>
+              <option>Business dinner</option><option>Celebration</option><option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="notes">Additional notes</label>
+          <textarea id="notes" name="notes" rows="3" placeholder="Allergies, preferences, special requests..."></textarea>
+        </div>
+        <button type="submit" class="btn btn--gold btn--full">Request reservation</button>
+        <p class="form-note">You'll receive confirmation within 2 hours on working days.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- CONTACT / FOOTER -->
+  <footer class="footer" id="contacto">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <img src="img/LOGO_BANNER.png" alt="Alma Bar Restaurant" class="footer__logo" />
+        <p>A gastronomic experience that goes beyond the table.</p>
+        <div class="footer__social">
+          <a href="#" aria-label="Instagram" class="social-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="#" aria-label="Facebook" class="social-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" aria-label="TripAdvisor" class="social-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></a>
+        </div>
+      </div>
+      <div class="footer__col">
+        <h4>Navigation</h4>
+        <a href="#inicio">Home</a><a href="#nosotros">About</a>
+        <a href="#menu">Menu</a><a href="#galeria">Our Space</a><a href="#reservas">Reservations</a>
+      </div>
+      <div class="footer__col">
+        <h4>Contact</h4>
+        <p>Example Street 12, Ground Floor</p><p>City, Postcode</p>
+        <a href="tel:+34600000000">+34 600 000 000</a>
+        <a href="mailto:hola@almabarrestaurant.com">hola@almabarrestaurant.com</a>
+      </div>
+      <div class="footer__col">
+        <h4>Opening hours</h4>
+        <p><span>Tue – Fri</span> 1:30 PM – 2:00 AM</p>
+        <p><span>Sat – Sun</span> 1:00 PM – 2:00 AM</p>
+        <p><span>Monday</span> Closed</p>
+        <button class="btn btn--gold btn--sm" onclick="scrollToSection('reservas')">Book</button>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2025 Alma Bar Restaurant · All rights reserved</p>
+      <div><a href="#">Privacy policy</a><a href="#">Legal notice</a></div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast">
+    <div class="toast__icon">✓</div>
+    <div><strong>Request sent!</strong><p>We'll confirm shortly.</p></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -64,21 +64,22 @@ document.querySelectorAll(
   revealObserver.observe(el);
 });
 
-// Toast notification
-function showToast() {
-  const toast = document.getElementById('toast');
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 4000);
-}
-
-// Form submission
-document.getElementById('reservationForm').addEventListener('submit', (e) => {
-  e.preventDefault();
-  showToast();
-  e.target.reset();
-});
-
 // Marquee strip — el contenido ya está duplicado en el HTML para el loop
+
+// Language dropdown
+const langBtn = document.getElementById('langBtn');
+const langDropdown = document.getElementById('langDropdown');
+if (langBtn && langDropdown) {
+  langBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    langDropdown.classList.toggle('open');
+    langBtn.classList.toggle('open');
+  });
+  document.addEventListener('click', () => {
+    langDropdown.classList.remove('open');
+    langBtn.classList.remove('open');
+  });
+}
 
 // Set min date for date input to today
 const dateInput = document.getElementById('date');

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alma · Bar Restaurant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=25" />
+  <link rel="icon" type="image/png" href="logo.png" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <div class="nav__logo">
+      <a href="pt.html"><img src="img/LOGO_BANNER.png" alt="Alma Bar Restaurant" class="nav__logo-img" /></a>
+    </div>
+    <nav class="nav__links">
+      <a href="#inicio">Início</a>
+      <a href="#nosotros">Sobre nós</a>
+      <a href="#menu">Menu</a>
+      <a href="#galeria">O nosso espaço</a>
+      <a href="#reservas">Reservas</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <div class="nav__right">
+      <button class="nav__cta" onclick="scrollToSection('reservas')">Reservar mesa</button>
+      <div class="nav__lang">
+        <button class="nav__lang-btn" id="langBtn">
+          PT
+          <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg>
+        </button>
+        <div class="nav__lang-dropdown" id="langDropdown">
+          <a href="index.html" class="lang-opt">Català</a>
+          <a href="es.html" class="lang-opt">Castellano</a>
+          <a href="fr.html" class="lang-opt">Français</a>
+          <a href="en.html" class="lang-opt">English</a>
+          <a href="pt.html" class="lang-opt active">Português</a>
+        </div>
+      </div>
+      <button class="nav__hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#inicio" onclick="closeMobileMenu()">Início</a>
+    <a href="#nosotros" onclick="closeMobileMenu()">Sobre nós</a>
+    <a href="#menu" onclick="closeMobileMenu()">Menu</a>
+    <a href="#galeria" onclick="closeMobileMenu()">O nosso espaço</a>
+    <a href="#reservas" onclick="closeMobileMenu()">Reservas</a>
+    <a href="#contacto" onclick="closeMobileMenu()">Contacto</a>
+    <div class="mobile-menu__langs">
+      <a href="index.html">CA</a>
+      <a href="es.html">ES</a>
+      <a href="fr.html">FR</a>
+      <a href="en.html">EN</a>
+      <a href="pt.html" class="active">PT</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero__bg" style="background-image:url('img/dos-1200w.webp')"></div>
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <p class="hero__eyebrow">· Experiência gastronómica ·</p>
+      <h1 class="hero__title">Onde cada prato<br /><em>conta uma história</em></h1>
+      <p class="hero__subtitle">Alta cozinha, atmosfera íntima e os melhores cocktails.<br />Uma experiência para os sentidos.</p>
+      <div class="hero__actions">
+        <button class="btn btn--gold" onclick="scrollToSection('reservas')">Reservar mesa</button>
+        <button class="btn btn--outline" onclick="scrollToSection('menu')">Ver o menu</button>
+      </div>
+    </div>
+    <div class="hero__scroll">
+      <span>Descobrir</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- STRIP -->
+  <div class="strip">
+    <div class="strip__track">
+      <span>Alta cozinha</span><i>◆</i>
+      <span>Cocktails de autor</span><i>◆</i>
+      <span>Ambiente exclusivo</span><i>◆</i>
+      <span>Ingredientes sazonais</span><i>◆</i>
+      <span>Menu de degustação</span><i>◆</i>
+      <span>Harmonização de vinhos</span><i>◆</i>
+      <span>Eventos privados</span><i>◆</i>
+      <span>Alta cozinha</span><i>◆</i>
+      <span>Cocktails de autor</span><i>◆</i>
+      <span>Ambiente exclusivo</span><i>◆</i>
+      <span>Ingredientes sazonais</span><i>◆</i>
+      <span>Menu de degustação</span><i>◆</i>
+      <span>Harmonização de vinhos</span><i>◆</i>
+      <span>Eventos privados</span><i>◆</i>
+    </div>
+  </div>
+
+  <!-- SOBRE NÓS -->
+  <section class="about" id="nosotros">
+    <div class="about__inner">
+      <div class="about__visual">
+        <div class="about__img-wrap">
+          <div class="about__img about__img--main" style="background-image:url('img/dos-1200w.webp')"></div>
+          <div class="about__img about__img--accent about__img--logo">
+            <img src="img/logopng.png" alt="Alma Logo" class="about__logo-img" />
+          </div>
+        </div>
+        <div class="about__badge">
+          <span class="about__badge-year">2018</span>
+          <span class="about__badge-label">Fundado</span>
+        </div>
+      </div>
+      <div class="about__text">
+        <p class="section__eyebrow">· A nossa história ·</p>
+        <h2 class="section__title">A alma de cada<br /><em>ingrediente</em></h2>
+        <p class="about__body">Alma nasceu do desejo de criar um espaço onde a gastronomia transcende o ordinário. Cada canto, cada prato e cada copo está pensado para conectar com quem o desfruta.</p>
+        <p class="about__body">Trabalhamos com produtores locais e sazonais, respeitando o produto e elevando-o através da técnica, criatividade e paixão genuína.</p>
+        <div class="about__stats">
+          <div class="stat">
+            <span class="stat__num">180+</span>
+            <span class="stat__label">Pratos criados</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">50+</span>
+            <span class="stat__label">Cocktails de autor</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num">7</span>
+            <span class="stat__label">Anos de história</span>
+          </div>
+        </div>
+        <a href="#reservas" class="btn btn--gold" onclick="event.preventDefault(); scrollToSection('reservas')">Viver a experiência</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="menu" id="menu">
+    <div class="menu__header">
+      <p class="section__eyebrow">· A nossa proposta ·</p>
+      <h2 class="section__title">O menu</h2>
+      <p class="menu__subtitle">Uma seleção cuidadosamente elaborada para cada momento do dia.</p>
+    </div>
+    <div class="menu__tabs">
+      <button class="tab active" data-tab="entrantes">Entradas</button>
+      <button class="tab" data-tab="principales">Principais</button>
+      <button class="tab" data-tab="postres">Sobremesas</button>
+      <button class="tab" data-tab="cocktails">Cocktails</button>
+    </div>
+    <div class="menu__grid" id="menuGrid">
+      <div class="menu__panel active" data-panel="entrantes">
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/carpaccio.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Tártaro de atum rabilho</h3><span class="dish-card__price">18€</span></div>
+            <p>Com abacate, molho de soja, sésamo torrado e crocante de arroz.</p>
+            <span class="dish-card__tag">Signature</span>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/pulpo.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Burrata com trufa negra</h3><span class="dish-card__price">16€</span></div>
+            <p>Sobre creme de pimento piquillo, azeite virgem extra e microgreens.</p>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/canelones.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Vieiras grelhadas</h3><span class="dish-card__price">22€</span></div>
+            <p>Com manteiga noisette, puré de couve-flor e caviar de limão.</p>
+            <span class="dish-card__tag">O chef recomenda</span>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/callos.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Foie mi-cuit</h3><span class="dish-card__price">20€</span></div>
+            <p>Com brioche tostado, compota de figos e flor de sal.</p>
+          </div>
+        </div>
+      </div>
+      <div class="menu__panel" data-panel="principales">
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/bacalla.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Lombo de pescada</h3><span class="dish-card__price">28€</span></div>
+            <p>Sobre velouté de amêijoas, espargos brancos e azeite de salsa.</p>
+            <span class="dish-card__tag">Temporada</span>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/entrecot.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Entrecôte maturado 45 dias</h3><span class="dish-card__price">52€</span></div>
+            <p>Com batata ratte, chimichurri de ervas e redução de vinho tinto.</p>
+            <span class="dish-card__tag">Signature</span>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/callos.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Risotto de cogumelos e parmesão</h3><span class="dish-card__price">24€</span></div>
+            <p>Com cogumelos sazonais, mantecato ao parmesão e trufa ralada.</p>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/pulpo.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Pombo assado</h3><span class="dish-card__price">34€</span></div>
+            <p>Com parmentier de aipo-rábano, jus de caça e cerejas em pickle.</p>
+            <span class="dish-card__tag">O chef recomenda</span>
+          </div>
+        </div>
+      </div>
+      <div class="menu__panel" data-panel="postres">
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/canelones.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Coulant de chocolate negro</h3><span class="dish-card__price">10€</span></div>
+            <p>Com gelado de baunilha de Madagascar e pó de ouro.</p>
+            <span class="dish-card__tag">Signature</span>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/carpaccio.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Cheesecake basco</h3><span class="dish-card__price">9€</span></div>
+            <p>Cremoso, caramelizado, com coulis de frutos vermelhos.</p>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/bacalla.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Crème brûlée de lavanda</h3><span class="dish-card__price">8€</span></div>
+            <p>Com caramelo crocante, raspa de limão e biscoito sablé.</p>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/entrecot.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Seleção de gelados artesanais</h3><span class="dish-card__price">7€</span></div>
+            <p>Três bolas de produção própria com toppings sazonais.</p>
+          </div>
+        </div>
+      </div>
+      <div class="menu__panel" data-panel="cocktails">
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/pulpo.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Alma Sour</h3><span class="dish-card__price">13€</span></div>
+            <p>Whisky fumado, sumo de limão, xarope de alecrim e clara de ovo.</p>
+            <span class="dish-card__tag">Signature</span>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/carpaccio.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Golden Garden</h3><span class="dish-card__price">14€</span></div>
+            <p>Gin, pepino, hortelã fresca, Elderflower e tónica premium.</p>
+            <span class="dish-card__tag">Bestseller</span>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/callos.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Dark Negroni</h3><span class="dish-card__price">14€</span></div>
+            <p>Campari negro, vermute rosso envelhecido e gin barrel aged.</p>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/canelones.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Velvet Espresso</h3><span class="dish-card__price">12€</span></div>
+            <p>Vodka, licor de café, espresso duplo e espuma de baunilha.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="menu__footer">
+      <p>Alergénios ou necessidades especiais? Consulte a nossa equipa.</p>
+      <button class="btn btn--outline" onclick="scrollToSection('reservas')">Reservar para os provar</button>
+    </div>
+  </section>
+
+  <!-- EXPERIÊNCIA -->
+  <section class="experience">
+    <div class="experience__inner">
+      <div class="experience__text">
+        <p class="section__eyebrow">· Mais do que um restaurante ·</p>
+        <h2 class="section__title">Uma experiência<br /><em>completa</em></h2>
+        <p>Desde o aperitivo até ao último cocktail, cada momento no Alma está concebido para o surpreender. A nossa equipa cuida de cada detalhe para que a sua visita seja memorável.</p>
+      </div>
+      <div class="experience__cards">
+        <div class="exp-card">
+          <div class="exp-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg></div>
+          <h3>Horário alargado</h3>
+          <p>Aberto de terça a domingo até às 2:00 AM. O ambiente noturno é o nosso momento.</p>
+        </div>
+        <div class="exp-card">
+          <div class="exp-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <h3>Eventos privados</h3>
+          <p>Celebre os seus momentos especiais. Espaços reservados para grupos e celebrações exclusivas.</p>
+        </div>
+        <div class="exp-card">
+          <div class="exp-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+          <h3>Menu degustação</h3>
+          <p>Uma viagem de 7 momentos pelo melhor da nossa carta. Harmonização de vinhos incluída.</p>
+        </div>
+        <div class="exp-card">
+          <div class="exp-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+          <h3>Menu de temporada</h3>
+          <p>O menu evolui com as estações. Sempre produto fresco, local e no seu ponto ótimo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- O NOSSO ESPAÇO -->
+  <section class="gallery" id="galeria">
+    <div class="gallery__wrap">
+      <div class="gallery__header">
+        <p class="section__eyebrow">· O nosso espaço ·</p>
+        <h2 class="gallery__title">Um lugar <em>especial</em></h2>
+        <p class="gallery__subtitle">Cada detalhe está pensado para que se sinta em casa, mas num lugar que nunca esquecerá.</p>
+      </div>
+      <div class="gallery__grid">
+        <div class="gallery__aside">
+          <div class="gallery__info">
+            <h3>O ambiente do Alma</h3>
+            <p>Um espaço íntimo e elegante onde a luz quente, os materiais naturais e o cuidado em cada canto criam a atmosfera perfeita para cada ocasião.</p>
+            <div class="gallery__stats">
+              <div class="gallery__stat"><strong>70</strong><span>Comensais</span></div>
+              <div class="gallery__stat"><strong>Esplanada</strong><span>Exterior</span></div>
+              <div class="gallery__stat"><strong>Sala</strong><span>Privada</span></div>
+            </div>
+            <button class="btn btn--gold" onclick="scrollToSection('reservas')">Reservar mesa</button>
+          </div>
+          <div class="gallery__stack">
+            <div class="gallery__stack-img" style="background-image:url('img/carpaccio.webp')"><span>Entradas</span></div>
+            <div class="gallery__stack-img" style="background-image:url('img/entrecot.webp')"><span>Grelha</span></div>
+          </div>
+        </div>
+        <div class="gallery__feature" style="background-image:url('img/dos-1200w.webp')">
+          <div class="gallery__feature-overlay">
+            <div class="gallery__feature-badge">
+              <span class="gallery__feature-badge-num">2018</span>
+              <span class="gallery__feature-badge-lbl">Desde</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="gallery__strip">
+        <div class="gallery__strip-item" style="background-image:url('img/pulpo.webp')"><span>Do mar</span></div>
+        <div class="gallery__strip-item" style="background-image:url('img/callos.webp')"><span>Tradição</span></div>
+        <div class="gallery__strip-item" style="background-image:url('img/canelones.webp')"><span>Paixão</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESERVAS -->
+  <section class="reservations" id="reservas">
+    <div class="reservations__inner">
+      <div class="reservations__text">
+        <p class="section__eyebrow">· Reserve a sua mesa ·</p>
+        <h2 class="section__title">Uma noite<br /><em>inesquecível</em></h2>
+        <p>Reserve a sua mesa e deixe-nos surpreendê-lo. Para grupos de mais de 10 pessoas ou eventos privados, contacte-nos diretamente.</p>
+        <div class="reservations__info">
+          <div class="res-info">
+            <span class="res-info__label">Terça – Sexta</span>
+            <span class="res-info__val">13:30 – 16:00 · 20:30 – 02:00</span>
+          </div>
+          <div class="res-info">
+            <span class="res-info__label">Sábados e Domingos</span>
+            <span class="res-info__val">13:00 – 16:30 · 20:00 – 02:00</span>
+          </div>
+          <div class="res-info">
+            <span class="res-info__label">Segunda</span>
+            <span class="res-info__val">Encerrado</span>
+          </div>
+        </div>
+      </div>
+      <form class="reservation-form" id="reservationForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Nome completo</label>
+            <input type="text" id="name" name="name" placeholder="O seu nome" required />
+          </div>
+          <div class="form-group">
+            <label for="phone">Telefone</label>
+            <input type="tel" id="phone" name="phone" placeholder="+34 600 000 000" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="date">Data</label>
+            <input type="date" id="date" name="date" required />
+          </div>
+          <div class="form-group">
+            <label for="time">Hora</label>
+            <select id="time" name="time" required>
+              <option value="">Selecionar hora</option>
+              <option>13:30</option><option>14:00</option><option>14:30</option>
+              <option>20:30</option><option>21:00</option><option>21:30</option><option>22:00</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="guests">Comensais</label>
+            <select id="guests" name="guests" required>
+              <option value="">Número de pessoas</option>
+              <option>1 pessoa</option><option>2 pessoas</option><option>3 pessoas</option>
+              <option>4 pessoas</option><option>5 pessoas</option><option>6 pessoas</option>
+              <option>7-10 pessoas</option><option>+10 pessoas</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="occasion">Ocasião especial</label>
+            <select id="occasion" name="occasion">
+              <option value="">Sem ocasião especial</option>
+              <option>Aniversário</option><option>Aniversário de casal</option>
+              <option>Jantar de negócios</option><option>Celebração</option><option>Outra</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="notes">Notas adicionais</label>
+          <textarea id="notes" name="notes" rows="3" placeholder="Alergias, preferências, pedidos especiais..."></textarea>
+        </div>
+        <button type="submit" class="btn btn--gold btn--full">Solicitar reserva</button>
+        <p class="form-note">Receberá confirmação em menos de 2 horas nos dias úteis.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- CONTACTO / FOOTER -->
+  <footer class="footer" id="contacto">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <img src="img/LOGO_BANNER.png" alt="Alma Bar Restaurant" class="footer__logo" />
+        <p>Uma experiência gastronómica que vai além da mesa.</p>
+        <div class="footer__social">
+          <a href="#" aria-label="Instagram" class="social-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="#" aria-label="Facebook" class="social-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" aria-label="TripAdvisor" class="social-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></a>
+        </div>
+      </div>
+      <div class="footer__col">
+        <h4>Navegação</h4>
+        <a href="#inicio">Início</a><a href="#nosotros">Sobre nós</a>
+        <a href="#menu">Menu</a><a href="#galeria">O nosso espaço</a><a href="#reservas">Reservas</a>
+      </div>
+      <div class="footer__col">
+        <h4>Contacto</h4>
+        <p>Rua Exemplo 12, Rés do Chão</p><p>Cidade, Código Postal</p>
+        <a href="tel:+34600000000">+34 600 000 000</a>
+        <a href="mailto:hola@almabarrestaurant.com">hola@almabarrestaurant.com</a>
+      </div>
+      <div class="footer__col">
+        <h4>Horário</h4>
+        <p><span>Ter – Sex</span> 13:30 – 02:00</p>
+        <p><span>Sáb – Dom</span> 13:00 – 02:00</p>
+        <p><span>Segunda</span> Encerrado</p>
+        <button class="btn btn--gold btn--sm" onclick="scrollToSection('reservas')">Reservar</button>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2025 Alma Bar Restaurant · Todos os direitos reservados</p>
+      <div><a href="#">Política de privacidade</a><a href="#">Aviso legal</a></div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast">
+    <div class="toast__icon">✓</div>
+    <div><strong>Pedido enviado!</strong><p>Confirmaremos em breve.</p></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
