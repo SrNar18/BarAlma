@@ -580,7 +580,7 @@
     <!-- Pujada de PDF -->
     <div class="upload-card">
       <h3>Publicar nova carta</h3>
-      <p class="upload-desc">Selecciona o arrossega el PDF amb la nova carta. Es publicarà immediatament a la web.</p>
+      <p class="upload-desc">Selecciona o arrossega el PDF amb la nova carta. Es publicarà immediatament a la web. Màxim 4 MB.</p>
 
       <div class="drop-zone" id="dropZone">
         <input type="file" id="fileInput" accept="application/pdf" />
@@ -591,7 +591,7 @@
           <polyline points="9 15 12 12 15 15"/>
         </svg>
         <p>Arrossega el PDF aquí</p>
-        <small>o fes clic per seleccionar · Màxim 10 MB</small>
+        <small>o fes clic per seleccionar · Màxim 4 MB</small>
       </div>
 
       <!-- Fitxer seleccionat -->
@@ -880,8 +880,8 @@
       return;
     }
 
-    // Validació mida (10 MB)
-    const MAX = 10 * 1024 * 1024;
+    // Validació mida (4 MB — límit del body de les funcions Netlify)
+    const MAX = 4 * 1024 * 1024;
     if (file.size > MAX) {
       showUploadMsg('error',
         'El fitxer és massa gran (' + formatBytes(file.size) + '). Màxim 10 MB.');
@@ -905,68 +905,57 @@
     progressWrap.classList.remove('show');
   }
 
-  // ── Publicar PDF (flux de 3 passos amb URL signada) ────
+  // ── Publicar PDF ───────────────────────────────────────
   publishBtn.addEventListener('click', async function () {
     if (!selectedFile) return;
 
     const s = getSession();
     if (!s) { clearSession(); showLogin(); return; }
 
-    const authHeaders = {
-      'Content-Type':    'application/json',
-      'Authorization':   'Bearer ' + s.token,
-      'X-Token-Payload': s.payload,
-    };
-
     publishBtn.disabled = true;
     progressWrap.classList.add('show');
-    setProgress(0, 'Preparant pujada...');
+    setProgress(10, 'Llegint fitxer...');
     uploadMsg.classList.remove('show');
 
     try {
-      // ── Pas 1: obtenir URL pre-signada ─────────────────
-      setProgress(5, 'Obtenint URL de pujada...');
-      const urlResp = await fetch('/api/get-upload-url', {
-        method: 'POST',
-        headers: authHeaders,
+      // Llegir el fitxer com a base64
+      const fileBase64 = await new Promise(function (resolve, reject) {
+        const reader = new FileReader();
+        reader.onload = function () {
+          // El resultat és "data:application/pdf;base64,<dades>"
+          resolve(reader.result.split(',')[1]);
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(selectedFile);
       });
 
-      if (urlResp.status === 401) { clearSession(); showLogin(); return; }
-      if (!urlResp.ok) {
-        const err = await urlResp.json().catch(() => ({}));
-        throw new Error((err.detail ? err.detail : err.error) || 'No s\'ha pogut obtenir la URL de pujada');
-      }
+      setProgress(50, 'Pujant el PDF...');
 
-      const { uploadUrl } = await urlResp.json();
-
-      // ── Pas 2: pujar el PDF directament via XHR ────────
-      setProgress(10, 'Pujant el PDF...');
-      await uploadFileXHR(uploadUrl, selectedFile, function (pct) {
-        // pct va de 0 a 100 durant la pujada directa
-        setProgress(10 + pct * 0.85, 'Pujant el PDF... ' + Math.round(pct) + '%');
-      });
-
-      // ── Pas 3: confirmar i desar metadada ──────────────
-      setProgress(97, 'Confirmant...');
-      const confirmResp = await fetch('/api/confirm-upload', {
+      const resp = await fetch('/api/upload-pdf', {
         method: 'POST',
-        headers: authHeaders,
+        headers: {
+          'Content-Type':    'application/json',
+          'Authorization':   'Bearer ' + s.token,
+          'X-Token-Payload': s.payload,
+        },
         body: JSON.stringify({
-          filename:  selectedFile.name,
-          sizeBytes: selectedFile.size,
+          filename:   selectedFile.name,
+          fileBase64: fileBase64,
+          sizeBytes:  selectedFile.size,
         }),
       });
 
-      if (confirmResp.status === 401) { clearSession(); showLogin(); return; }
-      if (!confirmResp.ok) {
-        const err = await confirmResp.json().catch(() => ({}));
-        throw new Error(err.error || 'Error confirmant la pujada');
+      setProgress(90, 'Confirmant...');
+
+      if (resp.status === 401) { clearSession(); showLogin(); return; }
+      if (!resp.ok) {
+        const err = await resp.json().catch(() => ({}));
+        throw new Error(err.detail || err.error || 'Error pujant el PDF');
       }
 
       setProgress(100, 'Completat');
       showUploadMsg('success', '✓ Carta publicada correctament. Ja és visible a la web.');
 
-      // Actualitzar estat i netejar
       await loadStatus();
       clearFile();
 
@@ -978,33 +967,6 @@
       setTimeout(() => progressWrap.classList.remove('show'), 3000);
     }
   });
-
-  // ── Pujada directa amb XHR (mostra progrés real) ──────
-  function uploadFileXHR(url, file, onProgress) {
-    return new Promise(function (resolve, reject) {
-      const xhr = new XMLHttpRequest();
-      xhr.open('PUT', url, true);
-      xhr.setRequestHeader('Content-Type', 'application/pdf');
-
-      xhr.upload.onprogress = function (e) {
-        if (e.lengthComputable) onProgress((e.loaded / e.total) * 100);
-      };
-
-      xhr.onload = function () {
-        if (xhr.status >= 200 && xhr.status < 300) {
-          resolve();
-        } else {
-          reject(new Error('Error pujant el fitxer (HTTP ' + xhr.status + ')'));
-        }
-      };
-
-      xhr.onerror = function () {
-        reject(new Error('Error de xarxa durant la pujada'));
-      };
-
-      xhr.send(file);
-    });
-  }
 
 })();
 </script>
