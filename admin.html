@@ -934,7 +934,7 @@
       if (urlResp.status === 401) { clearSession(); showLogin(); return; }
       if (!urlResp.ok) {
         const err = await urlResp.json().catch(() => ({}));
-        throw new Error(err.error || 'No s\'ha pogut obtenir la URL de pujada');
+        throw new Error((err.detail ? err.detail : err.error) || 'No s\'ha pogut obtenir la URL de pujada');
       }
 
       const { uploadUrl } = await urlResp.json();
