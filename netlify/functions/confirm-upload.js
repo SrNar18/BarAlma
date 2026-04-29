@@ -1,18 +1,22 @@
 /**
- * carta-status.js — Retorna l'estat actual del PDF de la carta
+ * confirm-upload.js — Confirma la pujada directa del PDF i desa la metadada
  *
- * GET /api/carta-status
+ * POST /api/confirm-upload
  * Headers:
  *   Authorization:    Bearer <token>
  *   X-Token-Payload:  <payload>
+ *   Content-Type:     application/json
+ * Body: { filename: string, sizeBytes: number }
+ *
+ * Response: { ok: true }
  */
 
-const crypto = require('crypto');
+const crypto   = require('crypto');
 const { getStore } = require('@netlify/blobs');
 
 const HEADERS = {
   'Content-Type': 'application/json',
-  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Origin':  '*',
   'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Token-Payload',
 };
 
@@ -34,6 +38,9 @@ exports.handler = async function (event) {
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 204, headers: HEADERS, body: '' };
   }
+  if (event.httpMethod !== 'POST') {
+    return { statusCode: 405, headers: HEADERS, body: JSON.stringify({ error: 'Mètode no permès' }) };
+  }
 
   const token   = (event.headers['authorization'] || '').replace('Bearer ', '').trim();
   const payload = (event.headers['x-token-payload'] || '').trim();
@@ -42,35 +49,43 @@ exports.handler = async function (event) {
     return { statusCode: 401, headers: HEADERS, body: JSON.stringify({ error: 'No autoritzat' }) };
   }
 
+  let filename, sizeBytes;
   try {
-    const store = getStore('uploads');
-    const meta  = await store.get('carta.meta', { type: 'json' });
+    const body = JSON.parse(event.body || '{}');
+    filename   = body.filename  || 'carta.pdf';
+    sizeBytes  = parseInt(body.sizeBytes, 10) || 0;
+  } catch {
+    return { statusCode: 400, headers: HEADERS, body: JSON.stringify({ error: 'Body invàlid' }) };
+  }
 
-    if (!meta) {
-      return {
-        statusCode: 200,
-        headers: HEADERS,
-        body: JSON.stringify({ exists: false }),
-      };
-    }
+  // Validate reasonable size (10 MB max)
+  if (sizeBytes > 10 * 1024 * 1024) {
+    return { statusCode: 400, headers: HEADERS, body: JSON.stringify({ error: 'Arxiu massa gran (màx. 10 MB)' }) };
+  }
+
+  try {
+    const store  = getStore('uploads');
+    const sizeMB = (sizeBytes / (1024 * 1024)).toFixed(2);
+
+    // Store metadata as a small JSON blob
+    await store.setJSON('carta.meta', {
+      originalName: filename,
+      sizeBytes,
+      sizeMB,
+      updatedAt: new Date().toISOString(),
+    });
 
     return {
       statusCode: 200,
       headers: HEADERS,
-      body: JSON.stringify({
-        exists:       true,
-        sizeMB:       meta.sizeMB       || '—',
-        sizeBytes:    meta.sizeBytes    || 0,
-        updatedAt:    meta.updatedAt    || null,
-        originalName: meta.originalName || 'carta.pdf',
-      }),
+      body: JSON.stringify({ ok: true }),
     };
   } catch (err) {
-    console.error('[carta-status] Error:', err);
+    console.error('[confirm-upload] Error:', err);
     return {
       statusCode: 500,
       headers: HEADERS,
-      body: JSON.stringify({ error: 'Error consultant l\'estat' }),
+      body: JSON.stringify({ error: 'Error desant la metadada' }),
     };
   }
 };

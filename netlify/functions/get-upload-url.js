@@ -1,18 +1,20 @@
 /**
- * carta-status.js — Retorna l'estat actual del PDF de la carta
+ * get-upload-url.js — Retorna una URL pre-signada per pujar el PDF de la carta
  *
- * GET /api/carta-status
+ * POST /api/get-upload-url
  * Headers:
  *   Authorization:    Bearer <token>
  *   X-Token-Payload:  <payload>
+ *
+ * Response: { uploadUrl: string }
  */
 
-const crypto = require('crypto');
+const crypto   = require('crypto');
 const { getStore } = require('@netlify/blobs');
 
 const HEADERS = {
   'Content-Type': 'application/json',
-  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Origin':  '*',
   'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Token-Payload',
 };
 
@@ -34,6 +36,9 @@ exports.handler = async function (event) {
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 204, headers: HEADERS, body: '' };
   }
+  if (event.httpMethod !== 'POST') {
+    return { statusCode: 405, headers: HEADERS, body: JSON.stringify({ error: 'Mètode no permès' }) };
+  }
 
   const token   = (event.headers['authorization'] || '').replace('Bearer ', '').trim();
   const payload = (event.headers['x-token-payload'] || '').trim();
@@ -43,34 +48,20 @@ exports.handler = async function (event) {
   }
 
   try {
-    const store = getStore('uploads');
-    const meta  = await store.get('carta.meta', { type: 'json' });
-
-    if (!meta) {
-      return {
-        statusCode: 200,
-        headers: HEADERS,
-        body: JSON.stringify({ exists: false }),
-      };
-    }
+    const store     = getStore('uploads');
+    const uploadUrl = await store.getSignedUploadURL('carta.pdf', { expiry: 300 }); // 5 min
 
     return {
       statusCode: 200,
       headers: HEADERS,
-      body: JSON.stringify({
-        exists:       true,
-        sizeMB:       meta.sizeMB       || '—',
-        sizeBytes:    meta.sizeBytes    || 0,
-        updatedAt:    meta.updatedAt    || null,
-        originalName: meta.originalName || 'carta.pdf',
-      }),
+      body: JSON.stringify({ uploadUrl }),
     };
   } catch (err) {
-    console.error('[carta-status] Error:', err);
+    console.error('[get-upload-url] Error:', err);
     return {
       statusCode: 500,
       headers: HEADERS,
-      body: JSON.stringify({ error: 'Error consultant l\'estat' }),
+      body: JSON.stringify({ error: 'No s\'ha pogut generar la URL de pujada' }),
     };
   }
 };

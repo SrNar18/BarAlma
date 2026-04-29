@@ -4,6 +4,8 @@
 
 [build]
   functions = "netlify/functions"
+  command   = "npm install"
+  publish   = "."
 
 # ── Redireccionaments d'API ───────────────────────
 [[redirects]]
@@ -12,8 +14,13 @@
   status = 200
 
 [[redirects]]
-  from   = "/api/upload-pdf"
-  to     = "/.netlify/functions/upload-pdf"
+  from   = "/api/get-upload-url"
+  to     = "/.netlify/functions/get-upload-url"
+  status = 200
+
+[[redirects]]
+  from   = "/api/confirm-upload"
+  to     = "/.netlify/functions/confirm-upload"
   status = 200
 
 [[redirects]]
@@ -22,8 +29,6 @@
   status = 200
 
 # ── Servir carta.pdf des de Netlify Blobs ─────────
-# force=true fa que la funció tingui prioritat fins
-# i tot si existeix un fitxer estàtic carta.pdf
 [[redirects]]
   from   = "/carta.pdf"
   to     = "/.netlify/functions/serve-carta"
