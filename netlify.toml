@@ -28,6 +28,11 @@
   to     = "/.netlify/functions/carta-status"
   status = 200
 
+[[redirects]]
+  from   = "/api/upload-pdf"
+  to     = "/.netlify/functions/upload-pdf"
+  status = 200
+
 # ── Servir carta.pdf des de Netlify Blobs ─────────
 [[redirects]]
   from   = "/carta.pdf"
