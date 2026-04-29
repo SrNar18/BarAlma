@@ -1,0 +1,31 @@
+# =====================================================
+# Alma Bar Restaurant — Netlify Configuration
+# =====================================================
+
+[build]
+  functions = "netlify/functions"
+
+# ── Redireccionaments d'API ───────────────────────
+[[redirects]]
+  from   = "/api/login"
+  to     = "/.netlify/functions/login"
+  status = 200
+
+[[redirects]]
+  from   = "/api/upload-pdf"
+  to     = "/.netlify/functions/upload-pdf"
+  status = 200
+
+[[redirects]]
+  from   = "/api/carta-status"
+  to     = "/.netlify/functions/carta-status"
+  status = 200
+
+# ── Servir carta.pdf des de Netlify Blobs ─────────
+# force=true fa que la funció tingui prioritat fins
+# i tot si existeix un fitxer estàtic carta.pdf
+[[redirects]]
+  from   = "/carta.pdf"
+  to     = "/.netlify/functions/serve-carta"
+  status = 200
+  force  = true

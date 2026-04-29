@@ -3,11 +3,80 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alma · Bar Restaurant</title>
+  <title>Alma Bar Restaurant | Tapas, Carnes y Pescados · Gastronomía de Mercado</title>
+  <meta name="description" content="Alma Bar Restaurant: gastronomía de mercado, tapas y pintxos, carnes ibéricas y pescados al horno. Ambiente íntimo, cócteles de autor y atención personalizada." />
+  <meta name="keywords" content="bar restaurante, tapas, pintxos, gastronomía de mercado, carnes ibéricas, pescados al horno, cócteles, alma restaurant" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Alma Bar Restaurant" />
+  <link rel="canonical" href="https://www.almabarrestaurant.com/es.html" />
+  <link rel="alternate" hreflang="ca" href="https://www.almabarrestaurant.com/" />
+  <link rel="alternate" hreflang="es" href="https://www.almabarrestaurant.com/es.html" />
+  <link rel="alternate" hreflang="fr" href="https://www.almabarrestaurant.com/fr.html" />
+  <link rel="alternate" hreflang="en" href="https://www.almabarrestaurant.com/en.html" />
+  <link rel="alternate" hreflang="pt" href="https://www.almabarrestaurant.com/pt.html" />
+  <link rel="alternate" hreflang="x-default" href="https://www.almabarrestaurant.com/" />
+  <!-- Open Graph -->
+  <meta property="og:type" content="restaurant" />
+  <meta property="og:site_name" content="Alma Bar Restaurant" />
+  <meta property="og:title" content="Alma Bar Restaurant | Tapas, Carnes y Pescados" />
+  <meta property="og:description" content="Gastronomía de mercado, tapas y pintxos, carnes ibéricas y pescados al horno. Ambiente íntimo y cócteles de autor." />
+  <meta property="og:image" content="https://www.almabarrestaurant.com/img/dos-1200w.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="800" />
+  <meta property="og:image:alt" content="Alma Bar Restaurant — sala interior" />
+  <meta property="og:url" content="https://www.almabarrestaurant.com/es.html" />
+  <meta property="og:locale" content="es_ES" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Alma Bar Restaurant | Tapas, Carnes y Pescados" />
+  <meta name="twitter:description" content="Gastronomía de mercado, tapas y pintxos, carnes ibéricas y pescados al horno. Ambiente íntimo y cócteles de autor." />
+  <meta name="twitter:image" content="https://www.almabarrestaurant.com/img/dos-1200w.webp" />
+  <!-- Structured Data: Restaurant -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "Alma Bar Restaurant",
+    "description": "Gastronomía de mercado, tapas y pintxos, carnes ibéricas y pescados al horno. Ambiente íntimo y cócteles de autor.",
+    "url": "https://www.almabarrestaurant.com",
+    "telephone": "+34600000000",
+    "image": "https://www.almabarrestaurant.com/img/dos-1200w.webp",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Carrer Exemple 12, Planta Baixa",
+      "addressLocality": "Ciutat",
+      "addressCountry": "ES"
+    },
+    "servesCuisine": ["Mediterranean", "Spanish", "Tapas"],
+    "priceRange": "€€",
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "13:30", "closes": "16:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "20:30", "closes": "02:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Saturday","Sunday"],
+        "opens": "13:00", "closes": "16:30"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Saturday","Sunday"],
+        "opens": "20:00", "closes": "02:00"
+      }
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=25" />
+  <link rel="stylesheet" href="styles.css?v=26" />
   <link rel="icon" type="image/png" href="logo.png" />
 </head>
 <body>
@@ -25,7 +94,7 @@
       <a href="#reservas">Contacto</a>
     </nav>
     <div class="nav__right">
-      <button class="nav__cta" onclick="scrollToSection('reservas')">Reservar mesa</button>
+      <a href="#reservas" class="nav__cta" title="Reservar mesa en Alma Bar Restaurant">Reservar mesa</a>
       <div class="nav__lang">
         <button class="nav__lang-btn" id="langBtn">
           ES
@@ -70,8 +139,8 @@
       <h1 class="hero__title">Donde cada plato<br /><em>cuenta una historia</em></h1>
       <p class="hero__subtitle">Alta cocina, atmósfera íntima y los mejores cócteles.<br />Una experiencia para los sentidos.</p>
       <div class="hero__actions">
-        <button class="btn btn--gold" onclick="scrollToSection('reservas')">Reservar mesa</button>
-        <button class="btn btn--outline" onclick="scrollToSection('menu')">Ver menú</button>
+        <a href="#reservas" class="btn btn--gold" title="Reservar mesa en Alma Bar Restaurant">Reservar mesa</a>
+        <a href="#menu" class="btn btn--outline" title="Ver el menú de Alma Bar Restaurant">Ver menú</a>
       </div>
     </div>
     <div class="hero__scroll">
@@ -134,7 +203,7 @@
             <span class="stat__label">Años de historia</span>
           </div>
         </div>
-        <a href="#reservas" class="btn btn--gold" onclick="event.preventDefault(); scrollToSection('reservas')">Vivir la experiencia</a>
+        <a href="#reservas" class="btn btn--gold" title="Contacta con Alma Bar Restaurant">Vivir la experiencia</a>
       </div>
     </div>
   </section>
@@ -147,192 +216,207 @@
       <p class="menu__subtitle">Una selección cuidadosamente elaborada para cada momento del día.</p>
     </div>
     <div class="menu__tabs">
-      <button class="tab active" data-tab="entrantes">Entrantes</button>
-      <button class="tab" data-tab="principales">Principales</button>
-      <button class="tab" data-tab="postres">Postres</button>
-      <button class="tab" data-tab="cocktails">Cócteles</button>
+      <button class="tab active" data-tab="tapas">Tapas &amp; Pintxos</button>
+      <button class="tab" data-tab="entrantes">Entrantes</button>
+      <button class="tab" data-tab="carns">Carnes</button>
+      <button class="tab" data-tab="peixos">Pescados</button>
     </div>
     <div class="menu__grid" id="menuGrid">
-      <div class="menu__panel active" data-panel="entrantes">
+
+      <!-- Tapas & Pintxos -->
+      <div class="menu__panel active" data-panel="tapas">
         <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/carpaccio.webp')"></div>
+          <div class="dish-card__img" style="background-image:url('img/callos.webp')"></div>
           <div class="dish-card__info">
             <div class="dish-card__header">
-              <h3>Tartar de atún rojo</h3>
-              <span class="dish-card__price">18€</span>
+              <h3>Gildas</h3>
             </div>
-            <p>Con aguacate, soja, sésamo tostado y crujiente de arroz.</p>
-            <span class="dish-card__tag">Signature</span>
-          </div>
-        </div>
-        <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/pulpo.webp')"></div>
-          <div class="dish-card__info">
-            <div class="dish-card__header">
-              <h3>Burrata con trufa negra</h3>
-              <span class="dish-card__price">16€</span>
-            </div>
-            <p>Sobre crema de piquillos, aceite de oliva virgen y microbrotes.</p>
+            <p>Oliva, guindilla y anchoa. El pintxo clásico del País Vasco.</p>
+            <span class="dish-card__tag">Clásico</span>
           </div>
         </div>
         <div class="dish-card">
           <div class="dish-card__img" style="background-image:url('img/canelones.webp')"></div>
           <div class="dish-card__info">
             <div class="dish-card__header">
-              <h3>Vieiras a la plancha</h3>
-              <span class="dish-card__price">22€</span>
+              <h3>Croquetas (4 und.)</h3>
             </div>
-            <p>Con mantequilla noisette, puré de coliflor y caviar de limón.</p>
-            <span class="dish-card__tag">Chef recomienda</span>
-          </div>
-        </div>
-        <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/callos.webp')"></div>
-          <div class="dish-card__info">
-            <div class="dish-card__header">
-              <h3>Foie mi-cuit</h3>
-              <span class="dish-card__price">20€</span>
-            </div>
-            <p>Con brioche tostado, mermelada de higos y sal en escamas.</p>
-          </div>
-        </div>
-      </div>
-      <div class="menu__panel" data-panel="principales">
-        <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/bacalla.webp')"></div>
-          <div class="dish-card__info">
-            <div class="dish-card__header">
-              <h3>Lomo de merluza</h3>
-              <span class="dish-card__price">28€</span>
-            </div>
-            <p>Sobre velouté de almejas, espárragos blancos y aceite de perejil.</p>
-            <span class="dish-card__tag">Temporada</span>
-          </div>
-        </div>
-        <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/entrecot.webp')"></div>
-          <div class="dish-card__info">
-            <div class="dish-card__header">
-              <h3>Chuletón madurado 45 días</h3>
-              <span class="dish-card__price">52€</span>
-            </div>
-            <p>Con patata ratte, chimichurri de hierbas y reducción de vino tinto.</p>
-            <span class="dish-card__tag">Signature</span>
-          </div>
-        </div>
-        <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/callos.webp')"></div>
-          <div class="dish-card__info">
-            <div class="dish-card__header">
-              <h3>Risotto de setas y parmesano</h3>
-              <span class="dish-card__price">24€</span>
-            </div>
-            <p>Con setas de temporada, mantecado al parmesano y trufa rallada.</p>
-          </div>
-        </div>
-        <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/pulpo.webp')"></div>
-          <div class="dish-card__info">
-            <div class="dish-card__header">
-              <h3>Pichón asado</h3>
-              <span class="dish-card__price">34€</span>
-            </div>
-            <p>Con parmentier de apionabo, jus de caza y cerezas encurtidas.</p>
-            <span class="dish-card__tag">Chef recomienda</span>
-          </div>
-        </div>
-      </div>
-      <div class="menu__panel" data-panel="postres">
-        <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/canelones.webp')"></div>
-          <div class="dish-card__info">
-            <div class="dish-card__header">
-              <h3>Coulant de chocolate negro</h3>
-              <span class="dish-card__price">10€</span>
-            </div>
-            <p>Con helado de vainilla de Madagascar y polvo de oro.</p>
-            <span class="dish-card__tag">Signature</span>
-          </div>
-        </div>
-        <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/carpaccio.webp')"></div>
-          <div class="dish-card__info">
-            <div class="dish-card__header">
-              <h3>Tarta de queso vasca</h3>
-              <span class="dish-card__price">9€</span>
-            </div>
-            <p>Cremosa, caramelizada, con coulis de frutos rojos.</p>
-          </div>
-        </div>
-        <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/bacalla.webp')"></div>
-          <div class="dish-card__info">
-            <div class="dish-card__header">
-              <h3>Crème brûlée de lavanda</h3>
-              <span class="dish-card__price">8€</span>
-            </div>
-            <p>Con caramelo crujiente, ralladura de limón y galleta sablé.</p>
-          </div>
-        </div>
-        <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/entrecot.webp')"></div>
-          <div class="dish-card__info">
-            <div class="dish-card__header">
-              <h3>Selección de helados artesanos</h3>
-              <span class="dish-card__price">7€</span>
-            </div>
-            <p>Tres bolas de producción propia con toppings de temporada.</p>
-          </div>
-        </div>
-      </div>
-      <div class="menu__panel" data-panel="cocktails">
-        <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/pulpo.webp')"></div>
-          <div class="dish-card__info">
-            <div class="dish-card__header">
-              <h3>Alma Sour</h3>
-              <span class="dish-card__price">13€</span>
-            </div>
-            <p>Whisky ahumado, zumo de limón, sirope de romero y clara de huevo.</p>
-            <span class="dish-card__tag">Signature</span>
-          </div>
-        </div>
-        <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/carpaccio.webp')"></div>
-          <div class="dish-card__info">
-            <div class="dish-card__header">
-              <h3>Golden Garden</h3>
-              <span class="dish-card__price">14€</span>
-            </div>
-            <p>Gin, pepino, menta fresca, Elderflower y agua tónica premium.</p>
+            <p>De jamón ibérico o pollo. Crujientes por fuera, cremosas por dentro.</p>
             <span class="dish-card__tag">Bestseller</span>
           </div>
         </div>
         <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/callos.webp')"></div>
+          <div class="dish-card__img" style="background-image:url('img/pulpo.webp')"></div>
           <div class="dish-card__info">
             <div class="dish-card__header">
-              <h3>Dark Negroni</h3>
-              <span class="dish-card__price">14€</span>
+              <h3>Patatas Bravas</h3>
             </div>
-            <p>Campari negro, vermouth rosso envejecido y gin barrel aged.</p>
+            <p>Patatas fritas con nuestra salsa brava casera.</p>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/carpaccio.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header">
+              <h3>Surtido de Aperitivos</h3>
+            </div>
+            <p>2 de jamón, 2 de pollo y 2 buñuelos. La combinación perfecta para compartir.</p>
+            <span class="dish-card__tag">Para compartir</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Entrantes -->
+      <div class="menu__panel" data-panel="entrantes">
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/carpaccio.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header">
+              <h3>Carpaccio de Pulpo</h3>
+            </div>
+            <p>Láminas finas de pulpo, aceite de oliva virgen extra y toques de limón.</p>
+            <span class="dish-card__tag">Frío</span>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/bacalla.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header">
+              <h3>Carpaccio de Salmón</h3>
+            </div>
+            <p>Salmón cortado a mano con alcaparras, eneldo y crema de queso.</p>
+            <span class="dish-card__tag">Frío</span>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/pulpo.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header">
+              <h3>Gambas al Ajillo</h3>
+            </div>
+            <p>Gambas salteadas con ajo, guindilla y aceite de oliva virgen extra.</p>
+            <span class="dish-card__tag">Caliente</span>
           </div>
         </div>
         <div class="dish-card">
           <div class="dish-card__img" style="background-image:url('img/canelones.webp')"></div>
           <div class="dish-card__info">
             <div class="dish-card__header">
-              <h3>Velvet Espresso</h3>
-              <span class="dish-card__price">12€</span>
+              <h3>Endibias de Cava y Queso</h3>
             </div>
-            <p>Vodka, licor de café, espresso doble y espuma de vainilla.</p>
+            <p>Gratinadas con foie. Una combinación elegante y sabrosa.</p>
+            <span class="dish-card__tag">El chef recomienda</span>
           </div>
         </div>
       </div>
+
+      <!-- Carnes -->
+      <div class="menu__panel" data-panel="carns">
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/entrecot.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header">
+              <h3>Entrecot</h3>
+            </div>
+            <p>A la plancha en su punto, con guarnición y salsa de la casa.</p>
+            <span class="dish-card__tag">Signature</span>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/callos.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header">
+              <h3>Magret</h3>
+            </div>
+            <p>Pechuga de pato a la plancha, rosada en su punto, con reducción de frutos rojos.</p>
+            <span class="dish-card__tag">El chef recomienda</span>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/pulpo.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header">
+              <h3>Secreto Ibérico</h3>
+            </div>
+            <p>Corte selecto de cerdo ibérico, jugoso y lleno de sabor intenso.</p>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/carpaccio.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header">
+              <h3>Costillas Kai</h3>
+            </div>
+            <p>Costillas tiernas marinadas y cocinadas a fuego lento.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pescados -->
+      <div class="menu__panel" data-panel="peixos">
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/bacalla.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header">
+              <h3>Salmón al Horno</h3>
+            </div>
+            <p>Filete de salmón al horno con hierbas aromáticas y verduras de temporada.</p>
+            <span class="dish-card__tag">Temporada</span>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/pulpo.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header">
+              <h3>Pulpo al Horno</h3>
+            </div>
+            <p>Con puré de patata. Textura perfecta y sabor intenso de mar.</p>
+            <span class="dish-card__tag">El chef recomienda</span>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/canelones.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header">
+              <h3>Bacalao al Horno</h3>
+            </div>
+            <p>Bacalao de primera calidad al horno, con aceite y ajos confitados.</p>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/carpaccio.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header">
+              <h3>Lenguado al Horno</h3>
+            </div>
+            <p>Pescado blanco delicado al horno, con mantequilla y limón.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="menu__pdf">
+      <div class="menu__pdf__icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="9" y1="13" x2="15" y2="13"/>
+          <line x1="9" y1="17" x2="15" y2="17"/>
+          <line x1="9" y1="9" x2="11" y2="9"/>
+        </svg>
+      </div>
+      <div class="menu__pdf__body">
+        <h4>Carta completa</h4>
+        <p>Tapas, pintxos, entrantes fríos y calientes, carnes, pescados y mucho más. Toda nuestra oferta en un solo documento.</p>
+      </div>
+      <a href="carta.pdf" target="_blank" rel="noopener" class="btn btn--gold" title="Ver la carta completa de Alma Bar Restaurant en PDF">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Ver la carta
+      </a>
     </div>
     <div class="menu__footer">
       <p>¿Alérgenos o necesidades especiales? Consulta con nuestro equipo.</p>
-      <button class="btn btn--outline" onclick="scrollToSection('reservas')">Reservar para probarlos</button>
+      <a href="#reservas" class="btn btn--outline" title="Contáctanos por WhatsApp">Contáctanos por WhatsApp</a>
     </div>
   </section>
 
@@ -395,7 +479,7 @@
               <div class="gallery__stat"><strong>Terraza</strong><span>Exterior</span></div>
               <div class="gallery__stat"><strong>Sala</strong><span>Privada</span></div>
             </div>
-            <button class="btn btn--gold" onclick="scrollToSection('reservas')">Reservar mesa</button>
+            <a href="#reservas" class="btn btn--gold" title="Reservar mesa en Alma Bar Restaurant">Reservar mesa</a>
           </div>
           <div class="gallery__stack">
             <div class="gallery__stack-img" style="background-image:url('img/carpaccio.webp')"><span>Entrantes</span></div>
@@ -483,7 +567,7 @@
         <p><span>Mar – Vie</span> 13:30 – 02:00</p>
         <p><span>Sáb – Dom</span> 13:00 – 02:00</p>
         <p><span>Lunes</span> Cerrado</p>
-        <button class="btn btn--gold btn--sm" onclick="scrollToSection('reservas')">Reservar</button>
+        <a href="#reservas" class="btn btn--gold btn--sm" title="Reservar mesa en Alma Bar Restaurant">Reservar</a>
       </div>
     </div>
     <div class="footer__bottom">

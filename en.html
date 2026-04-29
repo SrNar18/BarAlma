@@ -3,11 +3,80 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alma · Bar Restaurant</title>
+  <title>Alma Bar Restaurant | Tapas, Meats &amp; Fish · Market Gastronomy</title>
+  <meta name="description" content="Alma Bar Restaurant: market gastronomy, tapas and pintxos, Iberian meats and baked fish. Intimate atmosphere, signature cocktails and personalised service." />
+  <meta name="keywords" content="bar restaurant, tapas, pintxos, market gastronomy, Iberian meats, baked fish, signature cocktails, alma restaurant" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Alma Bar Restaurant" />
+  <link rel="canonical" href="https://www.almabarrestaurant.com/en.html" />
+  <link rel="alternate" hreflang="ca" href="https://www.almabarrestaurant.com/" />
+  <link rel="alternate" hreflang="es" href="https://www.almabarrestaurant.com/es.html" />
+  <link rel="alternate" hreflang="fr" href="https://www.almabarrestaurant.com/fr.html" />
+  <link rel="alternate" hreflang="en" href="https://www.almabarrestaurant.com/en.html" />
+  <link rel="alternate" hreflang="pt" href="https://www.almabarrestaurant.com/pt.html" />
+  <link rel="alternate" hreflang="x-default" href="https://www.almabarrestaurant.com/" />
+  <!-- Open Graph -->
+  <meta property="og:type" content="restaurant" />
+  <meta property="og:site_name" content="Alma Bar Restaurant" />
+  <meta property="og:title" content="Alma Bar Restaurant | Tapas, Meats &amp; Fish" />
+  <meta property="og:description" content="Market gastronomy, tapas and pintxos, Iberian meats and baked fish. Intimate atmosphere and signature cocktails." />
+  <meta property="og:image" content="https://www.almabarrestaurant.com/img/dos-1200w.webp" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="800" />
+  <meta property="og:image:alt" content="Alma Bar Restaurant — interior dining room" />
+  <meta property="og:url" content="https://www.almabarrestaurant.com/en.html" />
+  <meta property="og:locale" content="en_GB" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Alma Bar Restaurant | Tapas, Meats &amp; Fish" />
+  <meta name="twitter:description" content="Market gastronomy, tapas and pintxos, Iberian meats and baked fish. Intimate atmosphere and signature cocktails." />
+  <meta name="twitter:image" content="https://www.almabarrestaurant.com/img/dos-1200w.webp" />
+  <!-- Structured Data: Restaurant -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "Alma Bar Restaurant",
+    "description": "Market gastronomy, tapas and pintxos, Iberian meats and baked fish. Intimate atmosphere and signature cocktails.",
+    "url": "https://www.almabarrestaurant.com",
+    "telephone": "+34600000000",
+    "image": "https://www.almabarrestaurant.com/img/dos-1200w.webp",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Carrer Exemple 12, Planta Baixa",
+      "addressLocality": "Ciutat",
+      "addressCountry": "ES"
+    },
+    "servesCuisine": ["Mediterranean", "Spanish", "Tapas"],
+    "priceRange": "€€",
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "13:30", "closes": "16:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "20:30", "closes": "02:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Saturday","Sunday"],
+        "opens": "13:00", "closes": "16:30"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Saturday","Sunday"],
+        "opens": "20:00", "closes": "02:00"
+      }
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=25" />
+  <link rel="stylesheet" href="styles.css?v=26" />
   <link rel="icon" type="image/png" href="logo.png" />
 </head>
 <body>
@@ -25,7 +94,7 @@
       <a href="#reservas">Contact</a>
     </nav>
     <div class="nav__right">
-      <button class="nav__cta" onclick="scrollToSection('reservas')">Book a table</button>
+      <a href="#reservas" class="nav__cta" title="Book a table at Alma Bar Restaurant">Book a table</a>
       <div class="nav__lang">
         <button class="nav__lang-btn" id="langBtn">
           EN
@@ -70,8 +139,8 @@
       <h1 class="hero__title">Where every dish<br /><em>tells a story</em></h1>
       <p class="hero__subtitle">Fine dining, intimate atmosphere and the finest cocktails.<br />An experience for the senses.</p>
       <div class="hero__actions">
-        <button class="btn btn--gold" onclick="scrollToSection('reservas')">Book a table</button>
-        <button class="btn btn--outline" onclick="scrollToSection('menu')">View menu</button>
+        <a href="#reservas" class="btn btn--gold" title="Book a table at Alma Bar Restaurant">Book a table</a>
+        <a href="#menu" class="btn btn--outline" title="View Alma Bar Restaurant menu">View menu</a>
       </div>
     </div>
     <div class="hero__scroll">
@@ -134,7 +203,7 @@
             <span class="stat__label">Years of history</span>
           </div>
         </div>
-        <a href="#reservas" class="btn btn--gold" onclick="event.preventDefault(); scrollToSection('reservas')">Live the experience</a>
+        <a href="#reservas" class="btn btn--gold" title="Contact Alma Bar Restaurant">Live the experience</a>
       </div>
     </div>
   </section>
@@ -147,144 +216,175 @@
       <p class="menu__subtitle">A carefully curated selection for every moment of the day.</p>
     </div>
     <div class="menu__tabs">
-      <button class="tab active" data-tab="entrantes">Starters</button>
-      <button class="tab" data-tab="principales">Mains</button>
-      <button class="tab" data-tab="postres">Desserts</button>
-      <button class="tab" data-tab="cocktails">Cocktails</button>
+      <button class="tab active" data-tab="tapas">Tapas &amp; Pintxos</button>
+      <button class="tab" data-tab="entrantes">Starters</button>
+      <button class="tab" data-tab="carns">Meats</button>
+      <button class="tab" data-tab="peixos">Fish</button>
     </div>
     <div class="menu__grid" id="menuGrid">
-      <div class="menu__panel active" data-panel="entrantes">
+
+      <!-- Tapas & Pintxos -->
+      <div class="menu__panel active" data-panel="tapas">
         <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/carpaccio.webp')"></div>
+          <div class="dish-card__img" style="background-image:url('img/callos.webp')"></div>
           <div class="dish-card__info">
-            <div class="dish-card__header"><h3>Bluefin tuna tartare</h3><span class="dish-card__price">18€</span></div>
-            <p>With avocado, soy, toasted sesame and crispy rice.</p>
-            <span class="dish-card__tag">Signature</span>
-          </div>
-        </div>
-        <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/pulpo.webp')"></div>
-          <div class="dish-card__info">
-            <div class="dish-card__header"><h3>Burrata with black truffle</h3><span class="dish-card__price">16€</span></div>
-            <p>On piquillo cream, extra virgin olive oil and microgreens.</p>
+            <div class="dish-card__header"><h3>Gildas</h3></div>
+            <p>Olive, chilli and anchovy. The classic Basque pintxo.</p>
+            <span class="dish-card__tag">Classic</span>
           </div>
         </div>
         <div class="dish-card">
           <div class="dish-card__img" style="background-image:url('img/canelones.webp')"></div>
           <div class="dish-card__info">
-            <div class="dish-card__header"><h3>Grilled scallops</h3><span class="dish-card__price">22€</span></div>
-            <p>With noisette butter, cauliflower purée and lemon caviar.</p>
-            <span class="dish-card__tag">Chef's choice</span>
-          </div>
-        </div>
-        <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/callos.webp')"></div>
-          <div class="dish-card__info">
-            <div class="dish-card__header"><h3>Foie mi-cuit</h3><span class="dish-card__price">20€</span></div>
-            <p>With toasted brioche, fig jam and flaky salt.</p>
-          </div>
-        </div>
-      </div>
-      <div class="menu__panel" data-panel="principales">
-        <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/bacalla.webp')"></div>
-          <div class="dish-card__info">
-            <div class="dish-card__header"><h3>Hake loin</h3><span class="dish-card__price">28€</span></div>
-            <p>On clam velouté, white asparagus and parsley oil.</p>
-            <span class="dish-card__tag">Seasonal</span>
-          </div>
-        </div>
-        <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/entrecot.webp')"></div>
-          <div class="dish-card__info">
-            <div class="dish-card__header"><h3>45-day aged entrecôte</h3><span class="dish-card__price">52€</span></div>
-            <p>With ratte potato, herb chimichurri and red wine reduction.</p>
-            <span class="dish-card__tag">Signature</span>
-          </div>
-        </div>
-        <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/callos.webp')"></div>
-          <div class="dish-card__info">
-            <div class="dish-card__header"><h3>Wild mushroom and parmesan risotto</h3><span class="dish-card__price">24€</span></div>
-            <p>With seasonal mushrooms, parmesan mantecare and grated truffle.</p>
-          </div>
-        </div>
-        <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/pulpo.webp')"></div>
-          <div class="dish-card__info">
-            <div class="dish-card__header"><h3>Roasted pigeon</h3><span class="dish-card__price">34€</span></div>
-            <p>With celeriac parmentier, game jus and pickled cherries.</p>
-            <span class="dish-card__tag">Chef's choice</span>
-          </div>
-        </div>
-      </div>
-      <div class="menu__panel" data-panel="postres">
-        <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/canelones.webp')"></div>
-          <div class="dish-card__info">
-            <div class="dish-card__header"><h3>Dark chocolate coulant</h3><span class="dish-card__price">10€</span></div>
-            <p>With Madagascar vanilla ice cream and gold dust.</p>
-            <span class="dish-card__tag">Signature</span>
-          </div>
-        </div>
-        <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/carpaccio.webp')"></div>
-          <div class="dish-card__info">
-            <div class="dish-card__header"><h3>Basque cheesecake</h3><span class="dish-card__price">9€</span></div>
-            <p>Creamy, caramelised, with red berry coulis.</p>
-          </div>
-        </div>
-        <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/bacalla.webp')"></div>
-          <div class="dish-card__info">
-            <div class="dish-card__header"><h3>Lavender crème brûlée</h3><span class="dish-card__price">8€</span></div>
-            <p>With crispy caramel, lemon zest and sablé biscuit.</p>
-          </div>
-        </div>
-        <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/entrecot.webp')"></div>
-          <div class="dish-card__info">
-            <div class="dish-card__header"><h3>Artisan ice cream selection</h3><span class="dish-card__price">7€</span></div>
-            <p>Three scoops of house-made ice cream with seasonal toppings.</p>
-          </div>
-        </div>
-      </div>
-      <div class="menu__panel" data-panel="cocktails">
-        <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/pulpo.webp')"></div>
-          <div class="dish-card__info">
-            <div class="dish-card__header"><h3>Alma Sour</h3><span class="dish-card__price">13€</span></div>
-            <p>Smoked whisky, lemon juice, rosemary syrup and egg white.</p>
-            <span class="dish-card__tag">Signature</span>
-          </div>
-        </div>
-        <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/carpaccio.webp')"></div>
-          <div class="dish-card__info">
-            <div class="dish-card__header"><h3>Golden Garden</h3><span class="dish-card__price">14€</span></div>
-            <p>Gin, cucumber, fresh mint, Elderflower and premium tonic.</p>
+            <div class="dish-card__header"><h3>Croquettes (4 pcs.)</h3></div>
+            <p>Iberian ham or chicken. Crispy outside, creamy inside.</p>
             <span class="dish-card__tag">Bestseller</span>
           </div>
         </div>
         <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/callos.webp')"></div>
+          <div class="dish-card__img" style="background-image:url('img/pulpo.webp')"></div>
           <div class="dish-card__info">
-            <div class="dish-card__header"><h3>Dark Negroni</h3><span class="dish-card__price">14€</span></div>
-            <p>Black Campari, aged rosso vermouth and barrel-aged gin.</p>
+            <div class="dish-card__header"><h3>Patatas Bravas</h3></div>
+            <p>Fried potatoes with our house-made spicy brava sauce.</p>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/carpaccio.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Mixed Appetiser Platter</h3></div>
+            <p>2 ham, 2 chicken and 2 fritters. The perfect combination to share.</p>
+            <span class="dish-card__tag">To share</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Starters -->
+      <div class="menu__panel" data-panel="entrantes">
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/carpaccio.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Octopus Carpaccio</h3></div>
+            <p>Thinly sliced octopus, extra virgin olive oil and lemon.</p>
+            <span class="dish-card__tag">Cold</span>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/bacalla.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Salmon Carpaccio</h3></div>
+            <p>Hand-sliced salmon with capers, dill and cream cheese.</p>
+            <span class="dish-card__tag">Cold</span>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/pulpo.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Garlic Prawns</h3></div>
+            <p>Sautéed prawns with garlic, chilli and extra virgin olive oil.</p>
+            <span class="dish-card__tag">Hot</span>
           </div>
         </div>
         <div class="dish-card">
           <div class="dish-card__img" style="background-image:url('img/canelones.webp')"></div>
           <div class="dish-card__info">
-            <div class="dish-card__header"><h3>Velvet Espresso</h3><span class="dish-card__price">12€</span></div>
-            <p>Vodka, coffee liqueur, double espresso and vanilla foam.</p>
+            <div class="dish-card__header"><h3>Endives with Cava &amp; Cheese</h3></div>
+            <p>Gratinéed with foie gras. An elegant and flavourful combination.</p>
+            <span class="dish-card__tag">Chef's choice</span>
           </div>
         </div>
       </div>
+
+      <!-- Meats -->
+      <div class="menu__panel" data-panel="carns">
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/entrecot.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Entrecôte</h3></div>
+            <p>Grilled to perfection, with garnish and house sauce.</p>
+            <span class="dish-card__tag">Signature</span>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/callos.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Duck Magret</h3></div>
+            <p>Grilled duck breast, perfectly pink, with red berry reduction.</p>
+            <span class="dish-card__tag">Chef's choice</span>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/pulpo.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Iberian Secreto</h3></div>
+            <p>Select Iberian pork cut, juicy and packed with intense flavour.</p>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/carpaccio.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Kai Ribs</h3></div>
+            <p>Tender ribs, marinated and slow-cooked to perfection.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fish -->
+      <div class="menu__panel" data-panel="peixos">
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/bacalla.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Baked Salmon</h3></div>
+            <p>Salmon fillet baked with aromatic herbs and seasonal vegetables.</p>
+            <span class="dish-card__tag">Seasonal</span>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/pulpo.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Baked Octopus</h3></div>
+            <p>With potato purée. Perfect texture and intense flavour of the sea.</p>
+            <span class="dish-card__tag">Chef's choice</span>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/canelones.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Baked Cod</h3></div>
+            <p>Top-quality cod, oven-baked with olive oil and confit garlic.</p>
+          </div>
+        </div>
+        <div class="dish-card">
+          <div class="dish-card__img" style="background-image:url('img/carpaccio.webp')"></div>
+          <div class="dish-card__info">
+            <div class="dish-card__header"><h3>Baked Sole</h3></div>
+            <p>Delicate white fish, oven-baked with butter and lemon.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="menu__pdf">
+      <div class="menu__pdf__icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="9" y1="13" x2="15" y2="13"/>
+          <line x1="9" y1="17" x2="15" y2="17"/>
+          <line x1="9" y1="9" x2="11" y2="9"/>
+        </svg>
+      </div>
+      <div class="menu__pdf__body">
+        <h4>Full menu</h4>
+        <p>Tapas, pintxos, cold and hot starters, meats, fish and much more. Our complete offer in one document.</p>
+      </div>
+      <a href="carta.pdf" target="_blank" rel="noopener" class="btn btn--gold" title="View Alma Bar Restaurant full menu PDF">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        View full menu
+      </a>
     </div>
     <div class="menu__footer">
       <p>Allergens or dietary requirements? Ask our team.</p>
-      <button class="btn btn--outline" onclick="scrollToSection('reservas')">Book to try them</button>
+      <a href="#reservas" class="btn btn--outline" title="Contact us on WhatsApp">Contact us on WhatsApp</a>
     </div>
   </section>
 
@@ -339,7 +439,7 @@
               <div class="gallery__stat"><strong>Terrace</strong><span>Outside</span></div>
               <div class="gallery__stat"><strong>Room</strong><span>Private</span></div>
             </div>
-            <button class="btn btn--gold" onclick="scrollToSection('reservas')">Book a table</button>
+            <a href="#reservas" class="btn btn--gold" title="Book a table at Alma Bar Restaurant">Book a table</a>
           </div>
           <div class="gallery__stack">
             <div class="gallery__stack-img" style="background-image:url('img/carpaccio.webp')"><span>Starters</span></div>
@@ -363,13 +463,13 @@
     </div>
   </section>
 
-  <!-- RESERVATIONS -->
+  <!-- CONTACT -->
   <section class="reservations" id="reservas">
     <div class="reservations__inner">
       <div class="reservations__text">
-        <p class="section__eyebrow">· Book your table ·</p>
-        <h2 class="section__title">An unforgettable<br /><em>evening</em></h2>
-        <p>Book your table and let us surprise you. For groups of more than 10 people or private events, please contact us directly.</p>
+        <p class="section__eyebrow">· Get in touch ·</p>
+        <h2 class="section__title">Talk to<br /><em>us directly</em></h2>
+        <p>For any enquiry, to organise a special event or simply to find out more, message us on WhatsApp and we'll get back to you personally.</p>
         <div class="reservations__info">
           <div class="res-info">
             <span class="res-info__label">Tuesday – Friday</span>
@@ -385,57 +485,17 @@
           </div>
         </div>
       </div>
-      <form class="reservation-form" id="reservationForm">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="name">Full name</label>
-            <input type="text" id="name" name="name" placeholder="Your name" required />
-          </div>
-          <div class="form-group">
-            <label for="phone">Phone</label>
-            <input type="tel" id="phone" name="phone" placeholder="+34 600 000 000" required />
-          </div>
+      <div class="whatsapp-cta">
+        <div class="whatsapp-cta__icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="date">Date</label>
-            <input type="date" id="date" name="date" required />
-          </div>
-          <div class="form-group">
-            <label for="time">Time</label>
-            <select id="time" name="time" required>
-              <option value="">Select time</option>
-              <option>13:30</option><option>14:00</option><option>14:30</option>
-              <option>20:30</option><option>21:00</option><option>21:30</option><option>22:00</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label for="guests">Guests</label>
-            <select id="guests" name="guests" required>
-              <option value="">Number of guests</option>
-              <option>1 guest</option><option>2 guests</option><option>3 guests</option>
-              <option>4 guests</option><option>5 guests</option><option>6 guests</option>
-              <option>7-10 guests</option><option>+10 guests</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="occasion">Special occasion</label>
-            <select id="occasion" name="occasion">
-              <option value="">No special occasion</option>
-              <option>Birthday</option><option>Anniversary</option>
-              <option>Business dinner</option><option>Celebration</option><option>Other</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="notes">Additional notes</label>
-          <textarea id="notes" name="notes" rows="3" placeholder="Allergies, preferences, special requests..."></textarea>
-        </div>
-        <button type="submit" class="btn btn--gold btn--full">Request reservation</button>
-        <p class="form-note">You'll receive confirmation within 2 hours on working days.</p>
-      </form>
+        <p class="whatsapp-cta__text">Message us directly and we'll give you a personal response for any question or special occasion.</p>
+        <a href="https://wa.me/34600000000" target="_blank" rel="noopener" class="btn-whatsapp">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Open WhatsApp
+        </a>
+        <p class="whatsapp-cta__note">We usually reply within 2 hours.</p>
+      </div>
     </div>
   </section>
 
@@ -467,7 +527,7 @@
         <p><span>Tue – Fri</span> 1:30 PM – 2:00 AM</p>
         <p><span>Sat – Sun</span> 1:00 PM – 2:00 AM</p>
         <p><span>Monday</span> Closed</p>
-        <button class="btn btn--gold btn--sm" onclick="scrollToSection('reservas')">Book</button>
+        <a href="#reservas" class="btn btn--gold btn--sm" title="Book a table at Alma Bar Restaurant">Book</a>
       </div>
     </div>
     <div class="footer__bottom">
@@ -475,11 +535,6 @@
       <div><a href="#">Privacy policy</a><a href="#">Legal notice</a></div>
     </div>
   </footer>
-
-  <div class="toast" id="toast">
-    <div class="toast__icon">✓</div>
-    <div><strong>Request sent!</strong><p>We'll confirm shortly.</p></div>
-  </div>
 
   <script src="script.js"></script>
 </body>

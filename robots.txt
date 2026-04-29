@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /admin.html
+Disallow: /.netlify/
+Disallow: /api/
 
 Sitemap: https://www.almabarrestaurant.com/sitemap.xml

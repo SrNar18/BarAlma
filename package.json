@@ -1,0 +1,9 @@
+{
+  "name": "alma-bar-restaurant",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Alma Bar Restaurant website",
+  "dependencies": {
+    "@netlify/blobs": "^7.3.0"
+  }
+}

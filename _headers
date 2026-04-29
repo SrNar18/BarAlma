@@ -1,0 +1,57 @@
+# =====================================================
+# Alma Bar Restaurant — Cache & Security Headers
+# Compatible amb Netlify, Cloudflare Pages i servidors
+# que suportin el format _headers
+# =====================================================
+
+# ── Seguretat global ──────────────────────────────
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# ── HTML: 1 hora (es redigiu sovint, però no cada visita) ──
+/*.html
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+
+# ── CSS i JS: 2 mesos (versió controlada amb ?v=N) ──
+/*.css
+  Cache-Control: public, max-age=5184000, immutable
+
+/*.js
+  Cache-Control: public, max-age=5184000, immutable
+
+# ── Imatges: 1 any (mai canvien de nom) ──
+/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.png
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.jpg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.jpeg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.svg
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.ico
+  Cache-Control: public, max-age=31536000, immutable
+
+# ── Fonts locals (si n'hi ha) ──
+/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.woff
+  Cache-Control: public, max-age=31536000, immutable
+
+# ── Fitxers SEO: sempre frescos ──
+/robots.txt
+  Cache-Control: public, max-age=86400
+
+/sitemap.xml
+  Cache-Control: public, max-age=86400

@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin · Alma Bar Restaurant</title>
+  <!-- IMPORTANT: Evitar indexació per cercadors -->
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black:  #0A0A0A;
+      --black2: #111111;
+      --black3: #161616;
+      --gold:   #C9A14A;
+      --gold2:  #E8C46A;
+      --beige:  #EDE6D8;
+      --white:  #FFFFFF;
+      --gray:   #888888;
+      --red:    #e05c5c;
+      --green:  #5cba8a;
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--black);
+      color: var(--beige);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    a { color: var(--gold); text-decoration: none; }
+    input, button { font-family: inherit; }
+
+    /* ── Pantalla de login ── */
+    #loginScreen {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background:
+        radial-gradient(ellipse 60% 40% at 50% 0%, rgba(201,161,74,0.08) 0%, transparent 70%),
+        var(--black);
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 420px;
+      background: var(--black3);
+      border: 1px solid rgba(201,161,74,0.2);
+      border-radius: 4px;
+      padding: 48px 40px 40px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+    }
+
+    .login-logo {
+      display: block;
+      height: 52px;
+      margin: 0 auto 32px;
+      filter: brightness(1.05);
+    }
+
+    .login-eyebrow {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: center;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .login-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--white);
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    /* ── Form ── */
+    .field {
+      margin-bottom: 20px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 8px;
+    }
+
+    .field input {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(201,161,74,0.2);
+      border-radius: 2px;
+      color: var(--beige);
+      font-size: 14px;
+      padding: 12px 16px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .field input:focus {
+      border-color: var(--gold);
+      background: rgba(201,161,74,0.04);
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--gold);
+      color: var(--black);
+      border: none;
+      border-radius: 2px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 14px;
+      margin-top: 8px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-submit:hover:not(:disabled) {
+      background: var(--gold2);
+      transform: translateY(-1px);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
+    /* ── Missatges ── */
+    .msg {
+      margin-top: 16px;
+      padding: 12px 16px;
+      border-radius: 2px;
+      font-size: 13px;
+      display: none;
+    }
+
+    .msg.error {
+      background: rgba(224,92,92,0.1);
+      border: 1px solid rgba(224,92,92,0.3);
+      color: #ff8a8a;
+    }
+
+    .msg.success {
+      background: rgba(92,186,138,0.1);
+      border: 1px solid rgba(92,186,138,0.3);
+      color: #8adbb5;
+    }
+
+    .msg.show { display: block; }
+
+    /* ── Spinner ── */
+    .spinner {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(0,0,0,0.3);
+      border-top-color: var(--black);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Panel d'admin ── */
+    #adminPanel {
+      display: none;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+
+    #adminPanel.show { display: flex; }
+
+    /* Header */
+    .admin-header {
+      background: var(--black3);
+      border-bottom: 1px solid rgba(201,161,74,0.15);
+      padding: 0 48px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .admin-header-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .admin-header img {
+      height: 40px;
+    }
+
+    .admin-header-sep {
+      width: 1px;
+      height: 28px;
+      background: rgba(201,161,74,0.2);
+    }
+
+    .admin-header-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .btn-logout {
+      background: transparent;
+      border: 1px solid rgba(201,161,74,0.3);
+      color: var(--gray);
+      padding: 8px 20px;
+      border-radius: 2px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-logout:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* Main content */
+    .admin-main {
+      flex: 1;
+      max-width: 800px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 56px 24px 80px;
+    }
+
+    .admin-eyebrow {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .admin-section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 40px;
+    }
+
+    /* Targeta d'estat */
+    .status-card {
+      background: var(--black3);
+      border: 1px solid rgba(201,161,74,0.15);
+      border-radius: 4px;
+      padding: 20px 28px;
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .status-dot.active  { background: var(--green); box-shadow: 0 0 6px var(--green); }
+    .status-dot.inactive { background: var(--gray); }
+
+    .status-info {
+      flex: 1;
+    }
+
+    .status-info strong {
+      display: block;
+      font-size: 13px;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+
+    .status-info span {
+      font-size: 12px;
+      color: var(--gray);
+    }
+
+    .status-link {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(201,161,74,0.3);
+      padding: 6px 14px;
+      border-radius: 2px;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+    .status-link:hover {
+      background: rgba(201,161,74,0.08);
+      border-color: var(--gold);
+    }
+
+    /* Zona de pujada */
+    .upload-card {
+      background: var(--black3);
+      border: 1px solid rgba(201,161,74,0.2);
+      border-radius: 4px;
+      padding: 32px 32px 28px;
+    }
+
+    .upload-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .upload-card p.upload-desc {
+      font-size: 13px;
+      color: var(--gray);
+      margin-bottom: 28px;
+    }
+
+    /* Drag & drop zone */
+    .drop-zone {
+      border: 2px dashed rgba(201,161,74,0.25);
+      border-radius: 4px;
+      padding: 44px 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .drop-zone:hover,
+    .drop-zone.drag-over {
+      border-color: var(--gold);
+      background: rgba(201,161,74,0.04);
+    }
+
+    .drop-zone input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+
+    .drop-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 16px;
+      color: var(--gold);
+      opacity: 0.6;
+    }
+
+    .drop-zone p {
+      font-size: 14px;
+      color: var(--beige);
+      margin-bottom: 6px;
+    }
+
+    .drop-zone small {
+      font-size: 12px;
+      color: var(--gray);
+    }
+
+    /* Fitxer seleccionat */
+    .file-selected {
+      display: none;
+      align-items: center;
+      gap: 14px;
+      margin-top: 20px;
+      padding: 14px 20px;
+      background: rgba(201,161,74,0.06);
+      border: 1px solid rgba(201,161,74,0.2);
+      border-radius: 4px;
+    }
+
+    .file-selected.show { display: flex; }
+
+    .file-selected svg { color: var(--gold); flex-shrink: 0; }
+
+    .file-info { flex: 1; }
+    .file-info strong { display: block; font-size: 13px; color: var(--white); }
+    .file-info span   { font-size: 12px; color: var(--gray); }
+
+    .btn-clear {
+      background: none;
+      border: none;
+      color: var(--gray);
+      cursor: pointer;
+      padding: 4px;
+      transition: color 0.2s;
+    }
+    .btn-clear:hover { color: var(--red); }
+
+    /* Botó de publicar */
+    .btn-publish {
+      margin-top: 24px;
+      width: 100%;
+      background: var(--gold);
+      color: var(--black);
+      border: none;
+      border-radius: 2px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 15px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, opacity 0.2s;
+    }
+
+    .btn-publish:hover:not(:disabled) {
+      background: var(--gold2);
+      transform: translateY(-1px);
+    }
+
+    .btn-publish:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Barra de progrés */
+    .progress-wrap {
+      display: none;
+      margin-top: 16px;
+    }
+
+    .progress-wrap.show { display: block; }
+
+    .progress-label {
+      font-size: 12px;
+      color: var(--gray);
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .progress-bar {
+      height: 4px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--gold);
+      border-radius: 2px;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    /* Missatge de resultat */
+    .upload-msg {
+      margin-top: 16px;
+      padding: 14px 18px;
+      border-radius: 2px;
+      font-size: 13px;
+      display: none;
+    }
+
+    .upload-msg.error {
+      background: rgba(224,92,92,0.08);
+      border: 1px solid rgba(224,92,92,0.25);
+      color: #ff8a8a;
+    }
+
+    .upload-msg.success {
+      background: rgba(92,186,138,0.08);
+      border: 1px solid rgba(92,186,138,0.25);
+      color: #8adbb5;
+    }
+
+    .upload-msg.show { display: block; }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .login-card { padding: 36px 24px 28px; }
+      .admin-header { padding: 0 20px; }
+      .admin-main { padding: 32px 16px 60px; }
+      .upload-card { padding: 24px 20px 20px; }
+      .status-link { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════ LOGIN ══ -->
+<div id="loginScreen">
+  <div class="login-card">
+    <img src="img/LOGO_BANNER.png" alt="Alma Bar Restaurant" class="login-logo" />
+    <span class="login-eyebrow">· Panel d'administració ·</span>
+    <h1 class="login-title">Inicia sessió</h1>
+
+    <form id="loginForm" autocomplete="on">
+      <div class="field">
+        <label for="username">Usuari</label>
+        <input type="text" id="username" name="username"
+               autocomplete="username" placeholder="nom d'usuari" required />
+      </div>
+      <div class="field">
+        <label for="password">Contrasenya</label>
+        <input type="password" id="password" name="password"
+               autocomplete="current-password" placeholder="••••••••" required />
+      </div>
+      <button type="submit" class="btn-submit" id="loginBtn">
+        Entrar
+      </button>
+      <div class="msg error" id="loginError"></div>
+    </form>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════ ADMIN ══ -->
+<div id="adminPanel">
+
+  <header class="admin-header">
+    <div class="admin-header-left">
+      <img src="img/LOGO_BANNER.png" alt="Alma Bar Restaurant" />
+      <div class="admin-header-sep"></div>
+      <span class="admin-header-label">Admin</span>
+    </div>
+    <button class="btn-logout" id="logoutBtn">Tancar sessió</button>
+  </header>
+
+  <main class="admin-main">
+    <span class="admin-eyebrow">· Gestió de contingut ·</span>
+    <h2 class="admin-section-title">Carta del restaurant</h2>
+
+    <!-- Estat actual del PDF -->
+    <div class="status-card" id="statusCard">
+      <div class="status-dot inactive" id="statusDot"></div>
+      <div class="status-info">
+        <strong id="statusTitle">Comprovant estat...</strong>
+        <span id="statusDetail"></span>
+      </div>
+      <a href="/carta.pdf" target="_blank" rel="noopener" class="status-link" id="statusLink"
+         style="display:none">Veure actual →</a>
+    </div>
+
+    <!-- Pujada de PDF -->
+    <div class="upload-card">
+      <h3>Publicar nova carta</h3>
+      <p class="upload-desc">Selecciona o arrossega el PDF amb la nova carta. Es publicarà immediatament a la web.</p>
+
+      <div class="drop-zone" id="dropZone">
+        <input type="file" id="fileInput" accept="application/pdf" />
+        <svg class="drop-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="12" y1="18" x2="12" y2="12"/>
+          <polyline points="9 15 12 12 15 15"/>
+        </svg>
+        <p>Arrossega el PDF aquí</p>
+        <small>o fes clic per seleccionar · Màxim 4 MB</small>
+      </div>
+
+      <!-- Fitxer seleccionat -->
+      <div class="file-selected" id="fileSelected">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="1.5">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+        </svg>
+        <div class="file-info">
+          <strong id="fileName">—</strong>
+          <span id="fileSize">—</span>
+        </div>
+        <button class="btn-clear" id="clearBtn" title="Eliminar selecció">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Botó de publicar -->
+      <button class="btn-publish" id="publishBtn" disabled>
+        Publicar nova carta
+      </button>
+
+      <!-- Barra de progrés -->
+      <div class="progress-wrap" id="progressWrap">
+        <div class="progress-label">
+          <span id="progressLabel">Pujant...</span>
+          <span id="progressPct">0%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <!-- Resultat -->
+      <div class="upload-msg" id="uploadMsg"></div>
+    </div>
+  </main>
+</div>
+
+<!-- ════════════════════════════════════════════ JS ══ -->
+<script>
+(function () {
+  'use strict';
+
+  // ── Estat de sessió ────────────────────────────────────
+  const SESSION_KEY = 'alma_admin_session';
+
+  function getSession() {
+    try {
+      const raw = sessionStorage.getItem(SESSION_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch { return null; }
+  }
+
+  function saveSession(token, payload) {
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify({ token, payload }));
+  }
+
+  function clearSession() {
+    sessionStorage.removeItem(SESSION_KEY);
+  }
+
+  // ── Elements DOM ───────────────────────────────────────
+  const loginScreen = document.getElementById('loginScreen');
+  const adminPanel  = document.getElementById('adminPanel');
+  const loginForm   = document.getElementById('loginForm');
+  const loginBtn    = document.getElementById('loginBtn');
+  const loginError  = document.getElementById('loginError');
+  const logoutBtn   = document.getElementById('logoutBtn');
+
+  const statusDot    = document.getElementById('statusDot');
+  const statusTitle  = document.getElementById('statusTitle');
+  const statusDetail = document.getElementById('statusDetail');
+  const statusLink   = document.getElementById('statusLink');
+
+  const dropZone    = document.getElementById('dropZone');
+  const fileInput   = document.getElementById('fileInput');
+  const fileSelected= document.getElementById('fileSelected');
+  const fileName    = document.getElementById('fileName');
+  const fileSize    = document.getElementById('fileSize');
+  const clearBtn    = document.getElementById('clearBtn');
+  const publishBtn  = document.getElementById('publishBtn');
+  const progressWrap= document.getElementById('progressWrap');
+  const progressFill= document.getElementById('progressFill');
+  const progressLabel=document.getElementById('progressLabel');
+  const progressPct = document.getElementById('progressPct');
+  const uploadMsg   = document.getElementById('uploadMsg');
+
+  let selectedFile = null;
+
+  // ── Utilitats UI ───────────────────────────────────────
+  function showLogin() {
+    loginScreen.style.display = 'flex';
+    adminPanel.classList.remove('show');
+  }
+
+  function showAdmin() {
+    loginScreen.style.display = 'none';
+    adminPanel.classList.add('show');
+    loadStatus();
+  }
+
+  function showLoginError(msg) {
+    loginError.textContent = msg;
+    loginError.classList.add('show', 'error');
+  }
+
+  function hideLoginError() {
+    loginError.classList.remove('show');
+  }
+
+  function formatBytes(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+  }
+
+  function formatDate(iso) {
+    if (!iso) return '—';
+    const d = new Date(iso);
+    return d.toLocaleDateString('ca-ES', {
+      day: '2-digit', month: '2-digit', year: 'numeric',
+      hour: '2-digit', minute: '2-digit'
+    });
+  }
+
+  function setProgress(pct, label) {
+    progressFill.style.width = pct + '%';
+    progressPct.textContent  = Math.round(pct) + '%';
+    if (label) progressLabel.textContent = label;
+  }
+
+  function showUploadMsg(type, msg) {
+    uploadMsg.className = 'upload-msg ' + type + ' show';
+    uploadMsg.textContent = msg;
+    setTimeout(() => uploadMsg.classList.remove('show'), 6000);
+  }
+
+  // ── Verificació inicial de sessió ──────────────────────
+  const session = getSession();
+  if (session) {
+    // Comprovar que el token no ha expirat
+    try {
+      const parts  = session.payload.split(':');
+      const expiry = parseInt(parts[parts.length - 1], 10);
+      if (Date.now() < expiry) {
+        showAdmin();
+      } else {
+        clearSession();
+        showLogin();
+      }
+    } catch {
+      clearSession();
+      showLogin();
+    }
+  } else {
+    showLogin();
+  }
+
+  // ── Login ──────────────────────────────────────────────
+  loginForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    hideLoginError();
+
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value;
+
+    if (!username || !password) {
+      showLoginError('Omple els dos camps.');
+      return;
+    }
+
+    loginBtn.disabled = true;
+    loginBtn.innerHTML = '<span class="spinner"></span>Verificant...';
+
+    try {
+      const resp = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await resp.json();
+
+      if (!resp.ok) {
+        showLoginError(data.error || 'Error de connexió. Torna-ho a intentar.');
+        return;
+      }
+
+      saveSession(data.token, data.payload);
+      showAdmin();
+    } catch (err) {
+      showLoginError('No s\'ha pogut connectar amb el servidor. Comprova la connexió.');
+    } finally {
+      loginBtn.disabled = false;
+      loginBtn.textContent = 'Entrar';
+    }
+  });
+
+  // ── Logout ─────────────────────────────────────────────
+  logoutBtn.addEventListener('click', function () {
+    clearSession();
+    selectedFile = null;
+    loginForm.reset();
+    showLogin();
+  });
+
+  // ── Estat del PDF actual ───────────────────────────────
+  async function loadStatus() {
+    const s = getSession();
+    if (!s) return;
+
+    statusTitle.textContent  = 'Comprovant estat...';
+    statusDetail.textContent = '';
+    statusDot.className      = 'status-dot inactive';
+    statusLink.style.display = 'none';
+
+    try {
+      const resp = await fetch('/api/carta-status', {
+        headers: {
+          'Authorization':    'Bearer ' + s.token,
+          'X-Token-Payload':  s.payload,
+        },
+      });
+
+      if (resp.status === 401) {
+        clearSession();
+        showLogin();
+        return;
+      }
+
+      const data = await resp.json();
+
+      if (data.exists) {
+        statusDot.className      = 'status-dot active';
+        statusTitle.textContent  = 'PDF publicat';
+        statusDetail.textContent =
+          'Última actualització: ' + formatDate(data.updatedAt) +
+          ' · ' + data.sizeMB + ' MB';
+        statusLink.style.display = 'inline-block';
+      } else {
+        statusDot.className      = 'status-dot inactive';
+        statusTitle.textContent  = 'Cap carta publicada';
+        statusDetail.textContent = 'Puja un PDF per mostrar-lo a la web.';
+      }
+    } catch {
+      statusTitle.textContent  = 'No s\'ha pogut comprovar l\'estat';
+      statusDetail.textContent = '';
+    }
+  }
+
+  // ── Drag & Drop ────────────────────────────────────────
+  dropZone.addEventListener('dragover', function (e) {
+    e.preventDefault();
+    dropZone.classList.add('drag-over');
+  });
+
+  dropZone.addEventListener('dragleave', function () {
+    dropZone.classList.remove('drag-over');
+  });
+
+  dropZone.addEventListener('drop', function (e) {
+    e.preventDefault();
+    dropZone.classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (file) selectFile(file);
+  });
+
+  fileInput.addEventListener('change', function () {
+    if (fileInput.files[0]) selectFile(fileInput.files[0]);
+  });
+
+  clearBtn.addEventListener('click', function () {
+    clearFile();
+  });
+
+  function selectFile(file) {
+    // Validació tipus
+    if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) {
+      showUploadMsg('error', 'Només s\'admeten fitxers PDF.');
+      return;
+    }
+
+    // Validació mida (4 MB)
+    const MAX = 4 * 1024 * 1024;
+    if (file.size > MAX) {
+      showUploadMsg('error',
+        'El fitxer és massa gran (' + formatBytes(file.size) + '). Màxim 4 MB.');
+      return;
+    }
+
+    selectedFile = file;
+    fileName.textContent = file.name;
+    fileSize.textContent = formatBytes(file.size);
+    fileSelected.classList.add('show');
+    publishBtn.disabled  = false;
+    uploadMsg.classList.remove('show');
+  }
+
+  function clearFile() {
+    selectedFile = null;
+    fileInput.value = '';
+    fileSelected.classList.remove('show');
+    publishBtn.disabled = true;
+    uploadMsg.classList.remove('show');
+    progressWrap.classList.remove('show');
+  }
+
+  // ── Publicar PDF ───────────────────────────────────────
+  publishBtn.addEventListener('click', async function () {
+    if (!selectedFile) return;
+
+    const s = getSession();
+    if (!s) { clearSession(); showLogin(); return; }
+
+    publishBtn.disabled = true;
+    progressWrap.classList.add('show');
+    setProgress(5, 'Llegint fitxer...');
+    uploadMsg.classList.remove('show');
+
+    try {
+      // Convertir a base64
+      const base64 = await fileToBase64(selectedFile, (pct) => {
+        setProgress(5 + pct * 0.3, 'Preparant...');
+      });
+
+      setProgress(40, 'Pujant al servidor...');
+
+      const resp = await fetch('/api/upload-pdf', {
+        method: 'POST',
+        headers: {
+          'Content-Type':     'application/json',
+          'Authorization':    'Bearer ' + s.token,
+          'X-Token-Payload':  s.payload,
+        },
+        body: JSON.stringify({ pdf: base64, filename: selectedFile.name }),
+      });
+
+      setProgress(90, 'Processant...');
+
+      const data = await resp.json();
+
+      if (!resp.ok) {
+        if (resp.status === 401) {
+          clearSession();
+          showLogin();
+          return;
+        }
+        throw new Error(data.error || 'Error desconegut');
+      }
+
+      setProgress(100, 'Completat');
+      showUploadMsg('success',
+        '✓ ' + data.message +
+        (data.updatedAt ? ' · ' + formatDate(data.updatedAt) : ''));
+
+      // Actualitzar estat
+      await loadStatus();
+      clearFile();
+
+    } catch (err) {
+      setProgress(0);
+      showUploadMsg('error', '✖ ' + (err.message || 'Error pujant el PDF. Torna-ho a intentar.'));
+    } finally {
+      publishBtn.disabled = !selectedFile;
+      setTimeout(() => progressWrap.classList.remove('show'), 2000);
+    }
+  });
+
+  // ── Llegir fitxer com base64 ───────────────────────────
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload  = () => resolve(reader.result.split(',')[1]);
+      reader.onerror = () => reject(new Error('Error llegint el fitxer'));
+      reader.readAsDataURL(file);
+    });
+  }
+
+})();
+</script>
+</body>
+</html>

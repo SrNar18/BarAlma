@@ -17,7 +17,10 @@
   --nav-h:  88px;
 }
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-h);
+}
 
 body {
   background: var(--black);
@@ -61,6 +64,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 14px 32px;
   font-family: 'Montserrat', sans-serif;
@@ -72,6 +76,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .btn--gold {
@@ -186,6 +192,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   padding: 11px 26px;
   border-radius: 2px;
   transition: all 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
 }
 .nav__cta:hover {
   background: var(--gold);
@@ -762,7 +770,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .menu__footer {
   text-align: center;
-  margin-top: 72px;
+  margin-top: 48px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -771,6 +779,70 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .menu__footer p {
   color: var(--gray);
   font-size: 13px;
+}
+
+/* ── Carta completa PDF CTA ── */
+.menu__pdf {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin: 56px auto 0;
+  max-width: 860px;
+  padding: 32px 44px;
+  border: 1px solid rgba(201, 161, 74, 0.35);
+  border-radius: 2px;
+  background: linear-gradient(135deg, rgba(201,161,74,0.06) 0%, rgba(201,161,74,0.02) 100%);
+  position: relative;
+  overflow: hidden;
+}
+.menu__pdf::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: var(--gold);
+  opacity: 0.7;
+}
+.menu__pdf__icon {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(201, 161, 74, 0.1);
+  border-radius: 50%;
+  border: 1px solid rgba(201, 161, 74, 0.3);
+}
+.menu__pdf__icon svg {
+  width: 26px;
+  height: 26px;
+  color: var(--gold);
+}
+.menu__pdf__body {
+  flex: 1;
+}
+.menu__pdf__body h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.menu__pdf__body p {
+  color: var(--gray);
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0;
+}
+@media (max-width: 640px) {
+  .menu__pdf {
+    flex-direction: column;
+    text-align: center;
+    padding: 28px 24px;
+    gap: 20px;
+  }
+  .menu__pdf::before { width: 100%; height: 3px; }
 }
 
 /* ===== EXPERIENCE ===== */
