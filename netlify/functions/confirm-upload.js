@@ -11,8 +11,8 @@
  * Response: { ok: true }
  */
 
-const crypto   = require('crypto');
-const { getStore } = require('@netlify/blobs');
+const crypto          = require('crypto');
+const { createStore } = require('./_blobs');
 
 const HEADERS = {
   'Content-Type': 'application/json',
@@ -58,16 +58,14 @@ exports.handler = async function (event) {
     return { statusCode: 400, headers: HEADERS, body: JSON.stringify({ error: 'Body invàlid' }) };
   }
 
-  // Validate reasonable size (10 MB max)
   if (sizeBytes > 10 * 1024 * 1024) {
     return { statusCode: 400, headers: HEADERS, body: JSON.stringify({ error: 'Arxiu massa gran (màx. 10 MB)' }) };
   }
 
   try {
-    const store  = getStore('uploads');
+    const store  = createStore('uploads');
     const sizeMB = (sizeBytes / (1024 * 1024)).toFixed(2);
 
-    // Store metadata as a small JSON blob
     await store.setJSON('carta.meta', {
       originalName: filename,
       sizeBytes,
@@ -85,7 +83,10 @@ exports.handler = async function (event) {
     return {
       statusCode: 500,
       headers: HEADERS,
-      body: JSON.stringify({ error: 'Error desant la metadada' }),
+      body: JSON.stringify({
+        error:  'Error desant la metadada',
+        detail: err.message || String(err),
+      }),
     };
   }
 };

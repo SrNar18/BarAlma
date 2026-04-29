@@ -7,8 +7,8 @@
  *   X-Token-Payload:  <payload>
  */
 
-const crypto = require('crypto');
-const { getStore } = require('@netlify/blobs');
+const crypto          = require('crypto');
+const { createStore } = require('./_blobs');
 
 const HEADERS = {
   'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ exports.handler = async function (event) {
   }
 
   try {
-    const store = getStore('uploads');
+    const store = createStore('uploads');
     const meta  = await store.get('carta.meta', { type: 'json' });
 
     if (!meta) {
@@ -70,7 +70,10 @@ exports.handler = async function (event) {
     return {
       statusCode: 500,
       headers: HEADERS,
-      body: JSON.stringify({ error: 'Error consultant l\'estat' }),
+      body: JSON.stringify({
+        error:  'Error consultant l\'estat',
+        detail: err.message || String(err),
+      }),
     };
   }
 };

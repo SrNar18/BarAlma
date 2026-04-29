@@ -1467,6 +1467,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   transition: color 0.3s;
 }
 .footer__col a:hover { color: var(--gold); }
+.footer__col .btn--gold,
+.footer__col .btn--gold:hover { color: var(--black); }
 .footer__col p span {
   color: var(--beige);
   font-weight: 500;

@@ -9,8 +9,8 @@
  * Response: { uploadUrl: string }
  */
 
-const crypto       = require('crypto');
-const { getStore } = require('@netlify/blobs');
+const crypto           = require('crypto');
+const { createStore }  = require('./_blobs');
 
 const HEADERS = {
   'Content-Type': 'application/json',
@@ -48,14 +48,16 @@ exports.handler = async function (event) {
   }
 
   try {
-    const store  = getStore('uploads');
+    const store  = createStore('uploads');
 
     // getSignedUploadURL pot retornar un string o un objecte { url } segons la versió
     const result    = await store.getSignedUploadURL('carta.pdf');
-    const uploadUrl = (typeof result === 'string') ? result : (result && result.url) ? result.url : null;
+    const uploadUrl = (typeof result === 'string') ? result
+                    : (result && result.url)        ? result.url
+                    : null;
 
     if (!uploadUrl) {
-      throw new Error('getSignedUploadURL returned unexpected value: ' + JSON.stringify(result));
+      throw new Error('getSignedUploadURL va retornar un valor inesperat: ' + JSON.stringify(result));
     }
 
     return {
@@ -65,12 +67,11 @@ exports.handler = async function (event) {
     };
   } catch (err) {
     console.error('[get-upload-url] Error:', err);
-    // Retornem el missatge real per facilitar la depuració
     return {
       statusCode: 500,
       headers: HEADERS,
       body: JSON.stringify({
-        error: 'No s\'ha pogut generar la URL de pujada',
+        error:  'No s\'ha pogut generar la URL de pujada',
         detail: err.message || String(err),
       }),
     };
