@@ -134,3 +134,54 @@ const sectionObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.4 });
 
 sections.forEach(s => sectionObserver.observe(s));
+
+// ── FAQ Smooth Accordion ─────────────────────────────────────────────────────
+(function () {
+  const items = document.querySelectorAll('.faq__item');
+  if (!items.length) return;
+
+  items.forEach(details => {
+    const summary = details.querySelector('summary');
+    const content = details.querySelector('p');
+    if (!summary || !content) return;
+
+    // Wrap <p> in a grid div to animate grid-template-rows (perfectly smooth)
+    const wrapper = document.createElement('div');
+    wrapper.className = 'faq__body';
+    wrapper.style.cssText = [
+      'display:grid',
+      'grid-template-rows:' + (details.open ? '1fr' : '0fr'),
+      'transition:grid-template-rows 0.35s ease-in-out',
+    ].join(';');
+    content.parentNode.insertBefore(wrapper, content);
+    wrapper.appendChild(content);
+
+    // Reset inline styles from previous approach
+    content.style.maxHeight    = '';
+    content.style.paddingBottom = details.open ? '22px' : '0';
+    content.style.opacity      = details.open ? '1' : '0';
+    content.style.overflow     = 'hidden';
+    content.style.minHeight    = '0';
+    content.style.transition   = 'opacity 0.3s ease-in-out, padding-bottom 0.35s ease-in-out';
+
+    summary.addEventListener('click', e => {
+      e.preventDefault();
+      if (details.open) {
+        wrapper.style.gridTemplateRows = '0fr';
+        content.style.paddingBottom    = '0';
+        content.style.opacity          = '0';
+        wrapper.addEventListener('transitionend', () => {
+          details.removeAttribute('open');
+        }, { once: true });
+      } else {
+        details.setAttribute('open', '');
+        // Defer one frame so browser registers the open state before animating
+        requestAnimationFrame(() => {
+          wrapper.style.gridTemplateRows = '1fr';
+          content.style.paddingBottom    = '22px';
+          content.style.opacity          = '1';
+        });
+      }
+    });
+  });
+})();
