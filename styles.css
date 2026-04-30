@@ -141,7 +141,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .nav__logo a { display: flex; line-height: 0; }
 .nav__logo-img {
-  height: 52px;
+  height: 100px;
   width: auto;
   object-fit: contain;
 }
@@ -490,16 +490,24 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   max-width: 1300px;
   margin: 0 auto;
   position: relative;
+  overflow: hidden;
 }
 
-/* Línea vertical decorativa izquierda */
-.about::before {
-  content: '';
+.about__watermark {
   position: absolute;
-  left: 0; top: 80px; bottom: 80px;
-  width: 1px;
-  background: linear-gradient(to bottom, transparent, var(--gold), transparent);
-  opacity: 0.2;
+  right: -80px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(100px, 13vw, 190px);
+  font-weight: 700;
+  color: var(--gold);
+  opacity: 0.03;
+  letter-spacing: 16px;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+  z-index: 0;
 }
 
 .about__inner {
@@ -507,86 +515,78 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   grid-template-columns: 1fr 1fr;
   gap: 80px;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 .about__visual { position: relative; }
 
-.about__img-wrap {
+.about__img-frame {
   position: relative;
-  height: 580px;
+  padding-bottom: 20px;
+  padding-right: 20px;
 }
 
-.about__img {
-  position: absolute;
+.about__img-main {
+  width: 100%;
+  height: 560px;
   background-size: cover;
   background-position: center;
-  border-radius: 2px;
-}
-.about__img--main {
-  top: 0; left: 0;
-  width: 75%; height: 75%;
-  background-color: var(--olive);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-}
-.about__img--accent {
-  bottom: 40px; right: 40px;
-  width: 34%; height: 34%;
-  background-color: var(--black);
-  border: none;
+  display: block;
+  position: relative;
+  z-index: 2;
 }
 
-/* Logo en la esquina accent — fondo beige, logo sin fondo blanco */
-.about__img--logo {
-  background: linear-gradient(145deg, #F7F0E3 0%, #E8D5A8 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow:
-    0 0 0 5px var(--black),
-    0 0 0 7px rgba(201, 161, 74, 0.7),
-    0 0 0 9px var(--black);
-}
-.about__logo-img {
-  width: 96%;
-  height: auto;
-  mix-blend-mode: multiply;
-}
-
-/* Marco decorativo dorado */
-.about__img--main::before {
-  content: '';
+/* Gold offset shadow frame */
+.about__img-offset {
   position: absolute;
-  inset: -6px;
-  border: 1px solid rgba(201, 161, 74, 0.2);
-  border-radius: 2px;
+  bottom: 0;
+  right: 0;
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  border: 1px solid rgba(201, 161, 74, 0.35);
+  z-index: 1;
   pointer-events: none;
 }
 
-.about__badge {
+/* "Des de 2018" panel anchored to image left edge */
+.about__img-caption {
   position: absolute;
-  bottom: 60px; left: -20px;
-  background: var(--gold);
-  color: var(--black);
-  padding: 20px 28px;
-  border-radius: 2px;
+  bottom: 32px;
+  left: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  z-index: 2;
-  box-shadow: 0 8px 32px rgba(201, 161, 74, 0.4);
+  align-items: flex-start;
+  z-index: 3;
+  background: var(--black);
+  padding: 18px 28px 18px 24px;
+  border-right: 2px solid var(--gold);
 }
-.about__badge-year {
+
+.about__img-caption-year {
   font-family: 'Playfair Display', serif;
   font-size: 2rem;
   font-weight: 700;
+  color: var(--gold);
   line-height: 1;
 }
-.about__badge-label {
+
+.about__img-caption-text {
   font-size: 10px;
   font-weight: 600;
-  letter-spacing: 2px;
+  letter-spacing: 3px;
   text-transform: uppercase;
+  color: var(--sage);
+  margin-top: 4px;
+}
+
+/* Thin gold rule between eyebrow and title */
+.about__rule {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  margin-bottom: 24px;
+  opacity: 0.6;
 }
 
 .about__body {
@@ -598,13 +598,36 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .about__stats {
   display: flex;
-  gap: 40px;
+  gap: 0;
   padding: 32px 0;
   border-top: 1px solid rgba(201, 161, 74, 0.15);
   border-bottom: 1px solid rgba(201, 161, 74, 0.15);
   margin: 32px 0;
 }
-.stat { display: flex; flex-direction: column; gap: 4px; }
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  padding: 0 24px;
+  position: relative;
+}
+
+.stat:first-child { padding-left: 0; }
+.stat:last-child { padding-right: 0; }
+
+.stat + .stat::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 36px;
+  width: 1px;
+  background: rgba(201, 161, 74, 0.25);
+}
+
 .stat__num {
   font-family: 'Playfair Display', serif;
   font-size: 2.4rem;
@@ -612,6 +635,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   color: var(--gold);
   line-height: 1;
 }
+
 .stat__label {
   font-size: 11px;
   letter-spacing: 1px;
@@ -1413,7 +1437,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 .footer__logo {
-  height: 52px;
+  height: 130px;
   width: auto;
   object-fit: contain;
   margin-bottom: 24px;
@@ -1559,6 +1583,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 @media (max-width: 1100px) {
   .about__inner { grid-template-columns: 1fr; gap: 60px; }
   .about__visual { max-width: 600px; }
+  .about__img-main { height: 460px; }
   .experience__inner { grid-template-columns: 1fr; gap: 48px; }
   .reservations__inner { grid-template-columns: 1fr; gap: 48px; }
   .footer__top { grid-template-columns: 1fr 1fr; }
@@ -1590,7 +1615,11 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 @media (max-width: 600px) {
   .hero__actions { flex-direction: column; align-items: center; }
-  .about__stats { gap: 24px; flex-wrap: wrap; }
+  .about__stats { flex-wrap: wrap; }
+  .stat { flex: 1 1 calc(50% - 12px); padding: 12px 0; }
+  .stat + .stat::before { display: none; }
+  .about__img-main { height: 340px; }
+  .about__img-frame { padding-bottom: 14px; padding-right: 14px; }
   .gallery__grid { grid-template-columns: 1fr; }
   .footer__top { grid-template-columns: 1fr; }
   .reservation-form { padding: 24px; }
