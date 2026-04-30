@@ -1,5 +1,5 @@
 /**
- * upload-pdf.js — Rep el PDF de la carta i el desa a Netlify Blobs
+ * upload-pdf.js — Rep el PDF i el desa a Supabase Storage
  *
  * POST /api/upload-pdf
  * Headers:
@@ -7,12 +7,10 @@
  *   X-Token-Payload:  <payload>
  *   Content-Type:     application/json
  * Body: { filename: string, fileBase64: string, sizeBytes: number }
- *
- * Response: { ok: true }
  */
 
-const crypto          = require('crypto');
-const { createStore } = require('./_blobs');
+const crypto                        = require('crypto');
+const { uploadPDF, uploadMeta }     = require('./_storage');
 
 const HEADERS = {
   'Content-Type': 'application/json',
@@ -20,7 +18,7 @@ const HEADERS = {
   'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Token-Payload',
 };
 
-const MAX_PDF_BYTES = 4 * 1024 * 1024; // 4 MB
+const MAX_PDF_BYTES = 4 * 1024 * 1024; // 4 MB (límit body Netlify Functions)
 
 function verifyToken(token, payload) {
   const secret = process.env.ADMIN_SECRET;
@@ -66,32 +64,20 @@ exports.handler = async function (event) {
   }
 
   if (sizeBytes > MAX_PDF_BYTES) {
-    return {
-      statusCode: 400,
-      headers: HEADERS,
-      body: JSON.stringify({ error: 'Arxiu massa gran (màx. 4 MB)' }),
-    };
+    return { statusCode: 400, headers: HEADERS, body: JSON.stringify({ error: 'Arxiu massa gran (màx. 4 MB)' }) };
   }
 
   try {
     const pdfBuffer = Buffer.from(fileBase64, 'base64');
 
     if (pdfBuffer.length > MAX_PDF_BYTES) {
-      return {
-        statusCode: 400,
-        headers: HEADERS,
-        body: JSON.stringify({ error: 'Arxiu massa gran (màx. 4 MB)' }),
-      };
+      return { statusCode: 400, headers: HEADERS, body: JSON.stringify({ error: 'Arxiu massa gran (màx. 4 MB)' }) };
     }
 
-    const store  = createStore('uploads');
     const sizeMB = (pdfBuffer.length / (1024 * 1024)).toFixed(2);
 
-    await store.set('carta.pdf', pdfBuffer, {
-      metadata: { contentType: 'application/pdf' },
-    });
-
-    await store.setJSON('carta.meta', {
+    await uploadPDF(pdfBuffer);
+    await uploadMeta({
       originalName: filename,
       sizeBytes:    pdfBuffer.length,
       sizeMB,
@@ -108,10 +94,7 @@ exports.handler = async function (event) {
     return {
       statusCode: 500,
       headers: HEADERS,
-      body: JSON.stringify({
-        error:  'Error desant el PDF',
-        detail: err.message || String(err),
-      }),
+      body: JSON.stringify({ error: 'Error desant el PDF', detail: err.message || String(err) }),
     };
   }
 };

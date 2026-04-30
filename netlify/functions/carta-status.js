@@ -7,12 +7,12 @@
  *   X-Token-Payload:  <payload>
  */
 
-const crypto          = require('crypto');
-const { createStore } = require('./_blobs');
+const crypto         = require('crypto');
+const { getMeta }    = require('./_storage');
 
 const HEADERS = {
   'Content-Type': 'application/json',
-  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Origin':  '*',
   'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Token-Payload',
 };
 
@@ -43,8 +43,7 @@ exports.handler = async function (event) {
   }
 
   try {
-    const store = createStore('uploads');
-    const meta  = await store.get('carta.meta', { type: 'json' });
+    const meta = await getMeta();
 
     if (!meta) {
       return {
@@ -70,10 +69,7 @@ exports.handler = async function (event) {
     return {
       statusCode: 500,
       headers: HEADERS,
-      body: JSON.stringify({
-        error:  'Error consultant l\'estat',
-        detail: err.message || String(err),
-      }),
+      body: JSON.stringify({ error: 'Error consultant l\'estat', detail: err.message || String(err) }),
     };
   }
 };
