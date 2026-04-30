@@ -580,7 +580,7 @@
     <!-- Pujada de PDF -->
     <div class="upload-card">
       <h3>Publicar nova carta</h3>
-      <p class="upload-desc">Selecciona o arrossega el PDF amb la nova carta. Es publicarà immediatament a la web. Màxim 4 MB.</p>
+      <p class="upload-desc">Selecciona o arrossega el PDF amb la nova carta. Es publicarà immediatament a la web.</p>
 
       <div class="drop-zone" id="dropZone">
         <input type="file" id="fileInput" accept="application/pdf" />
@@ -591,7 +591,7 @@
           <polyline points="9 15 12 12 15 15"/>
         </svg>
         <p>Arrossega el PDF aquí</p>
-        <small>o fes clic per seleccionar · Màxim 4 MB</small>
+        <small>o fes clic per seleccionar · Màxim 10 MB</small>
       </div>
 
       <!-- Fitxer seleccionat -->
@@ -880,8 +880,8 @@
       return;
     }
 
-    // Validació mida (4 MB — límit del body de les funcions Netlify)
-    const MAX = 4 * 1024 * 1024;
+    // Validació mida (10 MB)
+    const MAX = 10 * 1024 * 1024;
     if (file.size > MAX) {
       showUploadMsg('error',
         'El fitxer és massa gran (' + formatBytes(file.size) + '). Màxim 10 MB.');
@@ -905,7 +905,9 @@
     progressWrap.classList.remove('show');
   }
 
-  // ── Publicar PDF ───────────────────────────────────────
+  // ── Publicar PDF (chunked per a fitxers grans) ─────────
+  const CHUNK_SIZE = 3 * 1024 * 1024; // 3 MB per chunk
+
   publishBtn.addEventListener('click', async function () {
     if (!selectedFile) return;
 
@@ -914,48 +916,66 @@
 
     publishBtn.disabled = true;
     progressWrap.classList.add('show');
-    setProgress(10, 'Llegint fitxer...');
+    setProgress(0, 'Preparant...');
     uploadMsg.classList.remove('show');
 
+    const authHeaders = {
+      'Content-Type':    'application/json',
+      'Authorization':   'Bearer ' + s.token,
+      'X-Token-Payload': s.payload,
+    };
+
     try {
-      // Llegir el fitxer com a base64
-      const fileBase64 = await new Promise(function (resolve, reject) {
-        const reader = new FileReader();
-        reader.onload = function () {
-          // El resultat és "data:application/pdf;base64,<dades>"
-          resolve(reader.result.split(',')[1]);
-        };
-        reader.onerror = reject;
-        reader.readAsDataURL(selectedFile);
-      });
+      // Llegir el fitxer com ArrayBuffer
+      const arrayBuffer = await selectedFile.arrayBuffer();
+      const bytes       = new Uint8Array(arrayBuffer);
+      const totalChunks = Math.ceil(bytes.length / CHUNK_SIZE);
+      const uploadId    = Date.now().toString(36) + Math.random().toString(36).slice(2);
 
-      setProgress(50, 'Pujant el PDF...');
+      if (totalChunks === 1) {
+        // ── Fitxer petit: upload únic ──────────────────────
+        setProgress(20, 'Pujant el PDF...');
+        const b64  = btoa(String.fromCharCode(...bytes));
+        const resp = await fetch('/api/upload-pdf', {
+          method:  'POST',
+          headers: authHeaders,
+          body:    JSON.stringify({ action: 'single', filename: selectedFile.name, fileBase64: b64, sizeBytes: selectedFile.size }),
+        });
+        if (resp.status === 401) { clearSession(); showLogin(); return; }
+        if (!resp.ok) { const e = await resp.json().catch(() => ({})); throw new Error(e.detail || e.error || 'Error pujant'); }
+        setProgress(100, 'Completat');
 
-      const resp = await fetch('/api/upload-pdf', {
-        method: 'POST',
-        headers: {
-          'Content-Type':    'application/json',
-          'Authorization':   'Bearer ' + s.token,
-          'X-Token-Payload': s.payload,
-        },
-        body: JSON.stringify({
-          filename:   selectedFile.name,
-          fileBase64: fileBase64,
-          sizeBytes:  selectedFile.size,
-        }),
-      });
+      } else {
+        // ── Fitxer gran: upload per chunks ─────────────────
+        for (let i = 0; i < totalChunks; i++) {
+          const start  = i * CHUNK_SIZE;
+          const chunk  = bytes.slice(start, start + CHUNK_SIZE);
+          const b64    = btoa(String.fromCharCode(...chunk));
+          const pct    = Math.round(((i + 1) / totalChunks) * 85);
+          setProgress(pct, 'Pujant part ' + (i + 1) + ' de ' + totalChunks + '...');
 
-      setProgress(90, 'Confirmant...');
+          const resp = await fetch('/api/upload-pdf', {
+            method:  'POST',
+            headers: authHeaders,
+            body:    JSON.stringify({ action: 'chunk', uploadId, chunkIndex: i, totalChunks, data: b64 }),
+          });
+          if (resp.status === 401) { clearSession(); showLogin(); return; }
+          if (!resp.ok) { const e = await resp.json().catch(() => ({})); throw new Error(e.detail || e.error || 'Error al chunk ' + i); }
+        }
 
-      if (resp.status === 401) { clearSession(); showLogin(); return; }
-      if (!resp.ok) {
-        const err = await resp.json().catch(() => ({}));
-        throw new Error(err.detail || err.error || 'Error pujant el PDF');
+        // Finalitzar
+        setProgress(92, 'Finalitzant...');
+        const fin = await fetch('/api/upload-pdf', {
+          method:  'POST',
+          headers: authHeaders,
+          body:    JSON.stringify({ action: 'finalize', uploadId, totalChunks, filename: selectedFile.name, sizeBytes: selectedFile.size }),
+        });
+        if (fin.status === 401) { clearSession(); showLogin(); return; }
+        if (!fin.ok) { const e = await fin.json().catch(() => ({})); throw new Error(e.detail || e.error || 'Error finalitzant'); }
+        setProgress(100, 'Completat');
       }
 
-      setProgress(100, 'Completat');
       showUploadMsg('success', '✓ Carta publicada correctament. Ja és visible a la web.');
-
       await loadStatus();
       clearFile();
 
