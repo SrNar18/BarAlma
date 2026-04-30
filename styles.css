@@ -984,6 +984,90 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   line-height: 1.8;
 }
 
+/* ===== FAQ ===== */
+.faq {
+  padding: 110px 48px;
+  background: #12100d;
+  border-top: 1px solid rgba(201,161,74,0.16);
+  border-bottom: 1px solid rgba(201,161,74,0.16);
+}
+
+.faq__inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 64px;
+  align-items: start;
+}
+
+.faq__intro .section__title {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+}
+
+.faq__intro p:not(.section__eyebrow) {
+  color: var(--sage);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.faq__list {
+  display: grid;
+  gap: 14px;
+}
+
+.faq__item {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(201,161,74,0.14);
+  border-radius: 6px;
+  overflow: hidden;
+  transition: border-color 0.25s, background 0.25s;
+}
+
+.faq__item[open],
+.faq__item:hover {
+  border-color: rgba(201,161,74,0.36);
+  background: rgba(201,161,74,0.055);
+}
+
+.faq__item summary {
+  position: relative;
+  list-style: none;
+  cursor: pointer;
+  padding: 20px 54px 20px 22px;
+  color: var(--white);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.faq__item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq__item summary::after {
+  content: '+';
+  position: absolute;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gold);
+  font-size: 22px;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.faq__item[open] summary::after {
+  content: '-';
+}
+
+.faq__item p {
+  padding: 0 22px 22px;
+  color: var(--sage);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
 /* ===== GALLERY ===== */
 .gallery {
   background: #0f0d0a;
@@ -1595,7 +1679,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .nav__links, .nav__cta, .nav__lang { display: none; }
   .nav__hamburger { display: flex; }
 
-  .about, .menu, .experience, .reservations { padding: 80px 24px; }
+  .about, .menu, .experience, .faq, .reservations { padding: 80px 24px; }
 
   /* Gallery responsive */
   .gallery__wrap { padding: 80px 24px; }
@@ -1606,6 +1690,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .gallery__strip-item:last-child { display: none; }
 
   .experience__cards { grid-template-columns: 1fr; }
+  .faq__inner { grid-template-columns: 1fr; gap: 36px; }
   .form-row { grid-template-columns: 1fr; }
 
   .footer__top { padding: 48px 24px; }

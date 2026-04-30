@@ -8,6 +8,30 @@ window.addEventListener('scroll', () => {
 const heroEl = document.querySelector('.hero');
 if (heroEl) heroEl.classList.add('loaded');
 
+// Lazy background images
+const lazyBackgrounds = document.querySelectorAll('[data-bg]');
+const loadBackground = (el) => {
+  const src = el.getAttribute('data-bg');
+  if (!src) return;
+  el.style.backgroundImage = `url('${src}')`;
+  el.removeAttribute('data-bg');
+  el.classList.add('bg-loaded');
+};
+
+if ('IntersectionObserver' in window) {
+  const bgObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      loadBackground(entry.target);
+      bgObserver.unobserve(entry.target);
+    });
+  }, { rootMargin: '500px 0px', threshold: 0.01 });
+
+  lazyBackgrounds.forEach(el => bgObserver.observe(el));
+} else {
+  lazyBackgrounds.forEach(loadBackground);
+}
+
 // Smooth scroll
 function scrollToSection(id) {
   const el = document.getElementById(id);
@@ -59,7 +83,7 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 
 document.querySelectorAll(
-  '.about__inner, .menu__header, .dish-card, .exp-card, .gallery__item, .reservations__text, .reservation-form, .footer__top'
+  '.about__inner, .menu__header, .dish-card, .exp-card, .faq__inner, .faq__item, .gallery__item, .reservations__text, .reservation-form, .footer__top'
 ).forEach(el => {
   el.classList.add('reveal');
   revealObserver.observe(el);

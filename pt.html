@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alma Bar Restaurant | Tapas, Carnes e Peixes · Gastronomia de Mercado</title>
+  <title>Alma Bar Restaurant | Tapas, Carnes e Peixes</title>
   <meta name="description" content="Alma Bar Restaurant: gastronomia de mercado, tapas e pintxos, carnes ibéricas e peixes no forno. Ambiente íntimo, cocktails de autor e serviço personalizado." />
   <meta name="keywords" content="bar restaurante, tapas, pintxos, gastronomia de mercado, carnes ibéricas, peixes no forno, cocktails, alma restaurant" />
   <meta name="robots" content="index, follow" />
@@ -39,36 +39,90 @@
     "name": "Alma Bar Restaurant",
     "description": "Gastronomia de mercado, tapas e pintxos, carnes ibéricas e peixes no forno. Ambiente íntimo e cocktails de autor.",
     "url": "https://www.almabarrestaurant.com",
-    "telephone": "+34600000000",
-    "image": "https://www.almabarrestaurant.com/img/dos-1200w.webp",
+    "telephone": "+376815393",
+    "image": [
+      "https://www.almabarrestaurant.com/img/dos-1200w.webp",
+      "https://www.almabarrestaurant.com/img/entrecot.webp",
+      "https://www.almabarrestaurant.com/img/pulpo.webp"
+    ],
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Carrer Exemple 12, Planta Baixa",
-      "addressLocality": "Ciutat",
-      "addressCountry": "ES"
+      "streetAddress": "Av. el Través, 3",
+      "addressLocality": "La Massana",
+      "addressCountry": "AD",
+      "postalCode": "AD400",
+      "addressRegion": "La Massana"
     },
-    "servesCuisine": ["Mediterranean", "Spanish", "Tapas"],
+    "servesCuisine": [
+      "Mediterranean",
+      "Spanish",
+      "Tapas"
+    ],
     "priceRange": "€€",
     "openingHoursSpecification": [
       {
         "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday"],
-        "opens": "13:30", "closes": "16:00"
+        "dayOfWeek": "Tuesday",
+        "opens": "09:00",
+        "closes": "17:00"
       },
       {
         "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday"],
-        "opens": "20:30", "closes": "02:00"
+        "dayOfWeek": [
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "08:00",
+        "closes": "22:00"
+      }
+    ],
+    "@id": "https://www.almabarrestaurant.com/#restaurant",
+    "hasMenu": "https://www.almabarrestaurant.com/carta.pdf",
+    "acceptsReservations": "https://wa.me/376815393",
+    "inLanguage": "pt"
+  }
+  </script>
+  <!-- Structured Data: FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "inLanguage": "pt",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Qual é o horário do Alma Bar Restaurant?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Abrimos à terça das 09:00 às 17:00 e de quarta a domingo das 08:00 às 22:00. Encerramos à segunda."
+        }
       },
       {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Saturday","Sunday"],
-        "opens": "13:00", "closes": "16:30"
+        "@type": "Question",
+        "name": "Posso reservar para grupos ou eventos privados?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim. Dispomos de espaços reservados para grupos e celebrações exclusivas. Escreva-nos pelo WhatsApp e ajudamos a organizar tudo."
+        }
       },
       {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Saturday","Sunday"],
-        "opens": "20:00", "closes": "02:00"
+        "@type": "Question",
+        "name": "Têm menu degustação?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim. O menu degustação é uma viagem de 7 momentos pelo melhor da nossa carta, com harmonização de vinhos incluída."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Como posso reservar?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Pode reservar ou consultar disponibilidade enviando-nos uma mensagem pelo WhatsApp para +376 815 393."
+        }
       }
     ]
   }
@@ -84,11 +138,11 @@
   <!-- NAV -->
   <header class="nav" id="nav">
     <div class="nav__logo">
-      <a href="pt.html"><img src="img/LOGO_BANNER.png" alt="Alma Bar Restaurant" class="nav__logo-img" /></a>
+      <a href="pt.html"><img src="img/LOGO_BANNER.png" alt="Alma Bar Restaurant" class="nav__logo-img" width="6912" height="3456" decoding="async" fetchpriority="high" /></a>
     </div>
     <nav class="nav__links">
       <a href="#inicio">Início</a>
-      <a href="#nosotros">Sobre nós</a>
+      <a href="#sobre">Sobre nós</a>
       <a href="#menu">Menu</a>
       <a href="#galeria">O nosso espaço</a>
       <a href="#reservas">Contacto</a>
@@ -117,7 +171,7 @@
   <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu">
     <a href="#inicio" onclick="closeMobileMenu()">Início</a>
-    <a href="#nosotros" onclick="closeMobileMenu()">Sobre nós</a>
+    <a href="#sobre" onclick="closeMobileMenu()">Sobre nós</a>
     <a href="#menu" onclick="closeMobileMenu()">Menu</a>
     <a href="#galeria" onclick="closeMobileMenu()">O nosso espaço</a>
     <a href="#reservas" onclick="closeMobileMenu()">Contacto</a>
@@ -170,12 +224,12 @@
   </div>
 
   <!-- SOBRE NÓS -->
-  <section class="about" id="nosotros">
+  <section class="about" id="sobre">
     <div class="about__watermark" aria-hidden="true">ALMA</div>
     <div class="about__inner">
       <div class="about__visual">
         <div class="about__img-frame">
-          <div class="about__img-main" style="background-image:url('img/dos-1200w.webp')"></div>
+          <div class="about__img-main" data-bg="img/dos-1200w.webp"></div>
           <div class="about__img-offset"></div>
           <div class="about__img-caption">
             <span class="about__img-caption-year">2018</span>
@@ -199,8 +253,7 @@
             <span class="stat__label">Cocktails de autor</span>
           </div>
           <div class="stat">
-            <span class="stat__num">7</span>
-            <span class="stat__label">Anos de história</span>
+            <span class="stat__num">8</span><span class="stat__label">Anos de história</span>
           </div>
         </div>
         <a href="#reservas" class="btn btn--gold" title="Contacte o Alma Bar Restaurant">Viver a experiência</a>
@@ -226,7 +279,7 @@
       <!-- Tapas & Pintxos -->
       <div class="menu__panel active" data-panel="tapas">
         <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/callos.webp')"></div>
+          <div class="dish-card__img" data-bg="img/callos.webp"></div>
           <div class="dish-card__info">
             <div class="dish-card__header"><h3>Gildas</h3></div>
             <p>Azeitona, pimento e anchova. O pintxo clássico do País Basco.</p>
@@ -234,7 +287,7 @@
           </div>
         </div>
         <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/canelones.webp')"></div>
+          <div class="dish-card__img" data-bg="img/canelones.webp"></div>
           <div class="dish-card__info">
             <div class="dish-card__header"><h3>Croquetes (4 und.)</h3></div>
             <p>De presunto ibérico ou frango. Estaladiços por fora, cremosos por dentro.</p>
@@ -242,14 +295,14 @@
           </div>
         </div>
         <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/pulpo.webp')"></div>
+          <div class="dish-card__img" data-bg="img/pulpo.webp"></div>
           <div class="dish-card__info">
             <div class="dish-card__header"><h3>Patatas Bravas</h3></div>
             <p>Batatas fritas com o nosso molho brava caseiro.</p>
           </div>
         </div>
         <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/carpaccio.webp')"></div>
+          <div class="dish-card__img" data-bg="img/carpaccio.webp"></div>
           <div class="dish-card__info">
             <div class="dish-card__header"><h3>Sortido de Aperitivos</h3></div>
             <p>2 de presunto, 2 de frango e 2 bolinhos. A combinação perfeita para partilhar.</p>
@@ -261,7 +314,7 @@
       <!-- Entradas -->
       <div class="menu__panel" data-panel="entrantes">
         <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/carpaccio.webp')"></div>
+          <div class="dish-card__img" data-bg="img/carpaccio.webp"></div>
           <div class="dish-card__info">
             <div class="dish-card__header"><h3>Carpaccio de Polvo</h3></div>
             <p>Fatias finas de polvo, azeite virgem extra e toques de limão.</p>
@@ -269,7 +322,7 @@
           </div>
         </div>
         <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/bacalla.webp')"></div>
+          <div class="dish-card__img" data-bg="img/bacalla.webp"></div>
           <div class="dish-card__info">
             <div class="dish-card__header"><h3>Carpaccio de Salmão</h3></div>
             <p>Salmão cortado à mão com alcaparras, endro e creme de queijo.</p>
@@ -277,7 +330,7 @@
           </div>
         </div>
         <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/pulpo.webp')"></div>
+          <div class="dish-card__img" data-bg="img/pulpo.webp"></div>
           <div class="dish-card__info">
             <div class="dish-card__header"><h3>Gambas ao Alho</h3></div>
             <p>Gambas salteadas com alho, piri-piri e azeite virgem extra.</p>
@@ -285,7 +338,7 @@
           </div>
         </div>
         <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/canelones.webp')"></div>
+          <div class="dish-card__img" data-bg="img/canelones.webp"></div>
           <div class="dish-card__info">
             <div class="dish-card__header"><h3>Endívias de Cava e Queijo</h3></div>
             <p>Gratinadas com foie gras. Uma combinação elegante e saborosa.</p>
@@ -297,7 +350,7 @@
       <!-- Carnes -->
       <div class="menu__panel" data-panel="carns">
         <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/entrecot.webp')"></div>
+          <div class="dish-card__img" data-bg="img/entrecot.webp"></div>
           <div class="dish-card__info">
             <div class="dish-card__header"><h3>Entrecôte</h3></div>
             <p>Grelhado no ponto certo, com guarnição e molho da casa.</p>
@@ -305,7 +358,7 @@
           </div>
         </div>
         <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/callos.webp')"></div>
+          <div class="dish-card__img" data-bg="img/callos.webp"></div>
           <div class="dish-card__info">
             <div class="dish-card__header"><h3>Magret de Pato</h3></div>
             <p>Peito de pato grelhado, rosado no ponto, com redução de frutos vermelhos.</p>
@@ -313,14 +366,14 @@
           </div>
         </div>
         <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/pulpo.webp')"></div>
+          <div class="dish-card__img" data-bg="img/pulpo.webp"></div>
           <div class="dish-card__info">
-            <div class="dish-card__header"><h3>Secreto Ibérico</h3></div>
+            <div class="dish-card__header"><h3>Segredo Ibérico</h3></div>
             <p>Corte selecto de porco ibérico, suculento e cheio de sabor.</p>
           </div>
         </div>
         <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/carpaccio.webp')"></div>
+          <div class="dish-card__img" data-bg="img/carpaccio.webp"></div>
           <div class="dish-card__info">
             <div class="dish-card__header"><h3>Costelas Kai</h3></div>
             <p>Costelas tenras marinadas e cozinhadas lentamente.</p>
@@ -331,7 +384,7 @@
       <!-- Peixes -->
       <div class="menu__panel" data-panel="peixos">
         <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/bacalla.webp')"></div>
+          <div class="dish-card__img" data-bg="img/bacalla.webp"></div>
           <div class="dish-card__info">
             <div class="dish-card__header"><h3>Salmão no Forno</h3></div>
             <p>Filete de salmão no forno com ervas aromáticas e legumes da época.</p>
@@ -339,7 +392,7 @@
           </div>
         </div>
         <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/pulpo.webp')"></div>
+          <div class="dish-card__img" data-bg="img/pulpo.webp"></div>
           <div class="dish-card__info">
             <div class="dish-card__header"><h3>Polvo no Forno</h3></div>
             <p>Com puré de batata. Textura perfeita e sabor intenso do mar.</p>
@@ -347,14 +400,14 @@
           </div>
         </div>
         <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/canelones.webp')"></div>
+          <div class="dish-card__img" data-bg="img/canelones.webp"></div>
           <div class="dish-card__info">
             <div class="dish-card__header"><h3>Bacalhau no Forno</h3></div>
             <p>Bacalhau de primeira qualidade no forno, com azeite e alho confitado.</p>
           </div>
         </div>
         <div class="dish-card">
-          <div class="dish-card__img" style="background-image:url('img/carpaccio.webp')"></div>
+          <div class="dish-card__img" data-bg="img/carpaccio.webp"></div>
           <div class="dish-card__info">
             <div class="dish-card__header"><h3>Linguado no Forno</h3></div>
             <p>Peixe branco delicado no forno, com manteiga e limão.</p>
@@ -400,7 +453,7 @@
         <div class="exp-card">
           <div class="exp-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg></div>
           <h3>Horário alargado</h3>
-          <p>Aberto de terça a domingo até às 2:00 AM. O ambiente noturno é o nosso momento.</p>
+          <p>Aberto de terça a domingo até às 22:00. O ambiente noturno é o nosso momento.</p>
         </div>
         <div class="exp-card">
           <div class="exp-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
@@ -422,6 +475,35 @@
   </section>
 
   <!-- O NOSSO ESPAÇO -->
+  <!-- FAQ -->
+  <section class="faq" id="faq" aria-labelledby="faq-title">
+    <div class="faq__inner">
+      <div class="faq__intro">
+        <p class="section__eyebrow">· Perguntas frequentes ·</p>
+        <h2 class="section__title" id="faq-title">Perguntas frequentes</h2>
+        <p>Respostas rápidas sobre horários, reservas, grupos e experiências especiais no Alma Bar Restaurant.</p>
+      </div>
+      <div class="faq__list">
+        <details class="faq__item" open>
+          <summary>Qual é o horário do Alma Bar Restaurant?</summary>
+          <p>Abrimos à terça das 09:00 às 17:00 e de quarta a domingo das 08:00 às 22:00. Encerramos à segunda.</p>
+        </details>
+        <details class="faq__item">
+          <summary>Posso reservar para grupos ou eventos privados?</summary>
+          <p>Sim. Dispomos de espaços reservados para grupos e celebrações exclusivas. Escreva-nos pelo WhatsApp e ajudamos a organizar tudo.</p>
+        </details>
+        <details class="faq__item">
+          <summary>Têm menu degustação?</summary>
+          <p>Sim. O menu degustação é uma viagem de 7 momentos pelo melhor da nossa carta, com harmonização de vinhos incluída.</p>
+        </details>
+        <details class="faq__item">
+          <summary>Como posso reservar?</summary>
+          <p>Pode reservar ou consultar disponibilidade enviando-nos uma mensagem pelo WhatsApp para +376 815 393.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
   <section class="gallery" id="galeria">
     <div class="gallery__wrap">
       <div class="gallery__header">
@@ -442,11 +524,11 @@
             <a href="#reservas" class="btn btn--gold" title="Reservar mesa no Alma Bar Restaurant">Reservar mesa</a>
           </div>
           <div class="gallery__stack">
-            <div class="gallery__stack-img" style="background-image:url('img/carpaccio.webp')"><span>Entradas</span></div>
-            <div class="gallery__stack-img" style="background-image:url('img/entrecot.webp')"><span>Grelha</span></div>
+            <div class="gallery__stack-img" data-bg="img/carpaccio.webp"><span>Entradas</span></div>
+            <div class="gallery__stack-img" data-bg="img/entrecot.webp"><span>Grelha</span></div>
           </div>
         </div>
-        <div class="gallery__feature" style="background-image:url('img/dos-1200w.webp')">
+        <div class="gallery__feature" data-bg="img/dos-1200w.webp">
           <div class="gallery__feature-overlay">
             <div class="gallery__feature-badge">
               <span class="gallery__feature-badge-num">2018</span>
@@ -456,9 +538,9 @@
         </div>
       </div>
       <div class="gallery__strip">
-        <div class="gallery__strip-item" style="background-image:url('img/pulpo.webp')"><span>Do mar</span></div>
-        <div class="gallery__strip-item" style="background-image:url('img/callos.webp')"><span>Tradição</span></div>
-        <div class="gallery__strip-item" style="background-image:url('img/canelones.webp')"><span>Paixão</span></div>
+        <div class="gallery__strip-item" data-bg="img/pulpo.webp"><span>Do mar</span></div>
+        <div class="gallery__strip-item" data-bg="img/callos.webp"><span>Tradição</span></div>
+        <div class="gallery__strip-item" data-bg="img/canelones.webp"><span>Paixão</span></div>
       </div>
     </div>
   </section>
@@ -472,12 +554,12 @@
         <p>Para qualquer dúvida, organizar um evento especial ou simplesmente saber mais, envie-nos uma mensagem pelo WhatsApp e respondemos pessoalmente.</p>
         <div class="reservations__info">
           <div class="res-info">
-            <span class="res-info__label">Terça – Sexta</span>
-            <span class="res-info__val">13:30 – 16:00 · 20:30 – 02:00</span>
+            <span class="res-info__label">Terça</span>
+            <span class="res-info__val">09:00 – 17:00</span>
           </div>
           <div class="res-info">
-            <span class="res-info__label">Sábados e Domingos</span>
-            <span class="res-info__val">13:00 – 16:30 · 20:00 – 02:00</span>
+            <span class="res-info__label">Quarta – Domingo</span>
+            <span class="res-info__val">08:00 – 22:00</span>
           </div>
           <div class="res-info">
             <span class="res-info__label">Segunda</span>
@@ -489,10 +571,10 @@
         <div class="whatsapp-cta__icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         </div>
-        <p class="whatsapp-cta__text">Escreva-nos diretamente e damos-lhe uma resposta personalizada para qualquer questão ou ocasião especial.</p>
-        <a href="https://wa.me/34600000000" target="_blank" rel="noopener" class="btn-whatsapp">
+        <p class="whatsapp-cta__text">Tem dúvidas ou quer reservar algo especial? Escreva-nos e respondemos pessoalmente.</p>
+        <a href="https://wa.me/376815393" target="_blank" rel="noopener" class="btn-whatsapp">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Abrir WhatsApp
+          Escreva-nos no WhatsApp
         </a>
         <p class="whatsapp-cta__note">Normalmente respondemos em menos de 2 horas.</p>
       </div>
@@ -503,7 +585,7 @@
   <footer class="footer" id="contacto">
     <div class="footer__top">
       <div class="footer__brand">
-        <img src="img/LOGO_BANNER.png" alt="Alma Bar Restaurant" class="footer__logo" />
+        <img src="img/LOGO_BANNER.png" alt="Alma Bar Restaurant" class="footer__logo" width="6912" height="3456" loading="lazy" decoding="async" />
         <p>Uma experiência gastronómica que vai além da mesa.</p>
         <div class="footer__social">
           <a href="#" aria-label="Instagram" class="social-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
@@ -513,19 +595,18 @@
       </div>
       <div class="footer__col">
         <h4>Navegação</h4>
-        <a href="#inicio">Início</a><a href="#nosotros">Sobre nós</a>
+        <a href="#inicio">Início</a><a href="#sobre">Sobre nós</a>
         <a href="#menu">Menu</a><a href="#galeria">O nosso espaço</a><a href="#reservas">Reservas</a>
       </div>
       <div class="footer__col">
         <h4>Contacto</h4>
-        <p>Rua Exemplo 12, Rés do Chão</p><p>Cidade, Código Postal</p>
-        <a href="tel:+34600000000">+34 600 000 000</a>
-        <a href="mailto:hola@almabarrestaurant.com">hola@almabarrestaurant.com</a>
-      </div>
+        <p>Av. el Través, 3, AD400 La Massana</p>
+        <a href="tel:+376815393">+376 815 393</a>
+        </div>
       <div class="footer__col">
         <h4>Horário</h4>
-        <p><span>Ter – Sex</span> 13:30 – 02:00</p>
-        <p><span>Sáb – Dom</span> 13:00 – 02:00</p>
+        <p><span>Terça</span> 09:00 – 17:00</p>
+        <p><span>Quarta a Domingo</span> 08:00 – 22:00</p>
         <p><span>Segunda</span> Encerrado</p>
         <a href="#reservas" class="btn btn--gold btn--sm" title="Reservar mesa no Alma Bar Restaurant">Reservar</a>
       </div>
@@ -541,6 +622,6 @@
     <div><strong>Pedido enviado!</strong><p>Confirmaremos em breve.</p></div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
