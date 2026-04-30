@@ -5,7 +5,8 @@ window.addEventListener('scroll', () => {
 });
 
 // Hero parallax & load
-document.querySelector('.hero').classList.add('loaded');
+const heroEl = document.querySelector('.hero');
+if (heroEl) heroEl.classList.add('loaded');
 
 // Smooth scroll
 function scrollToSection(id) {
