@@ -1,5 +1,5 @@
 /**
- * carta-status.js — Retorna l'estat actual del PDF de la carta
+ * carta-status.js — Estat del PDF de la carta (Netlify Functions V2)
  *
  * GET /api/carta-status
  * Headers:
@@ -7,11 +7,10 @@
  *   X-Token-Payload:  <payload>
  */
 
-const crypto         = require('crypto');
-const { getMeta }    = require('./_storage');
+import crypto       from 'node:crypto';
+import { getStore } from '@netlify/blobs';
 
-const HEADERS = {
-  'Content-Type': 'application/json',
+const CORS = {
   'Access-Control-Allow-Origin':  '*',
   'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Token-Payload',
 };
@@ -24,52 +23,37 @@ function verifyToken(token, payload) {
   if (isNaN(expiry) || Date.now() > expiry) return false;
   const expected = crypto.createHmac('sha256', secret).update(payload).digest('hex');
   try {
-    const a = Buffer.from(token.padEnd(64, '0').slice(0, 64));
-    const b = Buffer.from(expected.padEnd(64, '0').slice(0, 64));
-    return token.length === expected.length && crypto.timingSafeEqual(a, b);
+    if (token.length !== expected.length) return false;
+    return crypto.timingSafeEqual(Buffer.from(token), Buffer.from(expected));
   } catch { return false; }
 }
 
-exports.handler = async function (event) {
-  if (event.httpMethod === 'OPTIONS') {
-    return { statusCode: 204, headers: HEADERS, body: '' };
-  }
+export default async (req) => {
+  if (req.method === 'OPTIONS') return new Response('', { status: 204, headers: CORS });
 
-  const token   = (event.headers['authorization'] || '').replace('Bearer ', '').trim();
-  const payload = (event.headers['x-token-payload'] || '').trim();
+  const token   = (req.headers.get('authorization') || '').replace('Bearer ', '').trim();
+  const payload = (req.headers.get('x-token-payload') || '').trim();
 
   if (!verifyToken(token, payload)) {
-    return { statusCode: 401, headers: HEADERS, body: JSON.stringify({ error: 'No autoritzat' }) };
+    return Response.json({ error: 'No autoritzat' }, { status: 401, headers: CORS });
   }
 
   try {
-    const meta = await getMeta();
+    const store = getStore({ name: 'uploads', consistency: 'strong' });
+    const meta  = await store.get('carta.meta', { type: 'json' });
 
-    if (!meta) {
-      return {
-        statusCode: 200,
-        headers: HEADERS,
-        body: JSON.stringify({ exists: false }),
-      };
-    }
+    if (!meta) return Response.json({ exists: false }, { headers: CORS });
 
-    return {
-      statusCode: 200,
-      headers: HEADERS,
-      body: JSON.stringify({
-        exists:       true,
-        sizeMB:       meta.sizeMB       || '—',
-        sizeBytes:    meta.sizeBytes    || 0,
-        updatedAt:    meta.updatedAt    || null,
-        originalName: meta.originalName || 'carta.pdf',
-      }),
-    };
+    return Response.json({
+      exists:       true,
+      sizeMB:       meta.sizeMB       || '—',
+      sizeBytes:    meta.sizeBytes    || 0,
+      updatedAt:    meta.updatedAt    || null,
+      originalName: meta.originalName || 'carta.pdf',
+    }, { headers: CORS });
+
   } catch (err) {
-    console.error('[carta-status] Error:', err);
-    return {
-      statusCode: 500,
-      headers: HEADERS,
-      body: JSON.stringify({ error: 'Error consultant l\'estat', detail: err.message || String(err) }),
-    };
+    console.error('[carta-status]', err);
+    return Response.json({ error: 'Error consultant l\'estat', detail: err.message }, { status: 500, headers: CORS });
   }
 };

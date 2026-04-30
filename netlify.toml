@@ -7,6 +7,12 @@
   command   = "npm install"
   publish   = "."
 
+[functions]
+  node_bundler = "esbuild"
+
+[build.environment]
+  NODE_VERSION = "20"
+
 # ── Redireccionaments d'API ───────────────────────
 [[redirects]]
   from   = "/api/login"
@@ -14,23 +20,13 @@
   status = 200
 
 [[redirects]]
-  from   = "/api/get-upload-url"
-  to     = "/.netlify/functions/get-upload-url"
-  status = 200
-
-[[redirects]]
-  from   = "/api/confirm-upload"
-  to     = "/.netlify/functions/confirm-upload"
+  from   = "/api/upload-pdf"
+  to     = "/.netlify/functions/upload-pdf"
   status = 200
 
 [[redirects]]
   from   = "/api/carta-status"
   to     = "/.netlify/functions/carta-status"
-  status = 200
-
-[[redirects]]
-  from   = "/api/upload-pdf"
-  to     = "/.netlify/functions/upload-pdf"
   status = 200
 
 # ── Servir carta.pdf des de Netlify Blobs ─────────

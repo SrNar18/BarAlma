@@ -1,24 +1,22 @@
 /**
- * upload-pdf.js — Rep el PDF i el desa a Supabase Storage
+ * upload-pdf.js — Rep el PDF i el desa a Netlify Blobs (V2)
  *
  * POST /api/upload-pdf
  * Headers:
  *   Authorization:    Bearer <token>
  *   X-Token-Payload:  <payload>
- *   Content-Type:     application/json
- * Body: { filename: string, fileBase64: string, sizeBytes: number }
+ * Body: { filename, fileBase64, sizeBytes }
  */
 
-const crypto                        = require('crypto');
-const { uploadPDF, uploadMeta }     = require('./_storage');
+import crypto     from 'node:crypto';
+import { getStore } from '@netlify/blobs';
 
-const HEADERS = {
-  'Content-Type': 'application/json',
+const CORS = {
   'Access-Control-Allow-Origin':  '*',
   'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Token-Payload',
 };
 
-const MAX_PDF_BYTES = 4 * 1024 * 1024; // 4 MB (límit body Netlify Functions)
+const MAX_BYTES = 4 * 1024 * 1024; // 4 MB
 
 function verifyToken(token, payload) {
   const secret = process.env.ADMIN_SECRET;
@@ -28,73 +26,52 @@ function verifyToken(token, payload) {
   if (isNaN(expiry) || Date.now() > expiry) return false;
   const expected = crypto.createHmac('sha256', secret).update(payload).digest('hex');
   try {
-    const a = Buffer.from(token.padEnd(64, '0').slice(0, 64));
-    const b = Buffer.from(expected.padEnd(64, '0').slice(0, 64));
-    return token.length === expected.length && crypto.timingSafeEqual(a, b);
+    if (token.length !== expected.length) return false;
+    return crypto.timingSafeEqual(Buffer.from(token), Buffer.from(expected));
   } catch { return false; }
 }
 
-exports.handler = async function (event) {
-  if (event.httpMethod === 'OPTIONS') {
-    return { statusCode: 204, headers: HEADERS, body: '' };
-  }
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, headers: HEADERS, body: JSON.stringify({ error: 'Mètode no permès' }) };
-  }
+export default async (req) => {
+  if (req.method === 'OPTIONS') return new Response('', { status: 204, headers: CORS });
+  if (req.method !== 'POST')    return Response.json({ error: 'Mètode no permès' }, { status: 405, headers: CORS });
 
-  const token   = (event.headers['authorization'] || '').replace('Bearer ', '').trim();
-  const payload = (event.headers['x-token-payload'] || '').trim();
+  const token   = (req.headers.get('authorization') || '').replace('Bearer ', '').trim();
+  const payload = (req.headers.get('x-token-payload') || '').trim();
 
   if (!verifyToken(token, payload)) {
-    return { statusCode: 401, headers: HEADERS, body: JSON.stringify({ error: 'No autoritzat' }) };
+    return Response.json({ error: 'No autoritzat' }, { status: 401, headers: CORS });
   }
 
   let filename, fileBase64, sizeBytes;
   try {
-    const body = JSON.parse(event.body || '{}');
-    filename   = body.filename   || 'carta.pdf';
-    fileBase64 = body.fileBase64 || '';
-    sizeBytes  = parseInt(body.sizeBytes, 10) || 0;
+    ({ filename = 'carta.pdf', fileBase64 = '', sizeBytes = 0 } = await req.json());
   } catch {
-    return { statusCode: 400, headers: HEADERS, body: JSON.stringify({ error: 'Body invàlid' }) };
+    return Response.json({ error: 'Body invàlid' }, { status: 400, headers: CORS });
   }
 
-  if (!fileBase64) {
-    return { statusCode: 400, headers: HEADERS, body: JSON.stringify({ error: 'Falta el contingut del fitxer' }) };
-  }
-
-  if (sizeBytes > MAX_PDF_BYTES) {
-    return { statusCode: 400, headers: HEADERS, body: JSON.stringify({ error: 'Arxiu massa gran (màx. 4 MB)' }) };
-  }
+  if (!fileBase64) return Response.json({ error: 'Falta el contingut del fitxer' }, { status: 400, headers: CORS });
+  if (sizeBytes > MAX_BYTES) return Response.json({ error: 'Arxiu massa gran (màx. 4 MB)' }, { status: 400, headers: CORS });
 
   try {
     const pdfBuffer = Buffer.from(fileBase64, 'base64');
+    if (pdfBuffer.length > MAX_BYTES) return Response.json({ error: 'Arxiu massa gran (màx. 4 MB)' }, { status: 400, headers: CORS });
 
-    if (pdfBuffer.length > MAX_PDF_BYTES) {
-      return { statusCode: 400, headers: HEADERS, body: JSON.stringify({ error: 'Arxiu massa gran (màx. 4 MB)' }) };
-    }
-
+    const store  = getStore({ name: 'uploads', consistency: 'strong' });
     const sizeMB = (pdfBuffer.length / (1024 * 1024)).toFixed(2);
 
-    await uploadPDF(pdfBuffer);
-    await uploadMeta({
+    await store.set('carta.pdf', pdfBuffer, {
+      metadata: { contentType: 'application/pdf', uploadedAt: new Date().toISOString() }
+    });
+    await store.setJSON('carta.meta', {
       originalName: filename,
       sizeBytes:    pdfBuffer.length,
       sizeMB,
       updatedAt:    new Date().toISOString(),
     });
 
-    return {
-      statusCode: 200,
-      headers: HEADERS,
-      body: JSON.stringify({ ok: true }),
-    };
+    return Response.json({ ok: true }, { headers: CORS });
   } catch (err) {
-    console.error('[upload-pdf] Error:', err);
-    return {
-      statusCode: 500,
-      headers: HEADERS,
-      body: JSON.stringify({ error: 'Error desant el PDF', detail: err.message || String(err) }),
-    };
+    console.error('[upload-pdf]', err);
+    return Response.json({ error: 'Error desant el PDF', detail: err.message }, { status: 500, headers: CORS });
   }
 };
