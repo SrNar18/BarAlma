@@ -1612,6 +1612,19 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   transition: color 0.3s;
 }
 .footer__bottom a:hover { color: var(--gold); }
+.footer__credit {
+  font-size: 12px;
+  color: var(--gray);
+  margin-right: 24px;
+}
+.footer__credit a {
+  font-size: 12px;
+  color: var(--gray);
+  margin-left: 0;
+  font-weight: 700;
+  text-decoration: none;
+}
+.footer__credit a:hover { color: #8b5cf6; }
 
 /* ===== TOAST ===== */
 .toast {
