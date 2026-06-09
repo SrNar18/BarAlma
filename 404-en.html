@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page not found | Alma Bar Restaurant</title>
+  <meta name="description" content="The page you are looking for does not exist. Return to Alma Bar Restaurant." />
+  <meta name="robots" content="noindex, follow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=26" />
+  <link rel="icon" type="image/png" href="img/FaviCon.png" />
+  <style>
+    .error-section {
+      min-height: calc(100vh - var(--nav-h));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 48px 100px;
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse 70% 80% at 50% 50%,
+          rgba(201, 161, 74, 0.05) 0%,
+          transparent 70%
+        ),
+        var(--black);
+    }
+    .error-section::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0.3;
+    }
+    .error__watermark {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(160px, 28vw, 360px);
+      font-weight: 700;
+      color: var(--gold);
+      opacity: 0.04;
+      pointer-events: none;
+      user-select: none;
+      white-space: nowrap;
+      z-index: 0;
+      line-height: 1;
+    }
+    .error__content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 640px;
+    }
+    .error__code {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(5rem, 14vw, 10rem);
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 8px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s 0.2s forwards;
+      text-shadow: 0 0 80px rgba(201, 161, 74, 0.2);
+    }
+    .error__rule {
+      width: 60px; height: 1px;
+      background: var(--gold);
+      margin: 0 auto 32px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.4s forwards;
+    }
+    .error__eyebrow {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 4px; text-transform: uppercase;
+      color: var(--gold); display: block;
+      margin-bottom: 20px;
+      opacity: 0; transform: translateY(20px);
+      animation: fadeUp 0.8s 0.4s forwards;
+    }
+    .error__title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 500; color: var(--white);
+      line-height: 1.2; margin-bottom: 20px;
+      opacity: 0; transform: translateY(20px);
+      animation: fadeUp 0.8s 0.5s forwards;
+    }
+    .error__title em { font-style: italic; color: var(--gold); }
+    .error__subtitle {
+      font-size: 15px; color: var(--sage);
+      line-height: 1.9; margin-bottom: 48px;
+      opacity: 0; transform: translateY(20px);
+      animation: fadeUp 0.8s 0.65s forwards;
+    }
+    .error__actions {
+      display: flex; gap: 16px;
+      justify-content: center; flex-wrap: wrap;
+      opacity: 0; transform: translateY(20px);
+      animation: fadeUp 0.8s 0.8s forwards;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <div class="nav__logo">
+      <a href="en.html"><img src="img/LOGO_BANNER.webp" alt="Alma Bar Restaurant" class="nav__logo-img" width="6912" height="3456" decoding="async" fetchpriority="high" /></a>
+    </div>
+    <nav class="nav__links">
+      <a href="en.html#home">Home</a>
+      <a href="en.html#about">About</a>
+      <a href="en.html#menu">Menu</a>
+      <a href="en.html#space">Our Space</a>
+      <a href="en.html#contact">Contact</a>
+    </nav>
+    <div class="nav__right">
+      <a href="en.html#contact" class="nav__cta" title="Book a table at Alma Bar Restaurant">Book a table</a>
+      <div class="nav__lang">
+        <button class="nav__lang-btn" id="langBtn">
+          EN
+          <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg>
+        </button>
+        <div class="nav__lang-dropdown" id="langDropdown">
+          <a href="404.html" class="lang-opt">Català</a>
+          <a href="404-es.html" class="lang-opt">Castellano</a>
+          <a href="404-fr.html" class="lang-opt">Français</a>
+          <a href="404-en.html" class="lang-opt active">English</a>
+          <a href="404-pt.html" class="lang-opt">Português</a>
+        </div>
+      </div>
+      <button class="nav__hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="en.html#home" onclick="closeMobileMenu()">Home</a>
+    <a href="en.html#about" onclick="closeMobileMenu()">About</a>
+    <a href="en.html#menu" onclick="closeMobileMenu()">Menu</a>
+    <a href="en.html#space" onclick="closeMobileMenu()">Our Space</a>
+    <a href="en.html#contact" onclick="closeMobileMenu()">Contact</a>
+    <div class="mobile-menu__langs">
+      <a href="404.html">CA</a>
+      <a href="404-es.html">ES</a>
+      <a href="404-fr.html">FR</a>
+      <a href="404-en.html" class="active">EN</a>
+      <a href="404-pt.html">PT</a>
+    </div>
+  </div>
+
+  <!-- 404 CONTENT -->
+  <section class="error-section">
+    <div class="error__watermark" aria-hidden="true">404</div>
+    <div class="error__content">
+      <span class="error__code">404</span>
+      <div class="error__rule"></div>
+      <p class="error__eyebrow">· Page not found ·</p>
+      <h1 class="error__title">Looks like you've<br /><em>lost your way</em></h1>
+      <p class="error__subtitle">The page you're looking for doesn't exist or has been moved. But our kitchen is still open — head back to the homepage and discover everything we have to offer.</p>
+      <div class="error__actions">
+        <a href="en.html" class="btn btn--gold" title="Back to Alma Bar Restaurant homepage">Back to home</a>
+        <a href="en.html#contact" class="btn btn--outline" title="Contact Alma Bar Restaurant">Contact us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="contacto">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <img src="img/LOGO_BANNER.webp" alt="Alma Bar Restaurant" class="footer__logo" width="6912" height="3456" loading="lazy" decoding="async" />
+        <p>A gastronomic experience that goes beyond the table.</p>
+        <div class="footer__social">
+          <a href="#" aria-label="Instagram" class="social-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+          <a href="#" aria-label="Facebook" class="social-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" aria-label="TripAdvisor" class="social-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></a>
+        </div>
+      </div>
+      <div class="footer__col">
+        <h4>Navigation</h4>
+        <a href="en.html#home">Home</a>
+        <a href="en.html#about">About</a>
+        <a href="en.html#menu">Menu</a>
+        <a href="en.html#space">Our Space</a>
+        <a href="en.html#contact">Reservations</a>
+      </div>
+      <div class="footer__col">
+        <h4>Contact</h4>
+        <p>Av. el Través, 3, AD400 La Massana</p>
+        <a href="tel:+376815393">+376 815 393</a>
+      </div>
+      <div class="footer__col">
+        <h4>Opening hours</h4>
+        <p><span>Tuesday</span> 9:00 AM – 5:00 PM</p>
+        <p><span>Wed – Sun</span> 8:00 AM – 10:00 PM</p>
+        <p><span>Monday</span> Closed</p>
+        <a href="en.html#contact" class="btn btn--gold btn--sm" title="Book a table at Alma Bar Restaurant">Reserve</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2026 Alma Bar Restaurant · All rights reserved</p>
+      <div>
+        <span class="footer__credit">Website created with ❤️ by <a href="https://www.bitanube.com" target="_blank" rel="noopener">Bitanube</a></span>
+        <a href="legal-notice.html">Legal notice</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
