@@ -9,7 +9,9 @@
 
 [functions]
   node_bundler = "esbuild"
-  timeout      = 26
+
+[functions."upload-pdf"]
+  timeout = 26
 
 [build.environment]
   NODE_VERSION = "20"
