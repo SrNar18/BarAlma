@@ -2,7 +2,13 @@
   "permissions": {
     "allow": [
       "Bash(del \"C:\\\\Users\\\\Estades\\\\Documents\\\\BarAlma\\\\netlify\\\\functions\\\\upload-pdf.js\")",
-      "WebFetch(domain:calsilvino.netlify.app)"
+      "WebFetch(domain:calsilvino.netlify.app)",
+      "Bash(node -e \"require\\('sharp'\\)\")",
+      "Bash(cwebp -version)",
+      "Bash(ffmpeg -version)",
+      "Bash(npm install *)",
+      "Bash(node -e ' *)",
+      "Bash(npm uninstall *)"
     ]
   }
 }
