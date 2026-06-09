@@ -908,6 +908,13 @@
   // ── Publicar PDF (chunked per a fitxers grans) ─────────
   const CHUNK_SIZE = 3 * 1024 * 1024; // 3 MB per chunk
 
+  // Converteix Uint8Array a base64 sense spread (evita stack overflow en fitxers grans)
+  function uint8ToBase64(arr) {
+    let s = '';
+    for (let i = 0; i < arr.length; i++) s += String.fromCharCode(arr[i]);
+    return btoa(s);
+  }
+
   publishBtn.addEventListener('click', async function () {
     if (!selectedFile) return;
 
@@ -935,7 +942,7 @@
       if (totalChunks === 1) {
         // ── Fitxer petit: upload únic ──────────────────────
         setProgress(20, 'Pujant el PDF...');
-        const b64  = btoa(String.fromCharCode(...bytes));
+        const b64  = uint8ToBase64(bytes);
         const resp = await fetch('/api/upload-pdf', {
           method:  'POST',
           headers: authHeaders,
@@ -950,7 +957,7 @@
         for (let i = 0; i < totalChunks; i++) {
           const start  = i * CHUNK_SIZE;
           const chunk  = bytes.slice(start, start + CHUNK_SIZE);
-          const b64    = btoa(String.fromCharCode(...chunk));
+          const b64    = uint8ToBase64(chunk);
           const pct    = Math.round(((i + 1) / totalChunks) * 85);
           setProgress(pct, 'Pujant part ' + (i + 1) + ' de ' + totalChunks + '...');
 
