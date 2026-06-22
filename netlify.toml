@@ -41,6 +41,6 @@
 
 [[redirects]]
   from   = "/carta-fr-en.pdf"
-  to     = "/.netlify/functions/serve-carta?v=fr-en"
+  to     = "/.netlify/functions/serve-carta-fren"
   status = 200
   force  = true
