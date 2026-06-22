@@ -39,8 +39,12 @@ export default async (req) => {
   }
 
   try {
+    const url     = new URL(req.url);
+    const variant = url.searchParams.get('variant') === 'fr-en' ? 'fr-en' : 'es-ca';
+    const metaKey = variant === 'fr-en' ? 'carta-fr-en.meta' : 'carta.meta';
+
     const store = getStore({ name: 'uploads', consistency: 'strong' });
-    const meta  = await store.get('carta.meta', { type: 'json' });
+    const meta  = await store.get(metaKey, { type: 'json' });
 
     if (!meta) return Response.json({ exists: false }, { headers: CORS });
 

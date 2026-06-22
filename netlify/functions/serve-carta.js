@@ -7,10 +7,14 @@
 
 import { getStore } from '@netlify/blobs';
 
-export default async () => {
+export default async (req) => {
+  const url     = new URL(req.url);
+  const variant = url.searchParams.get('v') === 'fr-en' ? 'fr-en' : 'es-ca';
+  const blobKey = variant === 'fr-en' ? 'carta-fr-en.pdf' : 'carta.pdf';
+
   try {
     const store  = getStore({ name: 'uploads', consistency: 'strong' });
-    const result = await store.get('carta.pdf', { type: 'arrayBuffer' });
+    const result = await store.get(blobKey, { type: 'arrayBuffer' });
 
     if (!result || result.byteLength === 0) {
       return new Response(notFoundPage(), {

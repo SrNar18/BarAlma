@@ -51,10 +51,13 @@ export default async (req) => {
 
   const { action = 'single' } = body;
 
+  // variant: 'es-ca' (default) | 'fr-en'
+  const variant = body.variant === 'fr-en' ? 'fr-en' : 'es-ca';
+
   try {
     if (action === 'chunk')    return await handleChunk(body);
-    if (action === 'finalize') return await handleFinalize(body);
-    return await handleSingle(body);
+    if (action === 'finalize') return await handleFinalize({ ...body, variant });
+    return await handleSingle({ ...body, variant });
   } catch (err) {
     console.error('[upload-pdf]', err);
     return Response.json({ error: 'Error intern', detail: err.message }, { status: 500, headers: CORS });
@@ -62,18 +65,21 @@ export default async (req) => {
 };
 
 // ── Upload únic (≤ 3 MB) ─────────────────────────────────────────────────────
-async function handleSingle({ filename = 'carta.pdf', fileBase64 = '', sizeBytes = 0 }) {
+async function handleSingle({ filename = 'carta.pdf', fileBase64 = '', sizeBytes = 0, variant = 'es-ca' }) {
   if (!fileBase64) return Response.json({ error: 'Falta el contingut del fitxer' }, { status: 400, headers: CORS });
   if (sizeBytes > MAX_TOTAL_BYTES) return Response.json({ error: 'Arxiu massa gran (màx. 10 MB)' }, { status: 400, headers: CORS });
 
   const buf = Buffer.from(fileBase64, 'base64');
   if (!buf.length) return Response.json({ error: 'Arxiu buit' }, { status: 400, headers: CORS });
 
+  const pdfKey  = variant === 'fr-en' ? 'carta-fr-en.pdf'  : 'carta.pdf';
+  const metaKey = variant === 'fr-en' ? 'carta-fr-en.meta' : 'carta.meta';
+
   const store = getStore({ name: 'uploads', consistency: 'strong' });
-  await store.set('carta.pdf', buf, {
+  await store.set(pdfKey, buf, {
     metadata: { contentType: 'application/pdf', uploadedAt: new Date().toISOString() }
   });
-  await store.setJSON('carta.meta', {
+  await store.setJSON(metaKey, {
     originalName: filename,
     sizeBytes:    buf.length,
     sizeMB:       (buf.length / (1024 * 1024)).toFixed(2),
@@ -101,10 +107,13 @@ async function handleChunk({ uploadId, chunkIndex, totalChunks, data }) {
 }
 
 // ── Finalitzar: ajuntar chunks i desar el PDF ────────────────────────────────
-async function handleFinalize({ uploadId, totalChunks, filename = 'carta.pdf', sizeBytes = 0 }) {
+async function handleFinalize({ uploadId, totalChunks, filename = 'carta.pdf', sizeBytes = 0, variant = 'es-ca' }) {
   if (!uploadId || !totalChunks) {
     return Response.json({ error: 'Dades de finalització incompletes' }, { status: 400, headers: CORS });
   }
+
+  const pdfKey  = variant === 'fr-en' ? 'carta-fr-en.pdf'  : 'carta.pdf';
+  const metaKey = variant === 'fr-en' ? 'carta-fr-en.meta' : 'carta.meta';
 
   const store  = getStore({ name: 'uploads', consistency: 'strong' });
   const chunks = [];
@@ -126,10 +135,10 @@ async function handleFinalize({ uploadId, totalChunks, filename = 'carta.pdf', s
   }
 
   const final = Buffer.concat(chunks);
-  await store.set('carta.pdf', final, {
+  await store.set(pdfKey, final, {
     metadata: { contentType: 'application/pdf', uploadedAt: new Date().toISOString() }
   });
-  await store.setJSON('carta.meta', {
+  await store.setJSON(metaKey, {
     originalName: filename,
     sizeBytes:    final.length,
     sizeMB:       (final.length / (1024 * 1024)).toFixed(2),

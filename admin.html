@@ -514,6 +514,50 @@
 
     .upload-msg.show { display: block; }
 
+    /* ── Selector de variant ── */
+    .variant-selector {
+      display: flex;
+      gap: 0;
+      margin-bottom: 32px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(201,161,74,0.15);
+      border-radius: 3px;
+      padding: 4px;
+      width: fit-content;
+    }
+
+    .variant-btn {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gray);
+      padding: 11px 28px;
+      border-radius: 2px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      transition: all 0.25s;
+      white-space: nowrap;
+    }
+    .variant-btn:hover { color: var(--gold); }
+    .variant-btn.active {
+      background: var(--gold);
+      color: var(--black);
+      box-shadow: 0 2px 10px rgba(201,161,74,0.3);
+    }
+
+    .variant-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 10px;
+      display: block;
+    }
+
     /* ── Responsive ── */
     @media (max-width: 600px) {
       .login-card { padding: 36px 24px 28px; }
@@ -568,6 +612,12 @@
     <span class="admin-eyebrow">· Gestió de contingut ·</span>
     <h2 class="admin-section-title">Carta del restaurant</h2>
 
+    <!-- Selector de variant -->
+    <div class="variant-selector">
+      <button class="variant-btn active" id="variantEsCa" data-variant="es-ca">Carta ES / CA</button>
+      <button class="variant-btn" id="variantFrEn" data-variant="fr-en">Carta FR / EN</button>
+    </div>
+
     <!-- Estat actual del PDF -->
     <div class="status-card" id="statusCard">
       <div class="status-dot inactive" id="statusDot"></div>
@@ -582,7 +632,7 @@
     <!-- Pujada de PDF -->
     <div class="upload-card">
       <h3>Publicar nova carta</h3>
-      <p class="upload-desc">Selecciona o arrossega el PDF amb la nova carta. Es publicarà immediatament a la web.</p>
+      <p class="upload-desc" id="uploadDesc">Selecciona o arrossega el PDF amb la nova carta. Es publicarà immediatament a la web.</p>
 
       <div class="drop-zone" id="dropZone">
         <input type="file" id="fileInput" accept="application/pdf" />
@@ -687,7 +737,29 @@
   const progressPct = document.getElementById('progressPct');
   const uploadMsg   = document.getElementById('uploadMsg');
 
-  let selectedFile = null;
+  let selectedFile    = null;
+  let currentVariant  = 'es-ca';
+
+  const variantEsCaBtn = document.getElementById('variantEsCa');
+  const variantFrEnBtn = document.getElementById('variantFrEn');
+  const uploadDesc     = document.getElementById('uploadDesc');
+
+  const VARIANT_LABELS = {
+    'es-ca': { btn: 'Carta ES / CA', desc: 'Selecciona o arrossega el PDF de la carta en castellà i català. S\'aplicarà a ES, CA i PT.', url: '/carta.pdf' },
+    'fr-en': { btn: 'Carta FR / EN', desc: 'Selecciona o arrossega el PDF de la carta en francès i anglès. S\'aplicarà a FR i EN.',    url: '/carta-fr-en.pdf' },
+  };
+
+  function setVariant(v) {
+    currentVariant = v;
+    variantEsCaBtn.classList.toggle('active', v === 'es-ca');
+    variantFrEnBtn.classList.toggle('active', v === 'fr-en');
+    uploadDesc.textContent = VARIANT_LABELS[v].desc;
+    clearFile();
+    loadStatus();
+  }
+
+  variantEsCaBtn.addEventListener('click', () => setVariant('es-ca'));
+  variantFrEnBtn.addEventListener('click', () => setVariant('fr-en'));
 
   // ── Utilitats UI ───────────────────────────────────────
   function showLogin() {
@@ -817,7 +889,7 @@
     statusLink.style.display = 'none';
 
     try {
-      const resp = await fetch('/api/carta-status', {
+      const resp = await fetch('/api/carta-status?variant=' + currentVariant, {
         headers: {
           'Authorization':    'Bearer ' + s.token,
           'X-Token-Payload':  s.payload,
@@ -838,6 +910,7 @@
         statusDetail.textContent =
           'Última actualització: ' + formatDate(data.updatedAt) +
           ' · ' + data.sizeMB + ' MB';
+        statusLink.href          = VARIANT_LABELS[currentVariant].url;
         statusLink.style.display = 'inline-block';
       } else {
         statusDot.className      = 'status-dot inactive';
@@ -948,7 +1021,7 @@
         const resp = await fetch('/api/upload-pdf', {
           method:  'POST',
           headers: authHeaders,
-          body:    JSON.stringify({ action: 'single', filename: selectedFile.name, fileBase64: b64, sizeBytes: selectedFile.size }),
+          body:    JSON.stringify({ action: 'single', variant: currentVariant, filename: selectedFile.name, fileBase64: b64, sizeBytes: selectedFile.size }),
         });
         if (resp.status === 401) { clearSession(); showLogin(); return; }
         if (!resp.ok) { const e = await resp.json().catch(() => ({})); throw new Error(e.detail || e.error || 'Error pujant'); }
@@ -977,14 +1050,14 @@
         const fin = await fetch('/api/upload-pdf', {
           method:  'POST',
           headers: authHeaders,
-          body:    JSON.stringify({ action: 'finalize', uploadId, totalChunks, filename: selectedFile.name, sizeBytes: selectedFile.size }),
+          body:    JSON.stringify({ action: 'finalize', variant: currentVariant, uploadId, totalChunks, filename: selectedFile.name, sizeBytes: selectedFile.size }),
         });
         if (fin.status === 401) { clearSession(); showLogin(); return; }
         if (!fin.ok) { const e = await fin.json().catch(() => ({})); throw new Error(e.detail || e.error || 'Error finalitzant'); }
         setProgress(100, 'Completat');
       }
 
-      showUploadMsg('success', '✓ Carta publicada correctament. Ja és visible a la web.');
+      showUploadMsg('success', '✓ ' + VARIANT_LABELS[currentVariant].btn + ' publicada correctament. Ja és visible a la web.');
       await loadStatus();
       clearFile();
 
