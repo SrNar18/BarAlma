@@ -9,7 +9,13 @@
       "Bash(npm install *)",
       "Bash(node -e ' *)",
       "Bash(npm uninstall *)",
-      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\sopor\\\\Documents\\\\A trabajo Juan\\\\Bar alma web\\\\BarAlma\" | Where-Object { $_.PSIsContainer } | Select-Object Name)"
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\sopor\\\\Documents\\\\A trabajo Juan\\\\Bar alma web\\\\BarAlma\" | Where-Object { $_.PSIsContainer } | Select-Object Name)",
+      "Skill(run)",
+      "Skill(run:*)",
+      "Bash(python -m http.server 8000)",
+      "Bash(npx http-server *)",
+      "mcp__Claude_in_Chrome__navigate",
+      "Bash(git add *)"
     ]
   }
 }
