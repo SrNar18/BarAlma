@@ -780,6 +780,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   line-height: 1.75;
   margin-bottom: 14px;
 }
+.dish-card__info p:last-child { margin-bottom: 0; }
 .dish-card__tag {
   font-size: 10px;
   font-weight: 700;
@@ -790,6 +791,27 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   padding: 5px 11px;
   border-radius: 2px;
   border: 1px solid rgba(201, 161, 74, 0.25);
+}
+
+.dish-card--more {
+  min-height: 322px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.035) 0 2px, transparent 2px 9px),
+    #222;
+  filter: grayscale(1);
+}
+.dish-card--more span {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: rgba(237, 230, 216, 0.92);
+  text-transform: uppercase;
 }
 
 .menu__footer {
