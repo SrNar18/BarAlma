@@ -807,16 +807,18 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   border: 1px solid rgba(201, 161, 74, 0.15);
 }
 /* Foto de fondo borrosa */
-.dish-card--more::before {
-  content: '';
+.dish-card--more__bg {
   position: absolute;
-  inset: -12px;
-  background: url('Instagram_files/menu_salmon_mejor.jpg') center/cover no-repeat;
-  filter: blur(6px) brightness(0.62);
+  inset: -14px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: blur(6px) brightness(0.6);
   transform: scale(1.05);
   transition: transform 0.6s ease, filter 0.6s ease;
+  z-index: 0;
 }
-.dish-card--more:hover::before {
+.dish-card--more:hover .dish-card--more__bg {
   transform: scale(1.1);
   filter: blur(4px) brightness(0.72);
 }
