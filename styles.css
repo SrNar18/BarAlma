@@ -822,6 +822,18 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   transform: scale(1.1);
   filter: blur(4px) brightness(0.72);
 }
+/* Franja negra inferior, como el resto de tarjetas */
+.dish-card--more::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 45%;
+  background: linear-gradient(to top, #161616 12%, rgba(22,22,22,0.85) 45%, transparent);
+  z-index: 1;
+  pointer-events: none;
+}
 .dish-card--more:hover {
   box-shadow: 0 20px 40px rgba(0,0,0,0.4);
   border-color: rgba(201, 161, 74, 0.4);
