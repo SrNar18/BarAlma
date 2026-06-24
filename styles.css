@@ -800,9 +800,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   justify-content: center;
   text-align: center;
   background:
-    linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
-    repeating-linear-gradient(45deg, rgba(255,255,255,0.035) 0 2px, transparent 2px 9px),
-    #222;
+    radial-gradient(circle at 50% 0%, rgba(201,161,74,0.18), transparent 70%),
+    linear-gradient(160deg, #2a2417, #1a1a1a 60%);
   position: relative;
   overflow: hidden;
   cursor: pointer;
@@ -823,7 +822,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   left: 100%;
 }
 .dish-card--more:hover {
-  filter: grayscale(0.3);
   box-shadow: 0 20px 40px rgba(201,161,74,0.2);
   border-color: rgba(201, 161, 74, 0.35);
 }
@@ -1623,7 +1621,10 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   margin-bottom: 24px;
   max-width: 280px;
 }
-.footer__social { display: flex; gap: 12px; justify-content: center; }
+.footer__social {
+  display: flex;
+  gap: 12px;
+}
 
 .social-link {
   height: 48px;

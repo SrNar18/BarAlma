@@ -15,7 +15,10 @@
       "Bash(python -m http.server 8000)",
       "Bash(npx http-server *)",
       "mcp__Claude_in_Chrome__navigate",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git commit -m 'Mejora de menu y footer *)",
+      "Bash(git commit -m 'Ajuste card Y MUCHO MAS y footer *)"
     ]
   }
 }
