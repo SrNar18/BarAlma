@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
@@ -62,21 +62,17 @@
     "openingHoursSpecification": [
       {
         "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Tuesday",
-        "opens": "09:00",
-        "closes": "17:00"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
         "dayOfWeek": [
+          "Monday",
+          "Tuesday",
           "Wednesday",
           "Thursday",
           "Friday",
           "Saturday",
           "Sunday"
         ],
-        "opens": "08:00",
-        "closes": "22:00"
+        "opens": "10:00",
+        "closes": "22:30"
       }
     ],
     "@id": "https://www.barrestaurantalma.com/#restaurant",
@@ -97,7 +93,7 @@
         "name": "Quels sont les horaires d'Alma Bar Restaurant ?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Nous ouvrons le mardi de 09:00 à 17:00 et du mercredi au dimanche de 08:00 à 22:00. Nous sommes fermés le lundi."
+          "text": "Nous ouvrons tous les jours de 10:00 à 22:30."
         }
       },
       {
@@ -155,11 +151,11 @@
           <svg viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4"/></svg>
         </button>
         <div class="nav__lang-dropdown" id="langDropdown">
-          <a href="index.html" class="lang-opt">Català</a>
-          <a href="es.html" class="lang-opt">Castellano</a>
-          <a href="fr.html" class="lang-opt active">Français</a>
-          <a href="en.html" class="lang-opt">English</a>
-          <a href="pt.html" class="lang-opt">Português</a>
+          <a href="index.html" class="lang-opt"><img class="flag" src="img/flags/ad.svg" alt="" width="20" height="14" loading="lazy"> Català</a>
+          <a href="es.html" class="lang-opt"><img class="flag" src="img/flags/es.svg" alt="" width="20" height="14" loading="lazy"> Castellano</a>
+          <a href="fr.html" class="lang-opt active"><img class="flag" src="img/flags/fr.svg" alt="" width="20" height="14" loading="lazy"> Français</a>
+          <a href="en.html" class="lang-opt"><img class="flag" src="img/flags/gb.svg" alt="" width="20" height="14" loading="lazy"> English</a>
+          <a href="pt.html" class="lang-opt"><img class="flag" src="img/flags/pt.svg" alt="" width="20" height="14" loading="lazy"> Português</a>
         </div>
       </div>
       <button class="nav__hamburger" id="hamburger" aria-label="Menu">
@@ -175,18 +171,24 @@
     <a href="#menu" onclick="closeMobileMenu()">Menu</a>
     <a href="#galeria" onclick="closeMobileMenu()">Notre espace</a>
     <a href="#reservations" onclick="closeMobileMenu()">Contact</a>
-    <div class="mobile-menu__langs">
-      <a href="index.html">CA</a>
-      <a href="es.html">ES</a>
-      <a href="fr.html" class="active">FR</a>
-      <a href="en.html">EN</a>
-      <a href="pt.html">PT</a>
+    <div class="mobile-menu__lang" id="mobileLang">
+      <button type="button" class="mobile-menu__lang-toggle" onclick="toggleLangSubmenu()">
+        Langue
+        <span class="mobile-menu__lang-arrow" aria-hidden="true"></span>
+      </button>
+      <div class="mobile-menu__lang-submenu">
+        <a href="index.html"><img class="flag" src="img/flags/ad.svg" alt="" width="20" height="14" loading="lazy"> Català</a>
+        <a href="es.html"><img class="flag" src="img/flags/es.svg" alt="" width="20" height="14" loading="lazy"> Español</a>
+        <a href="fr.html" class="active"><img class="flag" src="img/flags/fr.svg" alt="" width="20" height="14" loading="lazy"> Français</a>
+        <a href="en.html"><img class="flag" src="img/flags/gb.svg" alt="" width="20" height="14" loading="lazy"> English</a>
+        <a href="pt.html"><img class="flag" src="img/flags/pt.svg" alt="" width="20" height="14" loading="lazy"> Português</a>
+      </div>
     </div>
   </div>
 
   <!-- HERO -->
   <section class="hero" id="accueil">
-    <div class="hero__bg" style="background-image:url('img/dos-1200w.webp')"></div>
+    <div class="hero__bg" style="background-image:url('img/hero-1600w.webp')"></div>
     <div class="hero__overlay"></div>
     <div class="hero__content">
       <p class="hero__eyebrow">· Expérience gastronomique ·</p>
@@ -229,10 +231,10 @@
     <div class="about__inner">
       <div class="about__visual">
         <div class="about__img-frame">
-          <div class="about__img-main" data-bg="img/dos-1200w.webp"></div>
+          <div class="about__img-main" data-bg="img/nosaltres-1200w.webp"></div>
           <div class="about__img-offset"></div>
           <div class="about__img-caption">
-            <span class="about__img-caption-year">2018</span>
+            <span class="about__img-caption-year">2016</span>
             <span class="about__img-caption-text">Fondé en</span>
           </div>
         </div>
@@ -253,7 +255,7 @@
             <span class="stat__label">Cocktails signature</span>
           </div>
           <div class="stat">
-            <span class="stat__num">8</span>
+            <span class="stat__num">10</span>
             <span class="stat__label">Ans d'histoire</span>
           </div>
         </div>
@@ -336,14 +338,14 @@
             <p>Avec pommes de terre, jambon et oeufs au plat.</p>
           </div>
         </article>
-        <article class="dish-card dish-card--more" aria-label="Y MUCHO MÁS">
+        <a href="carta-fr-en.pdf" target="_blank" rel="noopener" class="dish-card dish-card--more" aria-label="Y MUCHO MÁS — Voir la carte complète" title="Voir la carte complète">
           <div class="dish-card--more__bg" data-bg="Instagram_files/menu_hamburguesa_mejor.jpg" role="img" aria-label="Plats de notre menu"></div>
+          <span class="dish-card--more__mark" aria-hidden="true">+</span>
           <div class="dish-card--more__content">
-            <span class="dish-card--more__mark" aria-hidden="true">+</span>
             <span>Y MUCHO MÁS</span>
             <span class="dish-card--more__line" aria-hidden="true"></span>
           </div>
-        </article>
+        </a>
       </div>
 
     </div>
@@ -384,7 +386,7 @@
         <div class="exp-card">
           <div class="exp-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg></div>
           <h3>Horaires étendus</h3>
-          <p>Ouvert du mardi au dimanche jusqu'à 22h00. L'ambiance nocturne est notre moment.</p>
+          <p>Ouvert tous les jours de 10:00 à 22:30. L'ambiance nocturne est notre moment.</p>
         </div>
         <div class="exp-card">
           <div class="exp-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
@@ -417,7 +419,7 @@
       <div class="faq__list">
         <details class="faq__item" open>
           <summary>Quels sont les horaires d'Alma Bar Restaurant ?</summary>
-          <p>Nous ouvrons le mardi de 09:00 à 17:00 et du mercredi au dimanche de 08:00 à 22:00. Nous sommes fermés le lundi.</p>
+          <p>Nous ouvrons tous les jours de 10:00 à 22:30.</p>
         </details>
         <details class="faq__item">
           <summary>Puis-je réserver pour un groupe ou un événement privé ?</summary>
@@ -455,23 +457,23 @@
             <a href="#reservations" class="btn btn--gold" title="Réserver une table à Alma Bar Restaurant">Réserver une table</a>
           </div>
           <div class="gallery__stack">
-            <div class="gallery__stack-img" data-bg="img/carpaccio.webp"><span>Entrées</span></div>
-            <div class="gallery__stack-img" data-bg="img/entrecot.webp"><span>Grillade</span></div>
+            <div class="gallery__stack-img" data-bg="img/galeria-entrants-1200w.webp"></div>
+            <div class="gallery__stack-img" data-bg="img/galeria-graella-1200w.webp"></div>
           </div>
         </div>
-        <div class="gallery__feature" data-bg="img/dos-1200w.webp">
+        <div class="gallery__feature" data-bg="img/botellas-1200w.webp">
           <div class="gallery__feature-overlay">
             <div class="gallery__feature-badge">
-              <span class="gallery__feature-badge-num">2018</span>
+              <span class="gallery__feature-badge-num">2016</span>
               <span class="gallery__feature-badge-lbl">Depuis</span>
             </div>
           </div>
         </div>
       </div>
       <div class="gallery__strip">
-        <div class="gallery__strip-item" data-bg="img/pulpo.webp"><span>De la mer</span></div>
-        <div class="gallery__strip-item" data-bg="img/callos.webp"><span>Tradition</span></div>
-        <div class="gallery__strip-item" data-bg="img/canelones.webp"><span>Passion</span></div>
+        <div class="gallery__strip-item" data-bg="img/galeria-delmar-1200w.webp"></div>
+        <div class="gallery__strip-item" data-bg="img/galeria-tradicio-1200w.webp"></div>
+        <div class="gallery__strip-item" data-bg="img/galeria-passio-1200w.webp"></div>
       </div>
     </div>
   </section>
@@ -485,16 +487,8 @@
         <p>Pour toute question, organiser un événement spécial ou simplement en savoir plus, écrivez-nous sur WhatsApp et nous vous répondons personnellement.</p>
         <div class="reservations__info">
           <div class="res-info">
-            <span class="res-info__label">Mardi</span>
-            <span class="res-info__val">09:00 – 17:00</span>
-          </div>
-          <div class="res-info">
-            <span class="res-info__label">Mercredi – Dimanche</span>
-            <span class="res-info__val">08:00 – 22:00</span>
-          </div>
-          <div class="res-info">
-            <span class="res-info__label">Lundi</span>
-            <span class="res-info__val">Fermé</span>
+            <span class="res-info__label">Tous les jours</span>
+            <span class="res-info__val">10:00 – 22:30</span>
           </div>
         </div>
       </div>
@@ -521,7 +515,11 @@
         <div class="footer__social">
                     <a href="https://www.instagram.com/almabarrestaurant?igsh=OWJuYThxYnlsa2dy" aria-label="Instagram" class="social-link" target="_blank" rel="noopener">
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-                      Nous Suivre
+                      Instagram
+                    </a>
+                    <a href="https://www.facebook.com/ElRacodenSilvino" aria-label="Facebook" class="social-link" target="_blank" rel="noopener">
+                      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg>
+                      Facebook
                     </a>
         </div>
       </div>
@@ -537,9 +535,7 @@
         </div>
       <div class="footer__col">
         <h4>Horaires</h4>
-        <p><span>Mardi</span> 09:00 – 17:00</p>
-        <p><span>Mercredi – Dimanche</span> 08:00 – 22:00</p>
-        <p><span>Lundi</span> Fermé</p>
+        <p><span>Tous les jours</span> 10:00 – 22:30</p>
         <a href="#reservations" class="btn btn--gold btn--sm" title="Réserver une table à Alma Bar Restaurant">Réserver</a>
       </div>
     </div>

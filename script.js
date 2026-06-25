@@ -50,6 +50,14 @@ hamburger.addEventListener('click', () => {
 
 function closeMobileMenu() {
   mobileMenu.classList.remove('open');
+  const lang = document.getElementById('mobileLang');
+  if (lang) lang.classList.remove('open');
+}
+
+// Submenú de idiomas dentro del menú móvil
+function toggleLangSubmenu() {
+  const lang = document.getElementById('mobileLang');
+  if (lang) lang.classList.toggle('open');
 }
 
 // Close mobile menu on outside click

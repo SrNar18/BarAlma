@@ -19,7 +19,11 @@
       "Bash(git commit -m ' *)",
       "Bash(git commit -m 'Mejora de menu y footer *)",
       "Bash(git commit -m 'Ajuste card Y MUCHO MAS y footer *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(find ~/Downloads ~/Pictures ~/Desktop ~/Documents -maxdepth 3 -type f \\\\\\( -iname \"*.png\" -o -iname \"*.jpg\" -o -iname \"*.jpeg\" -o -iname \"*.webp\" \\\\\\) -newermt \"-3 hours\" 2>/dev/null | head -40)",
+      "Bash(find ~/Desktop -maxdepth 1 -type f -iname \"_DSC*\" 2>/dev/null | sort)",
+      "Bash(magick -version)",
+      "Bash(python -c \"import PIL; print\\('PIL ok'\\)\")"
     ]
   }
 }
